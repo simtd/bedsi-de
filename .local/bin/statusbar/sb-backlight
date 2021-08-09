@@ -1,0 +1,3 @@
+#!/bin/sh
+
+printf '%s%s %.0f%s\n' 'L' 'Disp' "$(light -G)" '%'

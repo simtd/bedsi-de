@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+awkscript='/Mute: /{print $NF}
+           /[^Base ]Volume: /{print $5}
+           /Active Port: /{print $NF}'
+
+info=($(pactl list sinks | awk "$awkscript"))
+
+mute=${info[0]} vol=${info[1]} port=${info[2]}
+
+case "$port" in
+    "Headphones") text="Head" ;;
+    "Speaker") text="Speak" ;;
+esac
+
+[[ "$mute" = "yes" ]] && text="Mute $text"
+
+echo "V""$text $vol"

@@ -1,0 +1,33 @@
+auto-reload false
+max-items 200
+reload-threads 400
+goto-next-feed no
+cleanup-on-quit yes
+
+browser "linkhandler '%u'"
+macro b set browser "$BROWSER --new-window %u" ; open-in-browser ; set browser "linkhandler '%u'"
+macro d set browser "youtube-dl -q -o '~/Downloads/%(title)s' %u" ; open-in-browser ; set browser "linkhandler '%u'"
+macro m set browser "mpv %u" ; open-in-browser ; set browser "linkhandler '%u'"
+
+color info default default reverse
+color listnormal_unread blue default
+color listfocus cyan default reverse
+color listfocus_unread cyan default reverse
+color info magenta default
+
+highlight all "---.*---" yellow default
+highlight article "^(Feed|Link):.*$" color6 default bold
+highlight article "^(Title|Date|Author):.*$" color6 default bold
+highlight article "https?://[^ ]+" color10 default underline
+highlight article "\\[[0-9]+\\]" color10 default bold
+highlight article "\\[image\\ [0-9]+\\]" color10 default bold
+highlight feedlist "^─.*$" color6 color236 bold
+
+bind-key j down feedlist
+bind-key k up feedlist
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key j down article
+bind-key k up article

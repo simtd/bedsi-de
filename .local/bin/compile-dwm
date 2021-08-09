@@ -1,0 +1,3 @@
+#!/bin/sh
+
+"$TERMINAL" --working-directory "$HOME/.local/src/mydwm" -e "doas" "make" "clean" "install"

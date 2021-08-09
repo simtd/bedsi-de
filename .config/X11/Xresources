@@ -1,0 +1,12 @@
+! colorize BLACK
+dwm.normbordercolor: #44475a
+! colorize BG
+dwm.normbgcolor: #282a36
+! colorize FG
+dwm.normfgcolor: #f8f8f2
+! colorize HIGHLIGHT
+dwm.selbordercolor: #6272a4
+! colorize BG_ALT
+dwm.selbgcolor: #44475a
+! colorize FG_ALT
+dwm.selfgcolor:	#f8f8f2

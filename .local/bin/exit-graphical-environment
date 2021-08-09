@@ -1,0 +1,4 @@
+#!/bin/sh
+
+kill-statusbar
+pkill -15 Xorg

@@ -1,0 +1,67 @@
+#!/usr/bin/bash
+
+# changes system color scheme
+
+# current and available themes are located in ~/.local/share
+# the path to current theme is located in $THEME environment variable
+# usage:
+#   $ theme-changer nord
+
+#################
+### FUNCTIONS ###
+#################
+
+# replacing the colors in the theme file
+replace_color_theme() {
+    themes_dir="$HOME/.local/share"
+    color_theme="$themes_dir/themes/$1"
+    if [[ -f $color_theme ]]; then
+        printf "# $1\n" > "$themes_dir/theme"
+        cat "$color_theme" >> "$themes_dir/theme"
+    else
+        printf "ERROR: no valid theme given\n" && exit 1
+    fi
+}
+
+# changing colors for config files that can't import environment variables
+# add comment like "# colorize BLUE" on line above the hex color you want to change
+# the color names are the same as the variables in the theme files
+colorize_unwilling() {
+    comment_regex='\scolorize\s[A-Z]\+\(_\)\?\([A-Z]\+\)\?$' # e.g. # colorize FG_ALT
+    hex_regex="#[A-Fa-f0-9]{6}" # e.g. #EBB062
+
+    . "$THEME"
+    for file in "$@"; do
+        if ! [[ -f $file ]]; then
+            printf "ERROR: no such file: $file\n"
+        fi
+
+        while read -r line ; do
+            selcol="${line##* }"
+            selcol_hex="$(eval echo \$$selcol)"
+            next_line=$(( "${line%:*}" + 1 ))
+
+            if [[ $selcol_hex =~ $hex_regex ]]; then
+                sed -r -i ""$next_line"s/$hex_regex/$selcol_hex/" "$file"
+            else
+                printf "ERROR: color wrongly specified in file: $file\n"
+            fi
+
+        done < <(grep -on "$comment_regex" "$file")
+    done
+}
+
+# reloading background, dwm and statusbar script
+reload_wm() {
+    xrdb "$XRESOURCES"
+    xdotool key Super_L+F5
+    restart-statusbar
+}
+
+###############
+### RUNNING ###
+###############
+
+replace_color_theme "$1"
+colorize_unwilling "$HOME/.config/alacritty/alacritty.yml" "$XRESOURCES"
+reload_wm

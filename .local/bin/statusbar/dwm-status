@@ -1,0 +1,86 @@
+#!/usr/bin/bash
+
+# statusbar script for the dwm panel
+# based on https://github.com/baskerville/bspwm/tree/master/examples/panel
+
+# updates modules via a named pipe specified by $STATUS_PIPE environment variable
+# modules are their own scripts (in path) with "sb-" prefix
+# the modules need an update signal as the first letter in their output
+# the dwm patch status2d is used to add color
+# process needs to be disconnected from dwm for restart to work
+
+#############
+### SETUP ###
+#############
+
+# checking if script is already running
+for pid in "$(pidof -x $(basename $0))"; do
+   [[ $pid != $$ ]] && exit 1
+done
+
+# cleaning up processes when killed
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+# importing system theme
+. "$THEME"
+
+# setting up named pipe
+pipe="$STATUS_PIPE"
+[[ -e $pipe ]] && rm "$pipe"
+mkfifo "$pipe"
+
+# separator symbol bweteen modules
+sep="^c$BG_ALT^|^d^"
+
+#################
+### FUNCTIONS ###
+#################
+
+# updating modules on specified interval
+loop() {
+    while true; do
+        "$1"
+        sleep "$2" 
+    done > "$pipe" &
+}
+
+# updating volume module on port change (e.g. unplugging headphones)
+update_vol_port() {
+    while read line; do
+        [[ $line == *"card #1" ]] && sb-volume > "$pipe"
+    done < <(pactl subscribe) &
+}
+
+# sorts incoming output from modules and sets the actual status text
+assemble() {
+    while read line ; do
+        case $line in
+            B*) bat="${line#?}" ;;
+            W*) wifi="${line#?}" ;;
+            D*) date="${line#?}" ;;
+            L*) backlight="${line#?}" ;;
+            V*) vol="${line#?}" ;;
+            C*) clock="${line#?}" ;;
+        esac
+        xsetroot -name " $vol $sep $backlight $sep $wifi $sep $bat $sep $date $clock "
+    done
+}
+
+###############
+### RUNNING ###
+###############
+
+"sb-volume" > "$pipe" &
+"sb-backlight" > "$pipe" &
+
+# loop script seconds
+loop "sb-date" 60
+loop "sb-battery" 7
+loop "sb-wifi" 5
+loop "sb-clock" 1
+
+update_vol_port
+
+assemble < "$pipe"
+
+wait

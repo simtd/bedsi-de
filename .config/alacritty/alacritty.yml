@@ -1,0 +1,123 @@
+colors:
+  primary:
+    # colorize BG
+    background: '#282a36'
+    # colorize FG
+    foreground: '#f8f8f2'
+
+  normal:
+    # colorize BLACK
+    black:   '#44475a'
+    # colorize RED
+    red:     '#ff5555'
+    # colorize GREEN
+    green:   '#50fa7b'
+    # colorize YELLOW
+    yellow:  '#f1fa8c'
+    # colorize BLUE
+    blue:    '#bd93f9'
+    # colorize MAGENTA
+    magenta: '#ff79c6'
+    # colorize CYAN
+    cyan:    '#8be9fd'
+    # colorize WHITE
+    white:   '#f8f8f2'
+
+  bright:
+    # colorize BLACK_BRIGHT
+    black:   '#6272a4'
+    # colorize RED
+    red:     '#ff5555'
+    # colorize GREEN
+    green:   '#50fa7b'
+    # colorize YELLOW
+    yellow:  '#f1fa8c'
+    # colorize BLUE
+    blue:    '#bd93f9'
+    # colorize MAGENTA
+    magenta: '#ff79c6'
+    # colorize CYAN
+    cyan:    '#8be9fd'
+    # colorize WHITE
+    white:   '#f8f8f2'
+
+  dim:
+    # colorize BLACK
+    black:   '#44475a'
+    # colorize RED
+    red:     '#ff5555'
+    # colorize GREEN
+    green:   '#50fa7b'
+    # colorize YELLOW
+    yellow:  '#f1fa8c'
+    # colorize BLUE
+    blue:    '#bd93f9'
+    # colorize MAGENTA
+    magenta: '#ff79c6'
+    # colorize CYAN
+    cyan:    '#8be9fd'
+    # colorize WHITE
+    white:   '#f8f8f2'
+
+background_opacity: 1.0
+
+font:
+  normal:
+    family: "monospace"
+    style: Regular
+  bold:
+    family: "monospace"
+    style: Bold
+  italic:
+    family: "monospace"
+    style: Italic
+  bold_italic:
+    family: "monospace"
+    style: Bold Italic
+
+  size: 10
+
+  offset:
+    x: 0
+    y: 0
+  glyph_offset:
+    x: 0
+    y: 0
+
+window:
+  padding:
+    x: 15
+    y: 15
+
+  dynamic_padding: true
+
+scrolling:
+  history: 10000
+  multiplier: 10
+
+draw_bold_text_with_bright_colors: false
+
+selection:
+  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
+  save_to_clipboard: true
+
+live_config_reload: true
+
+cursor:
+  unfocused_hollow: true
+  # style: Underline
+  style:
+    blinking: Never
+  #   blink_interval: 400
+
+key_bindings:
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Plus, mods: Control, action: IncreaseFontSize }
+  - { key: NumpadSubtract, mods: Control, action: DecreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: N, mods: Control, action: SpawnNewInstance }
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
+

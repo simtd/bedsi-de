@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# control keyboard backlight (three levels)
+# map to a hotkey
+
+file="/sys/class/leds/tpacpi::kbd_backlight/brightness"
+current_lvl="$(cat "$file")"
+
+case "$current_lvl" in
+   0) lvl="1" ;;
+   1) lvl="2" ;;
+   2) lvl="0" ;;
+esac
+
+echo "$lvl" > "$file"

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# opens links in appropriate programs
+
+case "$1" in
+    *".png"*|*".jpg"*) feh "$1" ;;
+    *".mp3"*) mpv "$1" ;;
+    *"youtube.com/watch"*) mpv --ytdl-format="(bestvideo[height<=?1080]+bestaudio/best)" "$1" ;;
+    *) "$BROWSER" --new-window "$1" ;;
+esac
