@@ -16,10 +16,6 @@ export STATUS_PIPE="/tmp/statusbar-fifo"
 # theme file that is imported in multiple scripts
 export THEME="$HOME/.local/share/theme"
 
-# golang
-export GOPATH="$HOME/Coding/go"
-export PATH="${PATH:+${PATH}:}$GOPATH/bin"
-
 # coloring manpages
 export LESS_TERMCAP_md=$'\e[01;31m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -41,3 +37,7 @@ export ZDOTDIR="$HOME/.config/zsh"
 export PYLINTHOME="$HOME/.cache"
 export LESSHISTFILE="$HOME/.cache/lesshst"
 export GNUPGHOME="$HOME/.local/share/gnupg"
+
+# personal environment variables in separate file
+# needs to be created manually
+[ -f "$XDG_CONFIG_HOME/bedsi/profile" ] && "$XDG_CONFIG_HOME/bedsi/profile"
