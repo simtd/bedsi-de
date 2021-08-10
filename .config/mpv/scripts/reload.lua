@@ -1,4 +1,4 @@
--- reload.lua
+-- reload.lua from https://github.com/4e6/mpv-reload
 --
 -- When an online video is stuck buffering or got very slow CDN
 -- source, restarting often helps. This script provides automatic
