@@ -9,17 +9,16 @@
 # Xresources for dwm colors
 xrdb "$XRESOURCES"
 
+# personal init script
+# needs to be created manually
+[ -f "$XDG_CONFIG_HOME/bedsi/init" ] && "$XDG_CONFIG_HOME/bedsi/init"
+
 ##############################
 ### INPUT DEVICES SETTINGS ###
 ##############################
 
 # setting correct mouse cursor
 xsetroot -cursor_name left_ptr
-
-# setting my keyboard layout in this separate script
-# script needs to be created manually
-# setxkbmap is a good program for this
-[ -f "$XDG_CONFIG_HOME/bedsi/keyboard" ] && "$XDG_CONFIG_HOME/bedsi/keyboard"
 
 # adding tab as a modifier key for use in certain hotkeys
 xmodmap -e "add mod3 = Tab"

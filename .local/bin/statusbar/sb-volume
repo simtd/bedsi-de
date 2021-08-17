@@ -9,10 +9,10 @@ info=($(pactl list sinks | awk "$awkscript"))
 mute=${info[0]} vol=${info[1]} port=${info[2]}
 
 case "$port" in
-    "Headphones") text="Head" ;;
-    "Speaker") text="Speak" ;;
+    Headphones) text="Head" ;;
+    Speaker) text="Speak" ;;
 esac
 
-[[ "$mute" = "yes" ]] && text="Mute $text"
+[[ $mute == "yes" ]] && text="Mute $text"
 
 echo "V""$text $vol"

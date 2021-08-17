@@ -29,8 +29,10 @@ pipe="$STATUS_PIPE"
 [[ -e $pipe ]] && rm "$pipe"
 mkfifo "$pipe"
 
-# separator symbol bweteen modules
-sep="^c$BG_ALT^|^d^"
+# separator symbols
+sep="^c$BLUE^>^d^"
+sq_l="^c$BLACK_BRIGHT^[^d^"
+sq_r="^c$BLACK_BRIGHT^]^d^"
 
 #################
 ### FUNCTIONS ###
@@ -51,7 +53,8 @@ update_vol_port() {
     done < <(pactl subscribe) &
 }
 
-# sorts incoming output from modules and sets the actual status text
+# reads and sorts incoming output from modules
+# sets the actual status text
 assemble() {
     while read line ; do
         case $line in
@@ -62,7 +65,7 @@ assemble() {
             V*) vol="${line#?}" ;;
             C*) clock="${line#?}" ;;
         esac
-        xsetroot -name " $vol $sep $backlight $sep $wifi $sep $bat $sep $date $clock "
+        xsetroot -name " $sq_l$vol$sq_r $sq_l$backlight$sq_r $sq_l$wifi$sq_r $sq_l$bat$sq_r $sq_l$date $clock$sq_r "
     done
 }
 

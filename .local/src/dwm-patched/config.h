@@ -146,7 +146,7 @@ static Key keys[] = {
 	{ MODKEY, XK_minus, setgaps, {.i = +10 } },
 
 	// reset window gaps size
-	{ MODKEY|ShiftMask, XK_plus, setgaps, {.i = 0 } },
+	{ MODKEY|ShiftMask, XK_plus, setgaps, {.i = 10 } },
 
 	// add an extra master window
 	{ MODKEY, XK_i, incnmaster, {.i = +1 } },
@@ -178,6 +178,12 @@ static Key keys[] = {
 	// apply all tags to focused window
 	{ MODKEY|ShiftMask, XK_0, tag, {.ui = ~0 } },
 
+	// go to prevous occupied tag
+	{ MODKEY, XK_comma, shiftviewclients, { .i = -1 } },
+
+	// go to next occupined
+	{ MODKEY, XK_period, shiftviewclients, { .i = +1 } },
+	
 	// tag hotkeys related to number keys (see above)
 	TAGKEYS(XK_1, 0)
 	TAGKEYS(XK_2, 1)

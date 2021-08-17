@@ -40,4 +40,4 @@ export GNUPGHOME="$HOME/.local/share/gnupg"
 
 # personal environment variables in separate file
 # needs to be created manually
-[ -f "$XDG_CONFIG_HOME/bedsi/profile" ] && "$XDG_CONFIG_HOME/bedsi/profile"
+[ -f "$XDG_CONFIG_HOME/bedsi/profile" ] && source "$XDG_CONFIG_HOME/bedsi/profile"
