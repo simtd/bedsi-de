@@ -63,7 +63,7 @@ s() {
 
 # quick jump directories
 d() {
-    dir="$(find $HOME -maxdepth 3 -type d -printf '%P\n' | fzf)"
+    dir="$(find $HOME -maxdepth 3 -type d -printf '%P\n' | fzf-wrapper --no-multi)"
     cd "$HOME/$dir"
 }
 

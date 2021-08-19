@@ -24,7 +24,7 @@ export LESS_TERMCAP_so=$'\e[01;40;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[01;32m'
 
-# making fzf use terminal colors
+# making fzf use terminal colors by default
 export FZF_DEFAULT_OPTS='--color 16'
 
 # cleaning up ~
