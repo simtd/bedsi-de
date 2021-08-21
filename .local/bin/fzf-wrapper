@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# ensures fzf is run with correct colors and settings
-# use "fzf-wrapper" instead of regular "fzf" command 
-
-fzf --cycle --height 50% --border=sharp --color=16,bg+:-1,prompt:5,pointer:4 "$@"

@@ -40,7 +40,7 @@ alias open="xdg-open"
 alias py="python3"
 alias ac="arduino-cli"
 alias cb="checkbashisms"
-alias v="nvim"
+alias v="nvr -s --remote"
 alias nf="neofetch"
 
 alias storage="df -h -x tmpfs"
@@ -63,7 +63,7 @@ s() {
 
 # quick jump directories
 d() {
-    dir="$(find $HOME -maxdepth 3 -type d -printf '%P\n' | fzf-wrapper --no-multi)"
+    dir="$(find $HOME -maxdepth 3 -type d -printf '%P\n' | fzf --no-multi)"
     cd "$HOME/$dir"
 }
 

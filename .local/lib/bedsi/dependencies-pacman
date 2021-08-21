@@ -3,7 +3,6 @@ base-devel
 bat
 calcurse
 checkbashisms
-code
 dash
 dmenu
 feh
@@ -22,6 +21,7 @@ newsboat
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
+nitrogen
 opendoas
 papirus-icon-theme
 pcmanfm-gtk3

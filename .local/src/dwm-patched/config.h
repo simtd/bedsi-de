@@ -249,7 +249,7 @@ static Key keys[] = {
 	{ MODKEY, XK_f, spawn, SHCMD("pcmanfm") },
 
 	// code editor
-	{ MODKEY, XK_c, spawn, SHCMD("code") },
+	{ MODKEY, XK_c, spawn, SHCMD("$TERMINAL -e sh -c \"sleep 0.1 && $EDITOR\"") },
 
 	/*
 	*	    _   _ _ _ _   _

@@ -2,7 +2,7 @@
 
 # script to change system color theme from dmenu
 
-themes_dir="$HOME/.local/share"
+themes_dir="$HOME/.local/share/bedsi"
 
 current_theme=$(head -1 < "$themes_dir"/theme)
 

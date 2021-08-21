@@ -13,7 +13,7 @@
 
 # replacing the colors in the theme file
 replace_color_theme() {
-    themes_dir="$HOME/.local/share"
+    themes_dir="$HOME/.local/share/bedsi"
     color_theme="$themes_dir/themes/$1"
     if [[ -f $color_theme ]]; then
         printf "# $1\n" > "$themes_dir/theme"
@@ -51,7 +51,7 @@ colorize_unwilling() {
     done
 }
 
-# reloading background, dwm and statusbar script
+# reloading dwm colors and statusbar script
 reload_wm() {
     xrdb "$XRESOURCES"
     xdotool key Super_L+F5

@@ -36,6 +36,9 @@ unclutter &
 # playerctl for controlling media players with hotkeys
 playerctld daemon &
 
+# wallpaper
+nitrogen --restore &
+
 # statusbar scripts for dwm panel
 # (forked so it can be restarted without killing dwm)
 setsid dwm-status &
