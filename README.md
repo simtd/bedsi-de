@@ -2,6 +2,8 @@
 
 A complete desktop environment using the [dwm](https://dwm.suckless.org/) window manager. Inspired by https://github.com/LukeSmithxyz/voidrice.
 
+![Screenshot](https://github.com/simtd/bedsi-de/blob/main/Pictures/screenshot.png)
+
 ## Highlights
 * Simple modular [statusbar script](https://github.com/simtd/bedsi-de/blob/main/.local/bin/statusbar/dwm-status) for dwm with event-driven signal handling.
 * [Script](https://github.com/simtd/bedsi-de/blob/main/.local/bin/theme-changer) to change system color scheme.
