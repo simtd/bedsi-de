@@ -32,10 +32,12 @@
     " --- select a recent file to open in new buffer (requires fzf)
     nmap <silent> <leader>o :call fzf#run(fzf#wrap({'source': v:oldfiles, 'sink': 'edit'}))<CR>    
     " --- list open buffers and edit entered buffer from the list
-    nnoremap <Leader><Leader> :buffers<CR>:b<Space>
-    " move among buffers
-    nmap <C-J> :bnext<CR>
-    nmap <C-K> :bprev<CR>
+    nmap <Leader><Leader> :buffers<CR>:b<Space>
+    " --- move among buffers
+    nmap <silent> <C-J> :bnext<CR>
+    nmap <silent> <C-K> :bprev<CR>
+    " --- close open buffer
+    nmap <silent> <leader>q :bd<CR>
     " --- reload configuration file
     nmap <silent> <Leader>r :source $MYVIMRC<CR>
 
