@@ -1,4 +1,27 @@
-" GENERAL
+" INSTALLING VIMPLUG
+    let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+    if empty(glob(data_dir . '/autoload/plug.vim'))
+        silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
+
+" PLUGINS
+    " --- specify a directory for plugins
+    call plug#begin(stdpath('data') . '/plugged')
+
+    " --- fzf implementations plugin
+    Plug 'junegunn/fzf.vim'
+
+    " --- auto double brackets plugin
+    Plug 'jiangmiao/auto-pairs'
+
+    " --- auto comment out portions of text
+    Plug 'preservim/nerdcommenter' 
+
+    " --- initialize plugin system
+    call plug#end()
+
+" GENERAL SETTINGS
     " --- viminfo file path
     set viminfo+=n~/.config/nvim/viminfo
     " --- mouse interaction
@@ -24,30 +47,69 @@
     set colorcolumn=80
     " --- allowing opening new buffers without saving file
     set hidden
+    " --- disabling highlighing of matching parenthesies
+    let g:loaded_matchparen=1
 
-" SHORTCUTS
+" KEYBOARD SHORTCUTS
     let mapleader=','
     " --- replace all occurrences
     nmap S :%s//g<left><left>
-    " --- select a recent file to open in new buffer (requires fzf)
-    nmap <silent> <leader>o :call fzf#run(fzf#wrap({'source': v:oldfiles, 'sink': 'edit'}))<CR>    
     " --- list open buffers and edit entered buffer from the list
     nmap <Leader><Leader> :buffers<CR>:b<Space>
-    " --- move among buffers
+    " --- open recent files (requires fzf.vim)
+    nmap <silent> <Leader>o :History<CR>
+    " --- move up and down among buffers
     nmap <silent> <C-J> :bnext<CR>
     nmap <silent> <C-K> :bprev<CR>
     " --- close open buffer
     nmap <silent> <leader>q :bd<CR>
     " --- reload configuration file
     nmap <silent> <Leader>r :source $MYVIMRC<CR>
+    " --- insert empty lines
+    nmap <silent> <A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+    nmap <silent> <A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
+" STATUSLINE
+    set statusline=
+    " --- file name
+    set statusline+=%#TabLineSel#
+    set statusline+=%{&modified?'\ \ +':''}
+    set statusline+=\ %t\ 
+    set statusline+=%*
+    " --- line numbers
+    set statusline+=\ [%l/%L]
+    " --- right align
+    set statusline+=%=
+    " --- file type
+    set statusline+=%y
+    " --- file encoding
+    set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+    " --- file format
+    set statusline+=\(%{&fileformat}\)
+    " --- buffer number
+    set statusline+=\ %#TabLineSel#
+    set statusline+=\ %n\ 
+    
+" FZF SETTINGS
+    " --- layout
+    let g:fzf_layout = { 'down': '50%' }
+    " --- removing preview window
+    let g:fzf_preview_window = []
+    " --- removing statusbar and other elements in fzf window
+    autocmd! FileType fzf
+    autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
+        \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+ 
 " COLORS
     filetype plugin on
     syntax on
     syntax reset
-    hi clear
-    " --- default theme tweaks:
+    highlight clear
+    set background=dark
+    colorscheme industry
+    hi Normal ctermfg=NONE ctermbg=NONE
     hi Comment ctermbg=NONE ctermfg=8
+    hi Special ctermbg=NONE ctermfg=NONE
     hi StatusLine ctermbg=7 ctermfg=0 cterm=reverse
     hi StatusLineNC ctermbg=8 ctermfg=0 cterm=reverse
     hi LineNr ctermbg=NONE ctermfg=8
@@ -55,33 +117,4 @@
     hi TabLineFill ctermbg=NONE ctermfg=0
     hi TabLine ctermbg=7 ctermfg=0 cterm=reverse
     hi TabLineSel ctermbg=8 ctermfg=NONE
-    highlight ColorColumn ctermbg=0 guibg=NONE
-
-" STATUSLINE
-    set statusline=
-    " --- buffer number
-    set statusline+=%#TabLineSel#
-    set statusline+=\ %n\ 
-    set statusline+=%*
-    " --- line numbers
-    set statusline+=\ [%l/%L]
-    " --- right align
-    set statusline+=%=
-    " --- type
-    set statusline+=%y
-    " --- encoding
-    set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-    " --- format
-    set statusline+=\(%{&fileformat}\)
-    " --- file name
-    set statusline+=\ %#TabLineSel#
-    set statusline+=%{&modified?'\ +':''}
-    set statusline+=\ %f\ 
-
-" --- FZF SETTINGS
-    " --- layout
-    let g:fzf_layout = { 'down': '30%' }
-    " -- removing statusbar and other elements in fzf window
-    autocmd! FileType fzf
-    autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
-        \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+    hi ColorColumn ctermbg=0
