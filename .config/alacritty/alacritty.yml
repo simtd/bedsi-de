@@ -75,7 +75,7 @@ font:
     family: "monospace"
     style: Bold Italic
 
-  size: 10
+  size: 10 
 
   offset:
     x: 0
@@ -104,10 +104,10 @@ selection:
 live_config_reload: true
 
 cursor:
-  unfocused_hollow: true
-  # style: Underline
+  # unfocused_hollow: false
+  style: Underline
   # style:
-  #   blinking: Always
+    # blinking: Always
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }

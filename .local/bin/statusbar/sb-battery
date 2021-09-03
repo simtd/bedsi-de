@@ -5,11 +5,6 @@
 level=$(cat /sys/class/power_supply/BAT0/capacity)
 status=$(cat /sys/class/power_supply/BAT0/status)
 
-case "$status" in
-    "Charging"|"Full") text="Char" ;;
-    "Discharging") text="Bat" ;;
-esac
-
 if [ "$level" -le "10" ] && [ "$status" = "Discharging" ]; then
     text="Low"
     color="$RED"
@@ -19,4 +14,4 @@ else
     color="$YELLOW"
 fi
 
-printf '%s%s%s %s%s\n' "B" "^c$color^" "$text" "$level%" "^d^"
+printf '%s%s%s %s%s\n' "B" "^c$color^" "$status" "$level%" "^d^"

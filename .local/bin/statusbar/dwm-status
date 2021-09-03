@@ -30,7 +30,7 @@ pipe="$STATUS_PIPE"
 mkfifo "$pipe"
 
 # separator symbols
-sep="^c$BLUE^>^d^"
+sep="^c$BLUE^|^d^"
 
 #################
 ### FUNCTIONS ###

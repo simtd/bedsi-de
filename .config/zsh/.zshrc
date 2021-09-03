@@ -4,10 +4,10 @@
 
 function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    [[ -z $git_branch ]] || git_branch=" %F{green}${git_branch//\%/%%}%f"
+    [[ -z $git_branch ]] || git_branch=" %F{yellow}${git_branch//\%/%%}%f"
 
-    local path='%F{blue}%2~%f'
-    local symbol='%B%F{%(?.magenta.red)}$%f%b'
+    local path='%F{green}%2~%f'
+    local symbol='%B%F{%(?.magenta.red)}>%f%b'
 
     PROMPT="$symbol "
     RPROMPT="$path$git_branch"
@@ -55,13 +55,13 @@ alias wifi-disable="nmcli radio wifi off"
 ### FUNCTIONS ###
 #################
 
-# quick terminal websearch
+# quick terminal websearch with w3m
 s() {
     query="$@"
     w3m "https://www.qwant.com/?q=$query"
 }
 
-# quick jump directories
+# quick jump directories with fzf
 d() {
     dir="$(find $HOME -maxdepth 3 -type d -printf '%P\n' | fzf --no-multi)"
     cd "$HOME/$dir"
@@ -105,10 +105,3 @@ bindkey -v '^?' backward-delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
-
-###############
-### PLUGINS ###
-###############
-
-# syntax highlighting
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
