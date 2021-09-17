@@ -42,7 +42,6 @@ replace_color_theme() {
 }
 
 # changing colors for config files that can't import environment variables
-# the color names are the same as the variables in the theme files
 colorize_unwilling() {
     comment_regex='\scolorize\s[A-Z]\+\(_\)\?\([A-Z]\+\)\?$' # colorize FG_ALT
     hex_regex="#[A-Fa-f0-9]{6}" # #EBB062

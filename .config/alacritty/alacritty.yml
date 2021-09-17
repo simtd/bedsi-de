@@ -26,19 +26,19 @@ colors:
   bright:
     # colorize BLACK_BRIGHT
     black:   '#6272a4'
-    # colorize RED
+    # colorize RED_BRIGHT
     red:     '#ff5555'
-    # colorize GREEN
+    # colorize GREEN_BRIGHT
     green:   '#50fa7b'
-    # colorize YELLOW
+    # colorize YELLOW_BRIGHT
     yellow:  '#f1fa8c'
-    # colorize BLUE
+    # colorize BLUE_BRIGHT
     blue:    '#bd93f9'
-    # colorize MAGENTA
+    # colorize MAGENTA_BRIGHT
     magenta: '#ff79c6'
-    # colorize CYAN
+    # colorize CYAN_BRIGHT
     cyan:    '#8be9fd'
-    # colorize WHITE
+    # colorize WHITE_BRIGHT
     white:   '#f8f8f2'
 
   dim:
