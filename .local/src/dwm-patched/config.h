@@ -9,8 +9,8 @@ static const unsigned int gappx = 10; /* gaps between windows */
 static const unsigned int snap = 16; /* snap pixel */
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1; /* 0 means bottom bar */
-static const char *fonts[] = { "monospace:size=16:antialias=true:autohint=false" };
-static const char dmenufont[] = "monospace:size=16:antialias=false:autohint=false";
+static const char *fonts[] = { "monospace:size=14:antialias=false:autohint=false" };
+static const char dmenufont[] = "monospace:size=14:antialias=false:autohint=false";
 
 static char normbgcolor[] = "#222222";
 static char normbordercolor[] = "#444444";

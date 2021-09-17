@@ -55,7 +55,7 @@ update_vol_port() {
 # sets the actual status text
 assemble() {
     while read line ; do
-        case $line in
+        case "$line" in
             B*) bat="${line#?}" ;;
             W*) wifi="${line#?}" ;;
             D*) date="${line#?}" ;;

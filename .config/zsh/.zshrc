@@ -7,7 +7,7 @@ function set-prompt() {
     [[ -z $git_branch ]] || git_branch=" %F{yellow}${git_branch//\%/%%}%f"
 
     local path='%F{green}%2~%f'
-    local symbol='%B%F{%(?.magenta.red)}>%f%b'
+    local symbol='%F{%(?.magenta.red)}%#%f'
 
     PROMPT="$symbol "
     RPROMPT="$path$git_branch"

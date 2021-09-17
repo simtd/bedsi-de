@@ -1,34 +1,51 @@
 #!/usr/bin/bash
 
-# changes system color scheme
+# set system color scheme
 
-# current and available themes are located in ~/.local/share
-# the path to current theme is located in $THEME environment variable
 # usage:
 #   $ theme-changer nord
 
-#################
-### FUNCTIONS ###
-#################
+# available themes are located in $dir/themes
+# current theme is located in $dir/theme (created by this script)
+
+# programs vary with how they are fed colors
+# for programs and scripts that can read shell variables:
+#   - import $dir/theme and use the variables directly
+#   - use an eviroment variable so its easy to import in multiple files
+#   - e.g. . "$THEME"
+# for programs that cannot read shell variables:
+#   - specify the path to the config file in $unwilling_files
+#   - add comments to the config file, above every line containing a hex color
+#       - on the form: colorize FG_ALT
+#           - color names are the same as the variables in the theme file
+#   - if the program needs to be reloaded add the command to reload_programs()
+
+### SETUP:
+
+dir="$HOME/.local/share/bedsi"
+
+unwilling_files="
+$HOME/.config/alacritty/alacritty.yml
+$XRESOURCES
+"
+### FUNCTIONS:
 
 # replacing the colors in the theme file
 replace_color_theme() {
-    themes_dir="$HOME/.local/share/bedsi"
-    color_theme="$themes_dir/themes/$1"
+    color_theme="$dir/themes/$1"
     if [[ -f $color_theme ]]; then
-        printf "# $1\n" > "$themes_dir/theme"
-        cat "$color_theme" >> "$themes_dir/theme"
+        printf "# $1\n" > "$dir/theme"
+        cat "$color_theme" >> "$dir/theme"
     else
         printf "ERROR: no valid theme given\n" && exit 1
     fi
 }
 
 # changing colors for config files that can't import environment variables
-# add comment like "# colorize BLUE" on line above the hex color you want to change
 # the color names are the same as the variables in the theme files
 colorize_unwilling() {
-    comment_regex='\scolorize\s[A-Z]\+\(_\)\?\([A-Z]\+\)\?$' # e.g. # colorize FG_ALT
-    hex_regex="#[A-Fa-f0-9]{6}" # e.g. #EBB062
+    comment_regex='\scolorize\s[A-Z]\+\(_\)\?\([A-Z]\+\)\?$' # colorize FG_ALT
+    hex_regex="#[A-Fa-f0-9]{6}" # #EBB062
 
     . "$THEME"
     for file in "$@"; do
@@ -51,17 +68,14 @@ colorize_unwilling() {
     done
 }
 
-# reloading dwm colors and statusbar script
-reload_wm() {
+reload_programs() {
     xrdb "$XRESOURCES"
     xdotool key Super_L+F5
     restart-statusbar
 }
 
-###############
-### RUNNING ###
-###############
+### RUNNING:
 
 replace_color_theme "$1"
-colorize_unwilling "$HOME/.config/alacritty/alacritty.yml" "$XRESOURCES"
-reload_wm
+colorize_unwilling $unwilling_files
+reload_programs

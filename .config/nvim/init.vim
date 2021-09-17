@@ -49,6 +49,8 @@
     set hidden
     " --- disabling highlighing of matching parenthesies
     let g:loaded_matchparen=1
+    " --- highlight current line
+    "set cursorline
 
 " KEYBOARD SHORTCUTS
     let mapleader=','
@@ -65,9 +67,9 @@
     nmap <silent> <leader>q :bd<CR>
     " --- reload configuration file
     nmap <silent> <Leader>r :source $MYVIMRC<CR>
-    " --- insert empty lines
-    nmap <silent> <A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-    nmap <silent> <A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+    " --- insert empty lines above/below
+    nmap <silent> <CR> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+    nmap <silent> <leader><CR> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " STATUSLINE
     set statusline=
@@ -77,7 +79,7 @@
     set statusline+=\ %t\ 
     set statusline+=%*
     " --- line numbers
-    set statusline+=\ [%l/%L]
+    set statusline+=\ %l,%c
     " --- right align
     set statusline+=%=
     " --- file type
@@ -86,10 +88,12 @@
     set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
     " --- file format
     set statusline+=\(%{&fileformat}\)
+    " --- number of lines
+    set statusline+=\ %L
     " --- buffer number
     set statusline+=\ %#TabLineSel#
     set statusline+=\ %n\ 
-    
+
 " FZF SETTINGS
     " --- layout
     let g:fzf_layout = { 'down': '50%' }
@@ -99,16 +103,18 @@
     autocmd! FileType fzf
     autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
         \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
- 
+
 " COLORS
     filetype plugin on
     syntax on
     syntax reset
     highlight clear
     set background=dark
-    colorscheme industry
+    colorscheme default
     hi Normal ctermfg=NONE ctermbg=NONE
-    hi Comment ctermbg=NONE ctermfg=8
+    hi CursorLine ctermbg=0 cterm=NONE
+    hi Comment ctermbg=NONE ctermfg=8 cterm=italic
+    hi Visual ctermbg=0 ctermfg=NONE
     hi Special ctermbg=NONE ctermfg=NONE
     hi StatusLine ctermbg=7 ctermfg=0 cterm=reverse
     hi StatusLineNC ctermbg=8 ctermfg=0 cterm=reverse
