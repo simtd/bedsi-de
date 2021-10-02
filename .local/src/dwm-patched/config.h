@@ -9,8 +9,8 @@ static const unsigned int gappx = 10; /* gaps between windows */
 static const unsigned int snap = 16; /* snap pixel */
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1; /* 0 means bottom bar */
-static const char *fonts[] = { "monospace:size=14:antialias=false:autohint=false" };
-static const char dmenufont[] = "monospace:size=14:antialias=false:autohint=false";
+static const char *fonts[] = { "monospace:size=12:antialias=false:autohint=false" };
+static const char dmenufont[] = "monospace:size=12:antialias=false:autohint=false";
 
 static char normbgcolor[] = "#222222";
 static char normbordercolor[] = "#444444";
@@ -50,9 +50,9 @@ static const int resizehints = 1; /* 1 means respect size hints in tiled resizal
 
 static const Layout layouts[] = {
 	/* symbol, arrange function */
-	{ "[]=", tile }, /* first entry is default */
-	{ "><>", NULL }, /* no layout function means floating behavior */
-	{ "[M]", monocle },
+	{ "(T)", tile }, /* first entry is default */
+	{ "(F)", NULL }, /* no layout function means floating behavior */
+	{ "(M)", monocle },
 };
 
 /*

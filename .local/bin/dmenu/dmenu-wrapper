@@ -5,4 +5,4 @@
 
 . "$THEME"
 
-dmenu -fn 'monospace:size=14:antialias=false:autohint=false' -nb "$BG" -nf "$FG" -sb "$BG_ALT" -sf "$FG_ALT" "$@"
+dmenu -fn 'monospace:size=12:antialias=false:autohint=false' -nb "$BG" -nf "$FG" -sb "$BG_ALT" -sf "$FG_ALT" "$@"

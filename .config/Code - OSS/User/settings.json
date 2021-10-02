@@ -3,9 +3,10 @@
     "editor.glyphMargin": false,
     "editor.renderLineHighlight": "all",
     "workbench.editor.enablePreview": false,
-    "editor.fontSize": 15,
+    "editor.fontSize": 14,
     "workbench.startupEditor": "newUntitledFile",
     "window.menuBarVisibility": "hidden",
     "breadcrumbs.enabled": false,
+    "workbench.colorTheme": "GitHub Dark",
     "window.zoomLevel": 1,
 }

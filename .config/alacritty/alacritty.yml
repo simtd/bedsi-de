@@ -59,7 +59,7 @@ colors:
     # colorize WHITE
     white:   '#f8f8f2'
 
-background_opacity: 1.0
+background_opacity: 1.0 
 
 font:
   normal:
@@ -75,7 +75,7 @@ font:
     family: "monospace"
     style: Bold Italic
 
-  size: 16 
+  size: 15 
 
   offset:
     x: 0
@@ -103,11 +103,12 @@ selection:
 
 live_config_reload: true
 
-#cursor:
-  #unfocused_hollow: false
+cursor:
+  unfocused_hollow: false
   #style: Underline
-  #style:
-    #blinking: Always
+  style:
+    blinking: Always
+  blink_interval: 350
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
@@ -117,4 +118,4 @@ key_bindings:
   - { key: Plus, mods: Control, action: IncreaseFontSize }
   - { key: NumpadSubtract, mods: Control, action: DecreaseFontSize }
   - { key: Minus, mods: Control, action: DecreaseFontSize }
-  - { key: N, mods: Control, action: SpawnNewInstance }
+  - { key: Return, mods: Control, action: SpawnNewInstance }

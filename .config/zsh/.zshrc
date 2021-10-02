@@ -4,13 +4,13 @@
 
 function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    [[ -z $git_branch ]] || git_branch=" %F{yellow}${git_branch//\%/%%}%f"
+    [[ -z $git_branch ]] || git_branch=" %F{8}(${git_branch//\%/%%})%f"
 
-    local path='%F{green}%2~%f'
-    local symbol='%F{%(?.magenta.red)}%#%f'
+    #newline=$'\n'
+    #PROMPT="%F{green}%3~%f$git_branch%F{red}%(?.. %?)%f$newline%B%F{%(?.magenta.red)}>%f%b "
 
-    PROMPT="$symbol "
-    RPROMPT="$path$git_branch"
+    PROMPT='%F{%(?.magenta.red)}%#%f '
+    RPROMPT="%F{red}%(?..[%?])%f %F{green}%1d%f$git_branch"
 }
 
 autoload -Uz add-zsh-hook
@@ -23,12 +23,15 @@ add-zsh-hook precmd set-prompt
 alias ..="cd .."
 alias ls="ls --color"
 alias l="ls -lah --time-style='+%d-%m-%y'"
+alias mv="mv -iv"
+alias cp="cp -riv"
+alias mkdir="mkdir -vp"
 alias rm="rm -vI"
 alias grep="grep -i --color"
 alias c="clear"
 
 alias bedsi="git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME"
-alias beds="bedsi status"
+alias bedsis="bedsi status"
 
 alias gs="git status"
 alias ga="git add"
@@ -40,7 +43,7 @@ alias open="xdg-open"
 alias py="python3"
 alias ac="arduino-cli"
 alias cb="checkbashisms"
-alias v="nvr -s --remote"
+alias vim="nvr -s --remote"
 alias nf="neofetch"
 
 alias storage="df -h -x tmpfs"

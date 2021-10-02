@@ -12,10 +12,10 @@
 # for programs and scripts that can read shell variables:
 #   - import $dir/theme and use the variables directly
 #   - use an eviroment variable so its easy to import in multiple files
-#   - e.g. . "$THEME"
+#       - e.g. . "$THEME"
 # for programs that cannot read shell variables:
-#   - specify the path to the config file in $unwilling_files
-#   - add comments to the config file, above every line containing a hex color
+#   - specify the path to the config file in $unwilling_files (new line)
+#   - add a comment to the config file above every line containing a hex color
 #       - on the form: colorize FG_ALT
 #           - color names are the same as the variables in the theme file
 #   - if the program needs to be reloaded add the command to reload_programs()
@@ -28,10 +28,11 @@ unwilling_files="
 $HOME/.config/alacritty/alacritty.yml
 $XRESOURCES
 "
+
 ### FUNCTIONS:
 
 # replacing the colors in the theme file
-replace_color_theme() {
+replace_theme() {
     color_theme="$dir/themes/$1"
     if [[ -f $color_theme ]]; then
         printf "# $1\n" > "$dir/theme"
@@ -75,6 +76,6 @@ reload_programs() {
 
 ### RUNNING:
 
-replace_color_theme "$1"
-colorize_unwilling $unwilling_files
+replace_theme "$1"
+colorize_unwilling $unwilling_files # don't quote this variable
 reload_programs
