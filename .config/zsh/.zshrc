@@ -2,15 +2,26 @@
 ### PROMPT ###
 ##############
 
+function truncated_path() {
+    local i pwd
+    pwd=("${(s:/:)PWD/#$HOME/~}")
+    if (( $#pwd > 1 )); then
+        for i in {1..$(($#pwd-1))}; do
+            if [[ "$pwd[$i]" = .* ]]; then
+                pwd[$i]="${${pwd[$i]}[1,2]}"
+            else
+                pwd[$i]="${${pwd[$i]}[1]}"
+            fi
+        done
+    fi
+    echo "${(j:/:)pwd}"
+}
+
 function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     [[ -z $git_branch ]] || git_branch=" %F{8}(${git_branch//\%/%%})%f"
 
-    #newline=$'\n'
-    #PROMPT="%F{green}%3~%f$git_branch%F{red}%(?.. %?)%f$newline%B%F{%(?.magenta.red)}>%f%b "
-
-    PROMPT='%F{%(?.magenta.red)}%#%f '
-    RPROMPT="%F{red}%(?..[%?])%f %F{green}%1d%f$git_branch"
+    PROMPT="%F{2}$(truncated_path)%f$git_branch%B%F{1}%(?.. [%?])%f%b %# "
 }
 
 autoload -Uz add-zsh-hook
@@ -108,3 +119,12 @@ bindkey -v '^?' backward-delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
+
+#############################
+### PLUGINS AND AUTOSTART ###
+#############################
+
+# pfetch
+#export HOSTNAME="$HOST"
+#export PF_INFO="ascii title os wm host kernel uptime pkgs"
+#pfetch

@@ -1,5 +1,5 @@
 {
-	"font_size": 17,
+	/*"font_size": 17,*/
 	"font_options": ["no_antialias", "no_italic"],
 	"draw_centered": false,
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
@@ -12,5 +12,6 @@
 	"translate_tabs_to_spaces": true,
 	"vintage_start_in_command_mode": true,
 	"vintage_use_clipboard": true,
-	"ignored_packages": [], // enabling vintage mode
+	// "ignored_packages": [], // enabling vintage mode
+	"font_size": 16,
 }

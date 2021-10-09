@@ -59,7 +59,7 @@ colors:
     # colorize WHITE
     white:   '#f8f8f2'
 
-background_opacity: 1.0 
+background_opacity: 0.9
 
 font:
   normal:
@@ -103,12 +103,12 @@ selection:
 
 live_config_reload: true
 
-cursor:
-  unfocused_hollow: false
+#cursor:
+  #unfocused_hollow: false
   #style: Underline
-  style:
-    blinking: Always
-  blink_interval: 350
+  #style:
+    #blinking: Always
+  #blink_interval: 350
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }

@@ -1,5 +1,5 @@
 " INSTALLING VIMPLUG
-
+" TODO: remove autoinstalling vimplug
     let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
     if empty(glob(data_dir . '/autoload/plug.vim'))
         silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -20,6 +20,9 @@
     " --- auto comment
     Plug 'preservim/nerdcommenter' 
 
+    " --- distraction free writing
+    Plug 'junegunn/goyo.vim' 
+
     " --- initialize plugin system
     call plug#end()
 
@@ -36,7 +39,7 @@
 
     " --- line numbers
     set number
-    set relativenumber
+    "set relativenumber
 
     " --- settings for search
     set nohlsearch
@@ -101,6 +104,9 @@
     nmap <Down> <C-e>
     nmap <Up> <C-y>
 
+    " toggle distraction free writing
+    nmap <silent> <leader>w :Goyo<CR>
+
 " STATUSLINE
 
     set statusline=
@@ -146,6 +152,24 @@
     autocmd  FileType fzf set laststatus=0 noshowmode noruler nonumber norelativenumber
         \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
 
+
+" GOYO SETTINGS
+    
+    function! s:goyo_enter()
+        " TODO implement so that it clears previous command text and goes to
+        " the top of the file
+        set wrap
+        set breakindent
+    endfunction
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+
+    function! s:goyo_leave()
+        set nowrap
+    endfunction
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+    let g:limelight_conceal_ctermfg = 243
+
 " COLORS
 
     filetype plugin on
@@ -153,11 +177,11 @@
     syntax reset
     highlight clear
     set background=dark
-    colorscheme default
 
+    " TODO: add a precmd so that goyo and other plugins don't remove custom
+    " highlights
     hi Normal ctermfg=NONE ctermbg=NONE
     hi CursorLine ctermbg=NONE cterm=NONE
-    "hi Comment ctermbg=NONE ctermfg=8 cterm=italic
     hi Comment ctermbg=NONE ctermfg=8
     hi Visual ctermbg=0 ctermfg=NONE
     hi Special ctermbg=NONE ctermfg=NONE
@@ -169,3 +193,4 @@
     hi TabLine ctermbg=7 ctermfg=0 cterm=reverse
     hi TabLineSel ctermbg=8 ctermfg=NONE
     hi ColorColumn ctermbg=0
+    hi TODO ctermbg=8 ctermfg=NONE cterm=bold

@@ -30,7 +30,7 @@ pipe="$STATUS_PIPE"
 [[ -e $pipe ]] && rm "$pipe"
 mkfifo "$pipe"
 
-# separator symbol
+# separator symbol between modules
 sep="^c$BLACK_BRIGHT^|^d^"
 
 ### FUNCTIONS:

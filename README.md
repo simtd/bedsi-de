@@ -5,6 +5,7 @@ A complete desktop environment using the [dwm](https://dwm.suckless.org/) window
 ![Screenshot](https://github.com/simtd/bedsi-de/blob/main/Pictures/screenshot.png)
 
 ## Highlights
+
 * Simple modular [statusbar script](https://github.com/simtd/bedsi-de/blob/main/.local/bin/statusbar/dwm-status) for dwm with event-driven signal handling.
 * [Script](https://github.com/simtd/bedsi-de/blob/main/.local/bin/theme-changer) to change system color scheme.
 * [Z shell configuration](https://github.com/simtd/bedsi-de/blob/main/.config/zsh/.zshrc).
@@ -15,4 +16,5 @@ A complete desktop environment using the [dwm](https://dwm.suckless.org/) window
 * Many [configuration files](https://github.com/simtd/bedsi-de/tree/main/.config) for various programs.
 
 ## Installation steps
+
 Coming soon
