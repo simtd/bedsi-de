@@ -6,7 +6,7 @@ cleanup-on-quit yes
 
 browser "linkhandler '%u'"
 macro b set browser "$BROWSER --new-window %u" ; open-in-browser ; set browser "linkhandler '%u'"
-macro d set browser "youtube-dl -q -o '~/Downloads/%(title)s' %u" ; open-in-browser ; set browser "linkhandler '%u'"
+macro d set browser "yt-dlp -q -o '~/Downloads/%(title)s' %u" ; open-in-browser ; set browser "linkhandler '%u'"
 macro m set browser "mpv %u" ; open-in-browser ; set browser "linkhandler '%u'"
 
 color listnormal_unread blue default

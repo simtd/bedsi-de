@@ -27,9 +27,6 @@ export LESS_TERMCAP_us=$'\e[01;32m'
 # default fzf settings
 export FZF_DEFAULT_OPTS='--cycle --height 50% --border=sharp --color=16,bg+:-1,prompt:5,pointer:4'
 
-# neovim remote control
-export NVIM_LISTEN_ADDRESS="/tmp/nvimsocket"
-
 # cleaning up ~
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

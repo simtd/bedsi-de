@@ -21,7 +21,7 @@ function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     [[ -z $git_branch ]] || git_branch=" %F{8}(${git_branch//\%/%%})%f"
 
-    PROMPT="%F{2}$(truncated_path)%f$git_branch%B%F{1}%(?.. [%?])%f%b %# "
+    PROMPT="%F{5}$(truncated_path)%f$git_branch%B%F{1}%(?.. [%?])%f%b %# "
 }
 
 autoload -Uz add-zsh-hook
@@ -54,7 +54,6 @@ alias open="xdg-open"
 alias py="python3"
 alias ac="arduino-cli"
 alias cb="checkbashisms"
-alias vim="nvr -s --remote"
 alias nf="neofetch"
 
 alias storage="df -h -x tmpfs"
@@ -119,12 +118,3 @@ bindkey -v '^?' backward-delete-char
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
-
-#############################
-### PLUGINS AND AUTOSTART ###
-#############################
-
-# pfetch
-#export HOSTNAME="$HOST"
-#export PF_INFO="ascii title os wm host kernel uptime pkgs"
-#pfetch

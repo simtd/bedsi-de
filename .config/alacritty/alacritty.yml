@@ -1,65 +1,65 @@
 colors:
   primary:
     # colorize BG
-    background: '#282a36'
+    background: '#2E3440'
     # colorize FG
-    foreground: '#f8f8f2'
+    foreground: '#D8DEE9'
 
   normal:
     # colorize BLACK
-    black:   '#44475a'
+    black:   '#3B4252'
     # colorize RED
-    red:     '#ff5555'
+    red:     '#BF616A'
     # colorize GREEN
-    green:   '#50fa7b'
+    green:   '#A3BE8C'
     # colorize YELLOW
-    yellow:  '#f1fa8c'
+    yellow:  '#EBCB8B'
     # colorize BLUE
-    blue:    '#bd93f9'
+    blue:    '#81A1C1'
     # colorize MAGENTA
-    magenta: '#ff79c6'
+    magenta: '#B48EAD'
     # colorize CYAN
-    cyan:    '#8be9fd'
+    cyan:    '#88C0D0'
     # colorize WHITE
-    white:   '#f8f8f2'
+    white:   '#E5E9F0'
 
   bright:
     # colorize BLACK_BRIGHT
-    black:   '#6272a4'
+    black:   '#7B88A1'
     # colorize RED_BRIGHT
-    red:     '#ff5555'
+    red:     '#BF616A'
     # colorize GREEN_BRIGHT
-    green:   '#50fa7b'
+    green:   '#A3BE8C'
     # colorize YELLOW_BRIGHT
-    yellow:  '#f1fa8c'
+    yellow:  '#EBCB8B'
     # colorize BLUE_BRIGHT
-    blue:    '#bd93f9'
+    blue:    '#81A1C1'
     # colorize MAGENTA_BRIGHT
-    magenta: '#ff79c6'
+    magenta: '#B48EAD'
     # colorize CYAN_BRIGHT
-    cyan:    '#8be9fd'
+    cyan:    '#88C0D0'
     # colorize WHITE_BRIGHT
-    white:   '#f8f8f2'
+    white:   '#E5E9F0'
 
   dim:
     # colorize BLACK
-    black:   '#44475a'
+    black:   '#3B4252'
     # colorize RED
-    red:     '#ff5555'
+    red:     '#BF616A'
     # colorize GREEN
-    green:   '#50fa7b'
+    green:   '#A3BE8C'
     # colorize YELLOW
-    yellow:  '#f1fa8c'
+    yellow:  '#EBCB8B'
     # colorize BLUE
-    blue:    '#bd93f9'
+    blue:    '#81A1C1'
     # colorize MAGENTA
-    magenta: '#ff79c6'
+    magenta: '#B48EAD'
     # colorize CYAN
-    cyan:    '#8be9fd'
+    cyan:    '#88C0D0'
     # colorize WHITE
-    white:   '#f8f8f2'
+    white:   '#E5E9F0'
 
-background_opacity: 0.9
+background_opacity: 0.5 
 
 font:
   normal:
@@ -75,7 +75,7 @@ font:
     family: "monospace"
     style: Bold Italic
 
-  size: 15 
+  size: 13 
 
   offset:
     x: 0
@@ -86,8 +86,8 @@ font:
 
 window:
   padding:
-    x: 20
-    y: 20
+    x: 0
+    y: 0
 
   dynamic_padding: true
 
@@ -103,12 +103,12 @@ selection:
 
 live_config_reload: true
 
-#cursor:
+cursor:
   #unfocused_hollow: false
   #style: Underline
-  #style:
-    #blinking: Always
-  #blink_interval: 350
+  style:
+    blinking: Always
+  blink_interval: 450
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
