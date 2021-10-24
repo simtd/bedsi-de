@@ -50,9 +50,9 @@ static const int resizehints = 1; /* 1 means respect size hints in tiled resizal
 
 static const Layout layouts[] = {
 	/* symbol, arrange function */
-	{ "(T)", tile }, /* first entry is default */
-	{ "(F)", NULL }, /* no layout function means floating behavior */
-	{ "(M)", monocle },
+	{ "[]=", tile }, /* first entry is default */
+	{ "><>", NULL }, /* no layout function means floating behavior */
+	{ "[M]", monocle },
 };
 
 /*
@@ -247,9 +247,6 @@ static Key keys[] = {
 
 	// gui file manager
 	{ MODKEY, XK_f, spawn, SHCMD("pcmanfm") },
-
-	// code editor
-	{ MODKEY, XK_c, spawn, SHCMD("$TERMINAL -e nvim") },
 
 	/*
 	*	    _   _ _ _ _   _

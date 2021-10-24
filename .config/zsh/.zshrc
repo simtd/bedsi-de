@@ -42,7 +42,7 @@ alias grep="grep -i --color"
 alias c="clear"
 
 alias bedsi="git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME"
-alias bedsis="bedsi status"
+alias beds="bedsi status"
 
 alias gs="git status"
 alias ga="git add"

@@ -3,13 +3,49 @@
 --  / / __ \/ / __/ / / / / / __ `/
 -- / / / / / / /__ / / /_/ / /_/ /
 --/_/_/ /_/_/\__(_)_/\__,_/\__,_/
---                zero dependencies
+--
+
+-- dependencies:
+-- * packer
+-- * fzf
+
+-- shorthands
+local opt = vim.opt
+local g = vim.g
+local keymap = vim.api.nvim_set_keymap
+local cmd = vim.cmd
+
+-------------
+-- PLUGINS --
+-------------
+
+require('packer').startup(function()
+    use 'junegunn/fzf.vim' -- fuzzy finder
+    use 'nvim-lualine/lualine.nvim' -- statusline
+end)
+
+-- fzf options
+g.fzf_preview_window = ''
+
+-- lualine settings
+local custom_16color = require'lualine.themes.16color'
+custom_16color.normal.a.fg = 'black' 
+custom_16color.insert.a.fg = 'black' 
+custom_16color.visual.a.fg = 'black' 
+custom_16color.replace.a.fg = 'black' 
+custom_16color.inactive.a.fg = 'black' 
+require'lualine'.setup{
+    options = {
+        icons_enabled = false,
+        theme = custom_16color,
+        component_separators = { left = '|', right = '|'},
+        section_separators = '',
+    },
+}
 
 -------------
 -- OPTIONS --
 -------------
-
-local opt = vim.opt
 
 opt.shadafile = '.local/share/nvim/viminfo' -- viminfo file path from ~
 opt.mouse = 'a' -- mouse interaction
@@ -25,37 +61,35 @@ opt.smartindent = true -- automatically indent new lines
 opt.hidden = true -- allow opening new buffers without saving file
 opt.cursorline = true -- highlight current line
 -- opt.guicursor = '' -- disable cursor changes for different modes
-opt.laststatus = 0 -- hide status line
+opt.laststatus = 2 -- show/hide status line
+opt.showmode = false -- disable showing mode below statusline
 opt.updatetime = 300 -- decrease update time
 opt.completeopt = 'menuone,noselect' -- better completion experience
 opt.timeoutlen = 2000 -- more time for hotkeys
 
----------------
--- VARIABLES --
----------------
-
-local g = vim.g
-
 g['loaded_matchparen'] = 1 -- disable highlighing matching parenthesies
 g.mapleader = ',' -- change the <leader> key to be comma
+
+-- disable auto comment
+opt.formatoptions = opt.formatoptions - "o"
+opt.formatoptions = opt.formatoptions - "r"
+opt.formatoptions = opt.formatoptions - "c"
 
 -----------------
 -- KEYBINDINGS --
 -----------------
 
-local keymap = vim.api.nvim_set_keymap
--- keymap('mode', 'keymap', 'mapped to', {options})
 local silent = { silent = true }
 
+-- keymap('mode', 'keymap', 'mapped to', {options})
 keymap('n', '<Leader>s', ':%s//g<left><left>', {}) -- replace all occurrences
-keymap('n', '<Leader>h', ':browse oldfiles<CR>', {}) -- file history
-keymap('n', '<Leader>o', ':Lexplore<CR>', silent) -- open file manager 
-keymap('n', '<Leader>c', ':e $MYVIMRC<CR>', silent) -- edit the config file 
+keymap('n', '<Leader>o', ':History<CR>', silent) -- file history
+keymap('n', '<Leader>f', ':Files<CR>', silent) -- open file manager 
+keymap('n', '<Leader>e', ':e $MYVIMRC<CR>', silent) -- edit the config file 
 keymap('n', '<Leader><Leader>', ':buffers<CR>:b<Space>', {}) -- open buffers
-keymap('n', '<leader>q', ':bd<CR>', silent) -- close current buffer
 keymap('n', '<Leader>r', ':source $MYVIMRC<CR>', silent) -- reload config
 keymap('n', '<Leader>n', ':call v:lua.toggle_numbers()<CR>', silent)
-keymap('n', '<Leader>l', ':call v:lua.toggle_column()<CR>', silent)
+keymap('n', '<Leader>c', ':call v:lua.toggle_column()<CR>', silent)
 
 -- move between window splits
 keymap('n', '<C-h>', ':wincmd h<CR>', silent)
@@ -85,16 +119,12 @@ end
 -- COLORS --
 ------------
 
-local cmd = vim.cmd
-
 -- tweaks
 cmd[[highlight Normal ctermfg=NONE ctermbg=NONE]]
 cmd[[highlight CursorLine ctermbg=NONE cterm=NONE]]
-cmd[[highlight Comment ctermbg=NONE ctermfg=8]]
+cmd[[highlight Comment ctermbg=NONE ctermfg=2]]
 cmd[[highlight Visual ctermbg=0 ctermfg=NONE]]
 cmd[[highlight Special ctermbg=NONE ctermfg=NONE]]
-cmd[[highlight StatusLine ctermbg=4 ctermfg=0 cterm=bold]]
-cmd[[highlight StatusLineNC ctermbg=0 ctermfg=0]]
 cmd[[highlight LineNr ctermbg=NONE ctermfg=8]]
 cmd[[highlight CursorLineNr ctermbg=NONE ctermfg=NONE cterm=bold]]
 cmd[[highlight TabLineFill ctermbg=NONE ctermfg=0]]
@@ -108,14 +138,6 @@ cmd[[highlight TODO ctermbg=8 ctermfg=NONE cterm=bold]]
 -- VIMSCRIPT --
 ---------------
 
--- workaround for cmdheight being wrong on launch in some cases
-vim.api.nvim_exec(
-    [[
-    autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
-    ]],
-    false
-)
-
 -- highlight on yank
 vim.api.nvim_exec(
     [[
@@ -126,39 +148,3 @@ vim.api.nvim_exec(
     ]],
     false
 )
-
-----------------
--- STATUSLINE --
-----------------
-
-local function right_separated(str)
-    local sep = ' \\ '
-    if( str ~= '' )
-    then
-        return sep .. str
-    end
-    return '' 
-end
-
-local function sometimes_empty(bool, str)
-    if( bool )
-    then
-        return str 
-    end 
-    return ''
-end
-
-function _G.status_line()
-    return table.concat {
-        sometimes_empty(vim.bo.readonly, ' [RO]'),
-        " %t",
-        sometimes_empty(vim.bo.modified, ' [+]'),
-        "%=", -- right align
-        vim.bo.fileformat,
-        right_separated(vim.bo.fileencoding),
-        right_separated(vim.bo.filetype),
-        right_separated("ln:%l,col:%c %p%% "),
-    }
-end
-
-vim.o.statusline = "%!luaeval('status_line()')"

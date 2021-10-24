@@ -25,7 +25,7 @@ colors:
 
   bright:
     # colorize BLACK_BRIGHT
-    black:   '#7B88A1'
+    black:   '#4c566a'
     # colorize RED_BRIGHT
     red:     '#BF616A'
     # colorize GREEN_BRIGHT
@@ -59,7 +59,7 @@ colors:
     # colorize WHITE
     white:   '#E5E9F0'
 
-background_opacity: 0.5 
+background_opacity: 0.6 
 
 font:
   normal:
@@ -86,8 +86,8 @@ font:
 
 window:
   padding:
-    x: 0
-    y: 0
+    x: 5
+    y: 5
 
   dynamic_padding: true
 
@@ -103,12 +103,12 @@ selection:
 
 live_config_reload: true
 
-cursor:
+#cursor:
   #unfocused_hollow: false
   #style: Underline
-  style:
-    blinking: Always
-  blink_interval: 450
+  #style:
+    #blinking: Always
+  #blink_interval: 450
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
