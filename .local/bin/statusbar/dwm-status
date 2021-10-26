@@ -31,7 +31,7 @@ pipe="$STATUS_PIPE"
 mkfifo "$pipe"
 
 # separator symbol between modules
-sep="^c$BLACK_BRIGHT^|^d^"
+sep="^c$BLUE^|^d^"
 
 ### FUNCTIONS:
 

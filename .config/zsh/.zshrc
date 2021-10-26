@@ -68,12 +68,6 @@ alias wifi-disable="nmcli radio wifi off"
 ### FUNCTIONS ###
 #################
 
-# quick terminal websearch with w3m
-s() {
-    query="$@"
-    w3m "https://www.qwant.com/?q=$query"
-}
-
 # quick jump directories with fzf
 d() {
     dir="$(find $HOME -maxdepth 3 -type d -printf '%P\n' | fzf --no-multi)"
