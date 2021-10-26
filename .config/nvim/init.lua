@@ -20,7 +20,7 @@ local cmd = vim.cmd
 -------------
 
 require('packer').startup(function()
-    use 'junegunn/fzf.vim' -- fuzzy finder
+    use 'junegunn/fzf.vim' -- fuzzy finder helper functions
     use "lukas-reineke/indent-blankline.nvim" -- indent guides
     use 'ggandor/lightspeed.nvim' -- fast navigation
     use 'b3nj5m1n/kommentary' -- comment text in and out
@@ -33,7 +33,6 @@ g.fzf_preview_window = ''
 -- OPTIONS --
 -------------
 
-opt.shadafile = '.local/share/nvim/viminfo' -- viminfo file path from ~
 opt.mouse = 'a' -- mouse interaction
 opt.clipboard = 'unnamedplus' -- use system clipboard
 opt.hlsearch = false -- don't highlight all matches for search

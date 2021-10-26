@@ -11,14 +11,14 @@ Xft.rgba: rgb
 
 ! DWM COLORS
 ! colorize BLACK
-dwm.normbordercolor: #3B4252
+dwm.normbordercolor: #073642
 ! colorize BG
-dwm.normbgcolor: #2E3440
+dwm.normbgcolor: #002b36
 ! colorize FG
-dwm.normfgcolor: #D8DEE9
+dwm.normfgcolor: #839496
 ! colorize HIGHLIGHT
-dwm.selbordercolor: #81A1C1
+dwm.selbordercolor: #26abd2
 ! colorize BG_ALT
-dwm.selbgcolor: #4C566A
+dwm.selbgcolor: #073642
 ! colorize FG_ALT
-dwm.selfgcolor:	#E5E9F0
+dwm.selfgcolor:	#93a1a1
