@@ -21,27 +21,13 @@ local cmd = vim.cmd
 
 require('packer').startup(function()
     use 'junegunn/fzf.vim' -- fuzzy finder
-    use 'nvim-lualine/lualine.nvim' -- statusline
+    use "lukas-reineke/indent-blankline.nvim" -- indent guides
+    use 'ggandor/lightspeed.nvim' -- fast navigation
+    use 'b3nj5m1n/kommentary' -- comment text in and out
 end)
 
 -- fzf options
 g.fzf_preview_window = ''
-
--- lualine settings
-local custom_16color = require'lualine.themes.16color'
-custom_16color.normal.a.fg = 'black' 
-custom_16color.insert.a.fg = 'black' 
-custom_16color.visual.a.fg = 'black' 
-custom_16color.replace.a.fg = 'black' 
-custom_16color.inactive.a.fg = 'black' 
-require'lualine'.setup{
-    options = {
-        icons_enabled = false,
-        theme = custom_16color,
-        component_separators = { left = '|', right = '|'},
-        section_separators = '',
-    },
-}
 
 -------------
 -- OPTIONS --
@@ -61,8 +47,8 @@ opt.smartindent = true -- automatically indent new lines
 opt.hidden = true -- allow opening new buffers without saving file
 opt.cursorline = true -- highlight current line
 -- opt.guicursor = '' -- disable cursor changes for different modes
-opt.laststatus = 2 -- show/hide status line
-opt.showmode = false -- disable showing mode below statusline
+opt.laststatus = 0 -- show/hide status line
+-- opt.showmode = false -- disable showing mode below statusline
 opt.updatetime = 300 -- decrease update time
 opt.completeopt = 'menuone,noselect' -- better completion experience
 opt.timeoutlen = 2000 -- more time for hotkeys
@@ -89,7 +75,7 @@ keymap('n', '<Leader>e', ':e $MYVIMRC<CR>', silent) -- edit the config file
 keymap('n', '<Leader><Leader>', ':buffers<CR>:b<Space>', {}) -- open buffers
 keymap('n', '<Leader>r', ':source $MYVIMRC<CR>', silent) -- reload config
 keymap('n', '<Leader>n', ':call v:lua.toggle_numbers()<CR>', silent)
-keymap('n', '<Leader>c', ':call v:lua.toggle_column()<CR>', silent)
+keymap('n', '<Leader>l', ':call v:lua.toggle_column()<CR>', silent)
 
 -- move between window splits
 keymap('n', '<C-h>', ':wincmd h<CR>', silent)
@@ -98,8 +84,8 @@ keymap('n', '<C-k>', ':wincmd k<CR>', silent)
 keymap('n', '<C-l>', ':wincmd l<CR>', silent)
 
 -- move between open buffers
-keymap('n', '<A-J>', ':bnext<CR>', silent)
-keymap('n', '<A-K>', ':bprev<CR>', silent)
+keymap('n', '<A-j>', ':bnext<CR>', silent)
+keymap('n', '<A-k>', ':bprev<CR>', silent)
 
 function _G.toggle_numbers()
     vim.wo.number = not vim.wo.number
@@ -130,6 +116,8 @@ cmd[[highlight CursorLineNr ctermbg=NONE ctermfg=NONE cterm=bold]]
 cmd[[highlight TabLineFill ctermbg=NONE ctermfg=0]]
 cmd[[highlight TabLine ctermbg=7 ctermfg=0 cterm=reverse]]
 cmd[[highlight TabLineSel ctermbg=8 ctermfg=NONE]]
+cmd[[highlight StatusLine ctermbg=0 ctermfg=NONE cterm=NONE]]
+cmd[[highlight StatusLineNC ctermbg=0 ctermfg=0 cterm=NONE]]
 cmd[[highlight ColorColumn ctermbg=0]]
 cmd[[highlight Visual ctermbg=0 ctermfg=NONE]]
 cmd[[highlight TODO ctermbg=8 ctermfg=NONE cterm=bold]]

@@ -16,6 +16,9 @@ export STATUS_PIPE="/tmp/statusbar-fifo"
 # theme file that is imported in multiple scripts
 export THEME="$HOME/.local/share/bedsi/theme"
 
+# for neovim remote
+export NVIM_LISTEN_ADDRESS="/tmp/nvimsocket nvim"
+
 # coloring manpages
 export LESS_TERMCAP_md=$'\e[01;34m'
 export LESS_TERMCAP_me=$'\e[0m'
