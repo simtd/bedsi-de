@@ -19,15 +19,20 @@ local cmd = vim.cmd
 -- PLUGINS --
 -------------
 
-require('packer').startup(function()
-    use 'junegunn/fzf.vim' -- fuzzy finder helper functions
-    use "lukas-reineke/indent-blankline.nvim" -- indent guides
-    use 'ggandor/lightspeed.nvim' -- fast navigation
-    use 'b3nj5m1n/kommentary' -- comment text in and out
-end)
+require('packer').startup(
+    function()
+        use 'junegunn/fzf.vim' -- fuzzy finder helper functions
+        use "lukas-reineke/indent-blankline.nvim" -- indent guides
+        use 'ggandor/lightspeed.nvim' -- fast navigation
+        use 'b3nj5m1n/kommentary' -- comment text in and out
+    end
+)
 
 -- fzf options
 g.fzf_preview_window = ''
+
+-- indent-blackline options
+cmd[[highlight IndentBlanklineChar ctermfg=8]]
 
 -------------
 -- OPTIONS --
@@ -46,7 +51,7 @@ opt.smartindent = true -- automatically indent new lines
 opt.hidden = true -- allow opening new buffers without saving file
 opt.cursorline = true -- highlight current line
 -- opt.guicursor = '' -- disable cursor changes for different modes
-opt.laststatus = 0 -- show/hide status line
+opt.laststatus = 2 -- show/hide status line
 -- opt.showmode = false -- disable showing mode below statusline
 opt.updatetime = 300 -- decrease update time
 opt.completeopt = 'menuone,noselect' -- better completion experience

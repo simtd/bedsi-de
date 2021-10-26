@@ -1,63 +1,63 @@
 colors:
   primary:
     # colorize BG
-    background: '#002b36'
+    background: '#282828'
     # colorize FG
-    foreground: '#839496'
+    foreground: '#ebdbb2'
 
   normal:
     # colorize BLACK
-    black:   '#073642'
+    black:   '#3c3836'
     # colorize RED
-    red:     '#dc322f'
+    red:     '#cc241d'
     # colorize GREEN
-    green:   '#859900'
+    green:   '#98971a'
     # colorize YELLOW
-    yellow:  '#b58900'
+    yellow:  '#d79921'
     # colorize BLUE
-    blue:    '#268bd2'
+    blue:    '#458588'
     # colorize MAGENTA
-    magenta: '#d33682'
+    magenta: '#b16286'
     # colorize CYAN
-    cyan:    '#2aa198'
+    cyan:    '#689d6a'
     # colorize WHITE
-    white:   '#eee8d5'
+    white:   '#a89984'
 
   bright:
     # colorize BLACK_BRIGHT
-    black:   '#586e75'
+    black:   '#665c54'
     # colorize RED_BRIGHT
-    red:     '#dc322f'
+    red:     '#fb4934'
     # colorize GREEN_BRIGHT
-    green:   '#859900'
+    green:   '#b8bb26'
     # colorize YELLOW_BRIGHT
-    yellow:  '#b58900'
+    yellow:  '#fabd2f'
     # colorize BLUE_BRIGHT
-    blue:    '#268bd2'
+    blue:    '#83a598'
     # colorize MAGENTA_BRIGHT
-    magenta: '#d33682'
+    magenta: '#d3869b'
     # colorize CYAN_BRIGHT
-    cyan:    '#2aa198'
+    cyan:    '#8ec07c'
     # colorize WHITE_BRIGHT
-    white:   '#fdf6e3'
+    white:   '#fbf1c7'
 
   dim:
     # colorize BLACK
-    black:   '#073642'
+    black:   '#3c3836'
     # colorize RED
-    red:     '#dc322f'
+    red:     '#cc241d'
     # colorize GREEN
-    green:   '#859900'
+    green:   '#98971a'
     # colorize YELLOW
-    yellow:  '#b58900'
+    yellow:  '#d79921'
     # colorize BLUE
-    blue:    '#268bd2'
+    blue:    '#458588'
     # colorize MAGENTA
-    magenta: '#d33682'
+    magenta: '#b16286'
     # colorize CYAN
-    cyan:    '#2aa198'
+    cyan:    '#689d6a'
     # colorize WHITE
-    white:   '#eee8d5'
+    white:   '#a89984'
 
 background_opacity: 0.6 
 
