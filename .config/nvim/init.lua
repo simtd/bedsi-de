@@ -77,9 +77,10 @@ keymap('n', '<Leader>o', ':History<CR>', silent) -- file history
 keymap('n', '<Leader>f', ':Files<CR>', silent) -- open file manager 
 keymap('n', '<Leader>e', ':e $MYVIMRC<CR>', silent) -- edit the config file 
 keymap('n', '<Leader><Leader>', ':buffers<CR>:b<Space>', {}) -- open buffers
+keymap('n', '<Leader>q', ':bd<CR>', {}) -- open buffers
 keymap('n', '<Leader>r', ':source $MYVIMRC<CR>', silent) -- reload config
-keymap('n', '<Leader>n', ':call v:lua.toggle_numbers()<CR>', silent)
-keymap('n', '<Leader>l', ':call v:lua.toggle_column()<CR>', silent)
+keymap('n', '<Leader>n', '<cmd>lua toggle_numbers()<CR>', silent)
+keymap('n', '<Leader>l', '<cmd>lua toggle_column()<CR>', silent)
 
 -- move between window splits
 keymap('n', '<C-h>', ':wincmd h<CR>', silent)
@@ -111,6 +112,7 @@ end
 
 -- tweaks
 cmd[[highlight Normal ctermfg=NONE ctermbg=NONE]]
+cmd[[highlight Cursor ctermfg=NONE ctermbg=NONE cterm=reverse]]
 cmd[[highlight CursorLine ctermbg=NONE cterm=NONE]]
 cmd[[highlight Comment ctermbg=NONE ctermfg=2]]
 cmd[[highlight Visual ctermbg=0 ctermfg=NONE]]
