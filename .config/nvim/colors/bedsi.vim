@@ -12,10 +12,9 @@ let g:colors_name = 'bedsi'
 " ------
 
 highlight Statement ctermfg=3
-highlight Identifier ctermfg=3 cterm=NONE
-highlight Comment ctermfg=5
+highlight Comment ctermfg=2
 highlight Number ctermfg=4
-highlight String ctermfg=2
+highlight String ctermfg=5
 
 " -------
 " VARIOUS
@@ -30,6 +29,7 @@ highlight TabLine ctermbg=7 ctermfg=0 cterm=reverse
 highlight TabLineSel ctermbg=8 ctermfg=NONE
 highlight StatusLine ctermbg=0 ctermfg=NONE cterm=NONE
 highlight StatusLineNC ctermbg=0 ctermfg=0 cterm=NONE
+highlight VertSplit ctermbg=0 ctermfg=8 cterm=NONE
 highlight ColorColumn ctermbg=0
 highlight Visual ctermbg=0 ctermfg=NONE
 highlight TODO ctermbg=8 ctermfg=NONE cterm=bold
@@ -38,9 +38,17 @@ highlight TODO ctermbg=8 ctermfg=NONE cterm=bold
 " LANGUAGE SPECIFIC
 " -----------------
 
-" shellscript
 highlight shSetList ctermfg=NONE ctermbg=NONE
 highlight shOperator ctermfg=NONE ctermbg=NONE
+highlight shTestOpr ctermfg=NONE ctermbg=NONE
+highlight shFunction ctermfg=NONE ctermbg=NONE
+highlight bashStatement ctermfg=NONE ctermbg=NONE
+
+highlight vimFuncName ctermfg=NONE ctermbg=NONE
+highlight vimHiClear ctermfg=NONE ctermbg=NONE
+highlight vimVar ctermfg=NONE ctermbg=NONE
+
+highlight luaFunc ctermfg=NONE ctermbg=NONE
 
 " -------
 " PLUGINS

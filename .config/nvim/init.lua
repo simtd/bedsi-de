@@ -31,9 +31,6 @@ require('packer').startup(
 -- fzf options
 g.fzf_preview_window = ''
 
--- indent-blackline options
-cmd[[highlight IndentBlanklineChar ctermfg=8]]
-
 -------------
 -- OPTIONS --
 -------------
@@ -51,7 +48,7 @@ opt.smartindent = true -- automatically indent new lines
 opt.hidden = true -- allow opening new buffers without saving file
 opt.cursorline = true -- highlight current line
 -- opt.guicursor = '' -- disable cursor changes for different modes
-opt.laststatus = 2 -- show/hide status line
+opt.laststatus = 0 -- show/hide status line
 -- opt.showmode = false -- disable showing mode below statusline
 opt.updatetime = 300 -- decrease update time
 opt.completeopt = 'menuone,noselect' -- better completion experience
@@ -106,27 +103,21 @@ function _G.toggle_column()
     end
 end
 
+-- Getting color highlight groups for creating color schemes
+vim.api.nvim_exec(
+    [[function! SynGroup()
+        let l:s = synID(line('.'), col('.'), 1)
+        echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+    endfun
+    nnoremap <silent> <F3> :call SynGroup()<CR>]],
+    false
+)
+
 ------------   
 -- COLORS --
 ------------
 
--- tweaks
-cmd[[highlight Normal ctermfg=NONE ctermbg=NONE]]
-cmd[[highlight Cursor ctermfg=NONE ctermbg=NONE cterm=reverse]]
-cmd[[highlight CursorLine ctermbg=NONE cterm=NONE]]
-cmd[[highlight Comment ctermbg=NONE ctermfg=2]]
-cmd[[highlight Visual ctermbg=0 ctermfg=NONE]]
-cmd[[highlight Special ctermbg=NONE ctermfg=NONE]]
-cmd[[highlight LineNr ctermbg=NONE ctermfg=8]]
-cmd[[highlight CursorLineNr ctermbg=NONE ctermfg=NONE cterm=bold]]
-cmd[[highlight TabLineFill ctermbg=NONE ctermfg=0]]
-cmd[[highlight TabLine ctermbg=7 ctermfg=0 cterm=reverse]]
-cmd[[highlight TabLineSel ctermbg=8 ctermfg=NONE]]
-cmd[[highlight StatusLine ctermbg=0 ctermfg=NONE cterm=NONE]]
-cmd[[highlight StatusLineNC ctermbg=0 ctermfg=0 cterm=NONE]]
-cmd[[highlight ColorColumn ctermbg=0]]
-cmd[[highlight Visual ctermbg=0 ctermfg=NONE]]
-cmd[[highlight TODO ctermbg=8 ctermfg=NONE cterm=bold]]
+cmd('colorscheme bedsi')
 
 ---------------
 -- VIMSCRIPT --

@@ -9,8 +9,8 @@ static const unsigned int gappx = 10; /* gaps between windows */
 static const unsigned int snap = 16; /* snap pixel */
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1; /* 0 means bottom bar */
-static const char *fonts[] = { "monospace:size=12:antialias=false:autohint=false" };
-static const char dmenufont[] = "monospace:size=12:antialias=false:autohint=false";
+static const char *fonts[] = { "Terminus:size=12:antialias=false:autohint=false" };
+static const char dmenufont[] = "Terminus:size=12:antialias=false:autohint=false";
 
 static char normbgcolor[] = "#222222";
 static char normbordercolor[] = "#444444";
@@ -19,9 +19,9 @@ static char selfgcolor[] = "#eeeeee";
 static char selbordercolor[] = "#005577";
 static char selbgcolor[] = "#005577";
 static char *colors[][3] = {
-       /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+	/*               fg           bg           border   */
+	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+	[SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
 /*
@@ -29,6 +29,7 @@ static char *colors[][3] = {
 */
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+// static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
 
 static const Rule rules[] = {
 	/* xprop(1):

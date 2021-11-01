@@ -59,23 +59,23 @@ colors:
     # colorize WHITE
     white:   '#E5E9F0'
 
-background_opacity: 0.7 
+background_opacity: 0.9
 
 font:
   normal:
     family: "monospace"
-    style: Regular
+    style: Bold
   bold:
     family: "monospace"
     style: Bold
   italic:
     family: "monospace"
-    style: Italic
+    style: Bold
   bold_italic:
     family: "monospace"
     style: Bold Italic
 
-  size: 13 
+  size: 13
 
   offset:
     x: 0
@@ -103,12 +103,12 @@ selection:
 
 live_config_reload: true
 
-#cursor:
-  #unfocused_hollow: false
-  #style: Underline
-  #style:
-    #blinking: Always
-  #blink_interval: 450
+# cursor:
+#   #unfocused_hollow: false
+#   # style: Underline
+#   style:
+#     blinking: Always
+#   blink_interval: 450
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
