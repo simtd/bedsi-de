@@ -9,7 +9,9 @@
 # the dwm patch status2d is used to add color
 # process needs to be disconnected from dwm for restart to work
 
-### SETUP:
+###########
+## SETUP ##
+###########
 
 # checking if script is already running
 for pid in "$(pidof -x $(basename $0))"; do
@@ -33,7 +35,9 @@ mkfifo "$pipe"
 # separator symbol between modules
 sep="^c$BLUE^|^d^"
 
-### FUNCTIONS:
+###############
+## FUNCTIONS ##
+###############
 
 # updating modules on specified interval
 loop() {
@@ -43,7 +47,7 @@ loop() {
     done > "$pipe" &
 }
 
-# updating volume module on port change (e.g. unplugging headphones)
+# updating volume module on pulseaudio port change (e.g. unplugging headphones)
 update_vol_port() {
     while read line; do
         [[ $line == *"card #1" ]] && sb-volume > "$pipe"
@@ -66,7 +70,9 @@ assemble() {
     done
 }
 
-### RUNNING:
+#############
+## RUNNING ##
+#############
 
 "sb-volume" > "$pipe" &
 "sb-backlight" > "$pipe" &

@@ -19,9 +19,8 @@ function truncated_path() {
 
 function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    [[ -z $git_branch ]] || git_branch=" %F{8}(${git_branch//\%/%%})%f"
-
-    PROMPT="%F{5}$(truncated_path)%f$git_branch%B%F{1}%(?.. [%?])%f%b %# "
+    [[ -z $git_branch ]] || git_branch=" %F{6}${git_branch//\%/%%}%f"
+    PROMPT="%F{3}%n%f%F{2}@%f%F{4}%M%f %F{5}$(truncated_path)%f$git_branch%B%F{1}%(?.. %?)%f%b $ "
 }
 
 autoload -Uz add-zsh-hook
@@ -90,7 +89,7 @@ _comp_options+=(globdots)
 ### HISTORY ###
 ###############
 
-# searching history with arrowkeys based on what's typed in
+# searching history up arrow based on what's typed in
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end

@@ -5,9 +5,9 @@
 --/_/_/ /_/_/\__(_)_/\__,_/\__,_/
 --
 
--- dependencies:
--- * packer
--- * fzf
+-- dependencies
+-- * packer plugin manager
+-- * fzf fuzzy finder
 
 -- shorthands
 local opt = vim.opt
@@ -21,15 +21,18 @@ local cmd = vim.cmd
 
 require('packer').startup(
     function()
-        use 'junegunn/fzf.vim' -- fuzzy finder helper functions
-        use "lukas-reineke/indent-blankline.nvim" -- indent guides
+        use 'vijaymarupudi/nvim-fzf' -- fzf lua implementation
+        use 'lukas-reineke/indent-blankline.nvim' -- indent guides
         use 'ggandor/lightspeed.nvim' -- fast navigation
         use 'b3nj5m1n/kommentary' -- comment text in and out
     end
 )
 
--- fzf options
-g.fzf_preview_window = ''
+-- nvim-fzf initialization
+cmd('unlet $FZF_DEFAULT_OPTS') -- clearing options that may be set in env 
+local fzf = require('fzf')
+local fzf_arg = '--border=rounded --cycle --color=16,bg+:-1,prompt:5,pointer:4'
+require('fzf').default_options = { fzf_cli_args = fzf_arg }
 
 -------------
 -- OPTIONS --
@@ -62,6 +65,36 @@ opt.formatoptions = opt.formatoptions - "o"
 opt.formatoptions = opt.formatoptions - "r"
 opt.formatoptions = opt.formatoptions - "c"
 
+----------------------
+-- CUSTOM FUNCTIONS --
+----------------------
+
+-- file history with fzf (requires fzf variable to be set)
+function _G.history()
+    coroutine.wrap(function()
+        vim.cmd('below new')
+        local result = fzf.provided_win_fzf(vim.v.oldfiles)
+        if result then
+            vim.cmd('edit '.. result[1])
+        end
+    end)()
+end
+
+--  toggle line numbers
+function _G.toggle_numbers()
+    vim.wo.number = not vim.wo.number
+end
+
+-- toggle ruler
+function _G.toggle_column()
+    if( vim.wo.colorcolumn ~= '' )
+    then
+        vim.wo.colorcolumn = ''
+    else
+        vim.wo.colorcolumn = '80'
+    end
+end
+
 -----------------
 -- KEYBINDINGS --
 -----------------
@@ -70,7 +103,7 @@ local silent = { silent = true }
 
 -- keymap('mode', 'keymap', 'mapped to', {options})
 keymap('n', '<Leader>s', ':%s//g<left><left>', {}) -- replace all occurrences
-keymap('n', '<Leader>o', ':History<CR>', silent) -- file history
+keymap('n', '<Leader>o', '<cmd>lua history()<CR>', silent) -- file history
 keymap('n', '<Leader>f', ':Files<CR>', silent) -- open file manager 
 keymap('n', '<Leader>e', ':e $MYVIMRC<CR>', silent) -- edit the config file 
 keymap('n', '<Leader><Leader>', ':buffers<CR>:b<Space>', {}) -- open buffers
@@ -89,21 +122,7 @@ keymap('n', '<C-l>', ':wincmd l<CR>', silent)
 keymap('n', '<A-j>', ':bnext<CR>', silent)
 keymap('n', '<A-k>', ':bprev<CR>', silent)
 
-function _G.toggle_numbers()
-    vim.wo.number = not vim.wo.number
-    vim.wo.relativenumber = not vim.wo.relativenumber
-end
-
-function _G.toggle_column()
-    if( vim.wo.colorcolumn ~= '' )
-    then
-        vim.wo.colorcolumn = ''
-    else
-        vim.wo.colorcolumn = '80'
-    end
-end
-
--- Getting color highlight groups for creating color schemes
+-- Getting color highlight groups (for creating color schemes)
 vim.api.nvim_exec(
     [[function! SynGroup()
         let l:s = synID(line('.'), col('.'), 1)

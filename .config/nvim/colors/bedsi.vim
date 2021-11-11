@@ -11,9 +11,9 @@ let g:colors_name = 'bedsi'
 " BASICS
 " ------
 
-highlight Statement ctermfg=3
-highlight Comment ctermfg=2
-highlight Number ctermfg=4
+highlight Statement ctermfg=4
+highlight Comment ctermfg=6
+highlight Number ctermfg=1
 highlight String ctermfg=5
 
 " -------
@@ -39,9 +39,14 @@ highlight TODO ctermbg=8 ctermfg=NONE cterm=bold
 " -----------------
 
 highlight shSetList ctermfg=NONE ctermbg=NONE
+highlight shSetList ctermfg=NONE ctermbg=NONE
 highlight shOperator ctermfg=NONE ctermbg=NONE
 highlight shTestOpr ctermfg=NONE ctermbg=NONE
-highlight shFunction ctermfg=NONE ctermbg=NONE
+highlight shFunction ctermfg=3 ctermbg=NONE
+highlight shDerefSimple ctermfg=5 ctermbg=NONE
+highlight shStatement ctermfg=NONE ctermbg=NONE
+highlight shVarAssign ctermfg=2 ctermbg=NONE
+" highlight shArithRegion ctermfg=3 ctermbg=NONE
 highlight bashStatement ctermfg=NONE ctermbg=NONE
 
 highlight vimFuncName ctermfg=NONE ctermbg=NONE
@@ -49,6 +54,8 @@ highlight vimHiClear ctermfg=NONE ctermbg=NONE
 highlight vimVar ctermfg=NONE ctermbg=NONE
 
 highlight luaFunc ctermfg=NONE ctermbg=NONE
+
+" highlight goType ctermfg=3
 
 " -------
 " PLUGINS

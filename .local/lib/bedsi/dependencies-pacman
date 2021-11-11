@@ -30,7 +30,6 @@ pulseaudio
 socat
 terminus-font
 tldr
-ttf-ubuntu-font-family
 ufw
 unclutter
 w3m
@@ -43,3 +42,4 @@ xorg
 xorg-xinit
 yt-dlp
 zsh
+zsh-autosuggestions
