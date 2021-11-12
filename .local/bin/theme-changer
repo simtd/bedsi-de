@@ -3,35 +3,43 @@
 # set system color scheme
 
 # usage:
-#   $ theme-changer nord
+# ------
+# $ theme-changer nord
 
-# available themes are located in $dir/themes
+# files:
+# ------
+# available themes are located in $dir/themes (exit already in specific format)
 # current theme is located in $dir/theme (created by this script)
 
-# programs vary with how they are fed colors
-# for programs and scripts that can read shell variables:
-#   - import $dir/theme and use the variables directly
-#   - use an eviroment variable so its easy to import in multiple files
-#       - e.g. . "$THEME"
-# for programs that cannot read shell variables:
-#   - specify the path to the config file in $unwilling_files (new line)
-#   - add a comment to the config file above every line containing a hex color
-#       - on the form: colorize FG_ALT
-#           - color names are the same as the variables in the theme file
-#   - if the program needs to be reloaded add the command to reload_programs()
-
-### SETUP:
-
-dir="$HOME/.local/share/bedsi"
+# programs are fed colors in one of two ways:
+# -------------------------------------------
+# 1) for programs/scripts that can read shell variables:
+# - import $dir/theme and use the variables directly in the config script
+#   - tip: use an eviroment variable = $dir/theme
+#     - now themes are easily imported with: . "$THEME"
+#     - improves importing in multiple places
+# 2) for programs that cannot read shell variables:
+# - specify the path to the config file in $unwilling_files (on a new line)
+# - add a comment to the config file above every line containing a hex color
+#   you want to change
+#   - on the form: colorize FG_ALT
+#     - color names are the same as the variables in the theme file
+# - if the program needs to be reloaded for colors to take effect
+#   add the command to do so to reload_programs()
 
 unwilling_files="
 $HOME/.config/alacritty/alacritty.yml
 $XRESOURCES
 "
+reload_programs() {
+    xrdb "$XRESOURCES"
+    xdotool key Super_L+F5
+    restart-statusbar
+}
 
-### FUNCTIONS:
+dir="$HOME/.local/share/bedsi"
 
-# replacing the colors in the theme file
+# replacing theme file with new theme
 replace_theme() {
     color_theme="$dir/themes/$1"
     if [[ -f $color_theme ]]; then
@@ -42,7 +50,7 @@ replace_theme() {
     fi
 }
 
-# changing colors for config files that can't import environment variables
+# changing colors for config files that can't import shell variables
 colorize_unwilling() {
     comment_regex='\scolorize\s[A-Z]\+\(_\)\?\([A-Z]\+\)\?$' # colorize FG_ALT
     hex_regex="#[A-Fa-f0-9]{6}" # #EBB062
@@ -68,14 +76,6 @@ colorize_unwilling() {
     done
 }
 
-reload_programs() {
-    xrdb "$XRESOURCES"
-    xdotool key Super_L+F5
-    restart-statusbar
-}
-
-### RUNNING:
-
 replace_theme "$1"
-colorize_unwilling $unwilling_files # don't quote this variable
+colorize_unwilling $unwilling_files # don't quote to allow iteration
 reload_programs
