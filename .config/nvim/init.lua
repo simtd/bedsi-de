@@ -73,6 +73,8 @@ opt.formatoptions = opt.formatoptions - "c"
 function _G.history()
     coroutine.wrap(function()
         vim.cmd('below new')
+        vim.wo.number = false
+        vim.opt.showmode = false
         local result = fzf.provided_win_fzf(vim.v.oldfiles)
         if result then
             vim.cmd('edit '.. result[1])
@@ -99,18 +101,18 @@ end
 -- KEYBINDINGS --
 -----------------
 
+-- keymap('mode', 'keymap', 'mapped to', {options})
+
 local silent = { silent = true }
 
--- keymap('mode', 'keymap', 'mapped to', {options})
 keymap('n', '<Leader>s', ':%s//g<left><left>', {}) -- replace all occurrences
-keymap('n', '<Leader>o', '<cmd>lua history()<CR>', silent) -- file history
-keymap('n', '<Leader>f', ':Files<CR>', silent) -- open file manager 
-keymap('n', '<Leader>e', ':e $MYVIMRC<CR>', silent) -- edit the config file 
+keymap('n', '<Leader>e', ':e $MYVIMRC<CR>', silent) -- edit config file 
 keymap('n', '<Leader><Leader>', ':buffers<CR>:b<Space>', {}) -- open buffers
-keymap('n', '<Leader>q', ':bd<CR>', {}) -- open buffers
+keymap('n', '<Leader>q', ':bd<CR>', {}) -- close buffer
 keymap('n', '<Leader>r', ':source $MYVIMRC<CR>', silent) -- reload config
-keymap('n', '<Leader>n', '<cmd>lua toggle_numbers()<CR>', silent)
-keymap('n', '<Leader>l', '<cmd>lua toggle_column()<CR>', silent)
+keymap('n', '<Leader>n', '<cmd>lua toggle_numbers()<CR>', silent) -- line nums
+keymap('n', '<Leader>l', '<cmd>lua toggle_column()<CR>', silent) --ruler
+keymap('n', '<Leader>o', '<cmd>lua history()<CR>', silent) -- file history
 
 -- move between window splits
 keymap('n', '<C-h>', ':wincmd h<CR>', silent)
@@ -122,14 +124,15 @@ keymap('n', '<C-l>', ':wincmd l<CR>', silent)
 keymap('n', '<A-j>', ':bnext<CR>', silent)
 keymap('n', '<A-k>', ':bprev<CR>', silent)
 
--- Getting color highlight groups (for creating color schemes)
+-- get highlight group under cursor (for creating color schemes)
 vim.api.nvim_exec(
-    [[function! SynGroup()
+    [[
+    function! SynGroup()
         let l:s = synID(line('.'), col('.'), 1)
         echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
     endfun
-    nnoremap <silent> <F3> :call SynGroup()<CR>]],
-    false
+    nnoremap <silent> <F3> :call SynGroup()<CR>
+    ]], false
 )
 
 ------------   
