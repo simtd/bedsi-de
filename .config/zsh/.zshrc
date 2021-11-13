@@ -20,7 +20,7 @@ function truncated_path() {
 function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     [[ -z $git_branch ]] || git_branch=" %F{6}${git_branch//\%/%%}%f"
-    PROMPT="%F{3}%n%f%F{2}@%f%F{4}%M%f %F{5}$(truncated_path)%f$git_branch%B%F{1}%(?.. %?)%f%b $ "
+    PROMPT="%F{1}[%f%F{3}%n%f%F{2}@%f%F{4}%M%f %F{5}$(truncated_path)%f$git_branch%B%F{1}%(?.. %?)%f%b%F{1}]%f$ "
 }
 
 autoload -Uz add-zsh-hook
@@ -57,7 +57,7 @@ alias nf="neofetch"
 
 alias storage="df -h -x tmpfs"
 alias wifi-list="nmcli device wifi list"
-alias wifi-show="nmcli connection show"
+alias wifi-known="nmcli connection show"
 alias wifi-connect="nmcli --ask device wifi connect"
 alias wifi-disconnect="nmcli connection delete"
 alias wifi-enable="nmcli radio wifi on"

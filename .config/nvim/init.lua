@@ -30,7 +30,7 @@ require('packer').startup(
 
 -- nvim-fzf initialization
 cmd('unlet $FZF_DEFAULT_OPTS') -- clearing options that may be set in env 
-local fzf = require('fzf')
+local nvim_fzf = require('fzf')
 local fzf_arg = '--border=rounded --cycle --color=16,bg+:-1,prompt:5,pointer:4'
 require('fzf').default_options = { fzf_cli_args = fzf_arg }
 
@@ -69,17 +69,24 @@ opt.formatoptions = opt.formatoptions - "c"
 -- CUSTOM FUNCTIONS --
 ----------------------
 
--- file history with fzf (requires fzf variable to be set)
-function _G.history()
+-- template for fzf functionality with nvim-fzf
+-- requires fzf variable to be set (nvim_fzf)
+-- cmd_src = items to display in fzf
+-- cmd_act = vim command to use on selected item
+function _G.fzf_template(cmd_src, cmd_act)
     coroutine.wrap(function()
         vim.cmd('below new')
         vim.wo.number = false
         vim.opt.showmode = false
-        local result = fzf.provided_win_fzf(vim.v.oldfiles)
+        local result = nvim_fzf.provided_win_fzf(cmd_src)
         if result then
-            vim.cmd('edit '.. result[1])
+            vim.cmd(cmd_act .. ' ' .. result[1])
         end
     end)()
+end
+
+function _G.fzf_history()
+    fzf_template(vim.v.oldfiles, 'edit')
 end
 
 --  toggle line numbers
@@ -112,7 +119,7 @@ keymap('n', '<Leader>q', ':bd<CR>', {}) -- close buffer
 keymap('n', '<Leader>r', ':source $MYVIMRC<CR>', silent) -- reload config
 keymap('n', '<Leader>n', '<cmd>lua toggle_numbers()<CR>', silent) -- line nums
 keymap('n', '<Leader>l', '<cmd>lua toggle_column()<CR>', silent) --ruler
-keymap('n', '<Leader>o', '<cmd>lua history()<CR>', silent) -- file history
+keymap('n', '<Leader>o', '<cmd>lua fzf_history()<CR>', silent) -- file history
 
 -- move between window splits
 keymap('n', '<C-h>', ':wincmd h<CR>', silent)
@@ -139,7 +146,38 @@ vim.api.nvim_exec(
 -- COLORS --
 ------------
 
-cmd('colorscheme bedsi')
+cmd([[
+    highlight clear
+    syntax reset
+
+    highlight Comment ctermfg=2
+
+    highlight PreProc ctermfg=NONE
+    highlight Type ctermfg=NONE
+    highlight String ctermfg=NONE
+    highlight Statement ctermfg=NONE
+    highlight Constant ctermfg=NONE
+    highlight Identifier ctermfg=NONE
+    highlight Special ctermfg=NONE
+
+    highlight Cursor ctermfg=NONE ctermbg=NONE cterm=reverse
+    highlight CursorLine ctermbg=NONE ctermfg=NONE cterm=NONE
+    highlight Visual ctermbg=0 ctermfg=NONE
+    highlight LineNr ctermbg=NONE ctermfg=8
+    highlight CursorLineNr ctermbg=NONE ctermfg=NONE cterm=bold
+    highlight TabLineFill ctermbg=NONE ctermfg=0
+    highlight TabLine ctermbg=7 ctermfg=0 cterm=reverse
+    highlight TabLineSel ctermbg=8 ctermfg=NONE
+    highlight StatusLine ctermbg=0 ctermfg=NONE cterm=NONE
+    highlight StatusLineNC ctermbg=0 ctermfg=0 cterm=NONE
+    highlight VertSplit ctermbg=0 ctermfg=8 cterm=NONE
+    highlight ColorColumn ctermbg=0
+    highlight Visual ctermbg=0 ctermfg=NONE
+    highlight TODO ctermbg=8 ctermfg=NONE cterm=bold
+
+    " indent-blankline.nvim
+    highlight IndentBlanklineChar ctermfg=8
+]])
 
 ---------------
 -- VIMSCRIPT --
