@@ -100,7 +100,7 @@ function _G.toggle_column()
     then
         vim.wo.colorcolumn = ''
     else
-        vim.wo.colorcolumn = '80'
+        vim.wo.colorcolumn = '81'
     end
 end
 
@@ -151,6 +151,7 @@ cmd([[
     syntax reset
 
     highlight Comment ctermfg=2
+    highlight Title ctermfg=3
 
     highlight PreProc ctermfg=NONE
     highlight Type ctermfg=NONE

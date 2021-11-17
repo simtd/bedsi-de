@@ -7,13 +7,13 @@
 # slight decrease: volume-control slight down
 # mute: volume-control mute
 
-[[ "$1" = "mute" ]] && pactl set-sink-mute @DEFAULT_SINK@ toggle && exit 0
+[[ $1 = "mute" ]] && pactl set-sink-mute @DEFAULT_SINK@ toggle && exit 0
 
 vol=$(pactl list sinks | grep -o -m 1 "Volume:[^%]*")
 vol=${vol##* }
 
 increment=5
-[[ "$1" = "slight" ]] && increment=1
-[[ "${@:$#}" = "down" ]] && increment=$(( $increment * -1 ))
+[[ $1 = "slight" ]] && increment=1
+[[ ${@:$#} = "down" ]] && increment=$(( $increment * -1 ))
 [[ $(( $vol % $increment )) -ne 0 ]] && increment=$(perl -le 'printf "%.0f", eval"@ARGV"' "($increment - $vol % $increment)")
 pactl set-sink-volume @DEFAULT_SINK@ "+$increment%"

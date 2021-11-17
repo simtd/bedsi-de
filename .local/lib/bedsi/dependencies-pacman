@@ -26,13 +26,13 @@ papirus-icon-theme
 pcmanfm-gtk3
 pkgconf
 playerctl
-pulseaudio
+pipewire
+pipewire-pulse
 socat
 terminus-font
 tldr
 ufw
 unclutter
-w3m
 wget
 xcape
 xclip

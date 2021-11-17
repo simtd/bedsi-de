@@ -20,7 +20,7 @@ function truncated_path() {
 function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     [[ -z $git_branch ]] || git_branch=" %F{6}${git_branch//\%/%%}%f"
-    PROMPT="%F{1}[%f%F{3}%n%f%F{2}@%f%F{4}%M%f %F{5}$(truncated_path)%f$git_branch%B%F{1}%(?.. %?)%f%b%F{1}]%f$ "
+    PROMPT="%F{4}$(truncated_path)%f$git_branch%B%F{1}%(?.. %?)%f%b %B%F{5}>%f%b "
 }
 
 autoload -Uz add-zsh-hook
@@ -72,6 +72,27 @@ d() {
     dir="$(find $HOME -maxdepth 3 -type d -printf '%P\n' | fzf --no-multi)"
     cd "$HOME/$dir"
 }
+
+###############
+### VI MODE ###
+###############
+
+bindkey -v
+export KEYTIMEOUT=1
+
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # use beam shape cursor on startup
+preexec() { echo -ne '\e[5 q' ;} # use beam shape cursor for each new prompt
 
 ###################
 ### COMPLETIONS ###
