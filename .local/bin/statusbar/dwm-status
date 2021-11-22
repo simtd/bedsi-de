@@ -50,7 +50,7 @@ loop() {
 # updating volume module on pulseaudio port change (e.g. unplugging headphones)
 update_vol_port() {
     while read line; do
-        [[ $line == *"card #1" ]] && sb-volume > "$pipe"
+        [[ $line == *"card #43" ]] && sb-volume > "$pipe"
     done < <(pactl subscribe) &
 }
 

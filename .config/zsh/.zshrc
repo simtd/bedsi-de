@@ -20,7 +20,7 @@ function truncated_path() {
 function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     [[ -z $git_branch ]] || git_branch=" %F{6}${git_branch//\%/%%}%f"
-    PROMPT="%F{4}$(truncated_path)%f$git_branch%B%F{1}%(?.. %?)%f%b %B%F{5}>%f%b "
+    PROMPT="%F{4}$(truncated_path)%f$git_branch%B%F{1}%(?.. [%?])%f%b %B%F{5}>%f%b "
 }
 
 autoload -Uz add-zsh-hook
