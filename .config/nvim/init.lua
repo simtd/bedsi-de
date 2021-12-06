@@ -25,6 +25,9 @@ require('packer').startup(
         use 'lukas-reineke/indent-blankline.nvim' -- indent guides
         use 'ggandor/lightspeed.nvim' -- fast navigation
         use 'b3nj5m1n/kommentary' -- comment text in and out
+
+        -- better language parsers (mostly for improved syntax highlighting):
+        use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     end
 )
 
@@ -33,6 +36,13 @@ cmd('unlet $FZF_DEFAULT_OPTS') -- clearing options that may be set in env
 local nvim_fzf = require('fzf')
 local fzf_arg = '--border=rounded --cycle --color=16,bg+:-1,prompt:5,pointer:4'
 require('fzf').default_options = { fzf_cli_args = fzf_arg }
+
+-- tree-sitter initialization
+require'nvim-treesitter.configs'.setup {
+    highlight = {
+    enable = true,
+    },
+}
 
 -------------
 -- OPTIONS --
@@ -48,7 +58,6 @@ opt.expandtab = true -- insert spaces for tabs
 opt.tabstop = 4 -- number of spaces a tab equals
 opt.shiftwidth = 4 -- number of spaces for indentation
 opt.smartindent = true -- automatically indent new lines
-opt.hidden = true -- allow opening new buffers without saving file
 opt.cursorline = true -- highlight current line
 -- opt.guicursor = '' -- disable cursor changes for different modes
 opt.laststatus = 0 -- show/hide status line
@@ -150,8 +159,41 @@ cmd([[
     highlight clear
     syntax reset
 
+    highlight TSFunction ctermfg=13
+    highlight TSString ctermfg=2
+    highlight TSComment ctermfg=8
+    highlight TSNumber ctermfg=4
+    highlight TSType ctermfg=4
+
+    highlight Cursor ctermfg=NONE ctermbg=NONE cterm=reverse
+    highlight CursorLineNr ctermbg=NONE ctermfg=NONE cterm=bold
+    highlight CursorLine ctermbg=NONE ctermfg=NONE cterm=NONE
+    highlight Visual ctermbg=0 ctermfg=NONE
+    highlight LineNr ctermbg=NONE ctermfg=8
+    highlight TabLineFill ctermbg=NONE ctermfg=0
+    highlight TabLine ctermbg=7 ctermfg=0 cterm=reverse
+    highlight TabLineSel ctermbg=8 ctermfg=NONE
+    highlight StatusLine ctermbg=0 ctermfg=NONE cterm=NONE
+    highlight StatusLineNC ctermbg=0 ctermfg=0 cterm=NONE
+    highlight VertSplit ctermbg=0 ctermfg=8 cterm=NONE
+    highlight Visual ctermbg=0 ctermfg=NONE
+    highlight TODO ctermbg=8 ctermfg=NONE cterm=bold
+
+    highlight IndentBlanklineChar ctermfg=8
+]])
+
+-- cmd("colorscheme default")
+-- cmd("set termguicolors")
+
+--[=[
+
+cmd([[
+    highlight clear
+    syntax reset
+
     highlight Comment ctermfg=2
     highlight Title ctermfg=3
+    highlight Underlined ctermfg=NONE cterm=underline
 
     highlight PreProc ctermfg=NONE
     highlight Type ctermfg=NONE
@@ -179,6 +221,8 @@ cmd([[
     " indent-blankline.nvim
     highlight IndentBlanklineChar ctermfg=8
 ]])
+
+--]=]
 
 ---------------
 -- VIMSCRIPT --

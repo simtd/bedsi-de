@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # opens links in appropriate programs
+# useful for newsboat
 
 case "$1" in
-    *".png"*|*".jpg"*) feh "$1" ;;
-    *".mp3"*) mpv "$1" ;;
-    *"youtube.com/watch"*) mpv --ytdl-format="(bestvideo[height<=?1080]+bestaudio/best)" "$1" ;;
+    *png|*jpg|*gif) feh "$1" ;;
+    *youtube.com/watch*|*mp3) setsid -f mpv --no-terminal --ytdl-format="(bestvideo[height<=?1080]+bestaudio/best)" "$1" ;;
     *) "$BROWSER" --new-window "$1" ;;
 esac

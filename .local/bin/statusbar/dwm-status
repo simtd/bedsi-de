@@ -3,15 +3,12 @@
 # statusbar script for the dwm panel
 # based on https://github.com/baskerville/bspwm/tree/master/examples/panel
 
+# needs to run disconnected from dwm process for restart to not kill dwm (for example via setsid)
+
 # updates modules via a named pipe specified by $STATUS_PIPE env variable
-# modules are their own scripts (in path) with "sb-" prefix
+# modules are their own scripts (in path with "sb-" prefix)
 # the modules need an update signal as the first letter in their output
 # the dwm patch status2d is used to add color
-# process needs to be disconnected from dwm for restart to work
-
-###########
-## SETUP ##
-###########
 
 # checking if script is already running
 for pid in "$(pidof -x $(basename $0))"; do
@@ -21,7 +18,7 @@ for pid in "$(pidof -x $(basename $0))"; do
     fi
 done
 
-# cleaning up processes when killed
+# cleaning up processes when killed (script process needs to not be tied to wm!)
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
 # importing system theme
@@ -35,9 +32,9 @@ mkfifo "$pipe"
 # separator symbol between modules
 sep="^c$BLUE^|^d^"
 
-###############
-## FUNCTIONS ##
-###############
+# modules that updates on events loaded manually first time
+"sb-volume" > "$pipe" &
+"sb-backlight" > "$pipe" &
 
 # updating modules on specified interval
 loop() {
@@ -47,6 +44,13 @@ loop() {
     done > "$pipe" &
 }
 
+# modules that updates in intervals
+# loop script seconds
+loop "sb-date" 60
+loop "sb-battery" 7
+loop "sb-wifi" 5
+loop "sb-clock" 1
+
 # updating volume module on pulseaudio port change (e.g. unplugging headphones)
 update_vol_port() {
     while read line; do
@@ -54,7 +58,9 @@ update_vol_port() {
     done < <(pactl subscribe) &
 }
 
-# reads and sorts incoming output from modules
+update_vol_port
+
+# continuously reads and sorts incoming output from modules based on their update signal
 # sets the actual status text
 assemble() {
     while read line ; do
@@ -69,21 +75,6 @@ assemble() {
         xsetroot -name " $vol $sep $backlight $sep $wifi $sep $bat $sep $date $clock "
     done
 }
-
-#############
-## RUNNING ##
-#############
-
-"sb-volume" > "$pipe" &
-"sb-backlight" > "$pipe" &
-
-# loop script seconds
-loop "sb-date" 60
-loop "sb-battery" 7
-loop "sb-wifi" 5
-loop "sb-clock" 1
-
-update_vol_port
 
 assemble < "$pipe"
 

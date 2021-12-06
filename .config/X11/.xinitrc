@@ -2,9 +2,9 @@
 
 . "$THEME"
 
-###############
-### VARIOUS ###
-###############
+#############
+## VARIOUS ##
+#############
 
 # Xresources for dwm colors
 xrdb "$XRESOURCES"
@@ -13,9 +13,9 @@ xrdb "$XRESOURCES"
 # needs to be created manually
 [ -f "$XDG_CONFIG_HOME/bedsi/init" ] && "$XDG_CONFIG_HOME/bedsi/init"
 
-##############################
-### INPUT DEVICES SETTINGS ###
-##############################
+############################
+## INPUT DEVICES SETTINGS ##
+############################
 
 # setting correct mouse cursor
 xsetroot -cursor_name left_ptr
@@ -26,9 +26,9 @@ xmodmap -e "add mod3 = Tab"
 # increase key speed
 xset r rate 300 50
 
-################
-### PROGRAMS ###
-################
+##############
+## PROGRAMS ##
+##############
 
 # hiding inactive cursor
 unclutter &

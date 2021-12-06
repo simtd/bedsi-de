@@ -1,6 +1,6 @@
-##############
-### PROMPT ###
-##############
+############
+## PROMPT ##
+############
 
 function truncated_path() {
     local i pwd
@@ -26,9 +26,9 @@ function set-prompt() {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
 
-###############
-### ALIASES ###
-###############
+#############
+## ALIASES ##
+#############
 
 alias ..="cd .."
 alias ls="ls --color"
@@ -49,6 +49,7 @@ alias gc="git commit"
 alias gr="git rm --cached"
 alias gp="git push"
 
+alias mpv="setsid -f mpv --no-terminal"
 alias open="xdg-open"
 alias py="python3"
 alias ac="arduino-cli"
@@ -63,9 +64,9 @@ alias wifi-disconnect="nmcli connection delete"
 alias wifi-enable="nmcli radio wifi on"
 alias wifi-disable="nmcli radio wifi off"
 
-#################
-### FUNCTIONS ###
-#################
+###############
+## FUNCTIONS ##
+###############
 
 # quick jump directories with fzf
 d() {
@@ -73,9 +74,9 @@ d() {
     cd "$HOME/$dir"
 }
 
-###############
-### VI MODE ###
-###############
+#############
+## VI MODE ##
+#############
 
 bindkey -v
 export KEYTIMEOUT=1
@@ -94,9 +95,9 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # use beam shape cursor on startup
 preexec() { echo -ne '\e[5 q' ;} # use beam shape cursor for each new prompt
 
-###################
-### COMPLETIONS ###
-###################
+#################
+## COMPLETIONS ##
+#################
 
 # improving tab completion (menu, case-insensitive etc.)
 autoload -U compinit
@@ -106,9 +107,9 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
-###############
-### HISTORY ###
-###############
+#############
+## HISTORY ##
+#############
 
 # searching history up arrow based on what's typed in
 autoload -U history-search-end
@@ -117,9 +118,9 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^[[A" history-beginning-search-backward-end
 bindkey "^[[B" history-beginning-search-forward-end
 
-###################
-### KEYBINDINGS ###
-###################
+#################
+## KEYBINDINGS ##
+#################
 
 # vim keys in tab complete menu
 bindkey -M menuselect 'h' vi-backward-char
