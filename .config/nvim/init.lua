@@ -7,7 +7,7 @@
 
 -- dependencies
 -- * packer plugin manager
--- * fzf fuzzy finder
+-- * fzf fuzzy finder binary
 
 -- shorthands
 local opt = vim.opt
@@ -50,21 +50,22 @@ require'nvim-treesitter.configs'.setup {
 
 opt.mouse = 'a' -- mouse interaction
 opt.clipboard = 'unnamedplus' -- use system clipboard
-opt.hlsearch = false -- don't highlight all matches for search
+opt.hlsearch = false -- highlight all matches for search
 opt.ignorecase = true -- case insensitive seatch
-opt.smartcase = true -- don't ignore case when search contains upper case
+opt.smartcase = true -- ignore case when search contains upper case
 opt.wrap = false -- disable line wrapping
 opt.expandtab = true -- insert spaces for tabs
 opt.tabstop = 4 -- number of spaces a tab equals
 opt.shiftwidth = 4 -- number of spaces for indentation
 opt.smartindent = true -- automatically indent new lines
-opt.cursorline = true -- highlight current line
 -- opt.guicursor = '' -- disable cursor changes for different modes
 opt.laststatus = 0 -- show/hide status line
--- opt.showmode = false -- disable showing mode below statusline
-opt.updatetime = 300 -- decrease update time
+opt.showmode = true -- showing mode below statusline
+opt.updatetime = 300 -- decrease update time for faster feel
 opt.completeopt = 'menuone,noselect' -- better completion experience
-opt.timeoutlen = 2000 -- more time for hotkeys
+opt.timeoutlen = 2000 -- more time for leader hotkeys
+-- opt.scrolloff = 999 -- keep the cursor in the middle
+-- opt.list = true -- symbols for space and end of line
 
 g['loaded_matchparen'] = 1 -- disable highlighing matching parenthesies
 g.mapleader = ',' -- change the <leader> key to be comma
@@ -140,17 +141,6 @@ keymap('n', '<C-l>', ':wincmd l<CR>', silent)
 keymap('n', '<A-j>', ':bnext<CR>', silent)
 keymap('n', '<A-k>', ':bprev<CR>', silent)
 
--- get highlight group under cursor (for creating color schemes)
-vim.api.nvim_exec(
-    [[
-    function! SynGroup()
-        let l:s = synID(line('.'), col('.'), 1)
-        echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-    endfun
-    nnoremap <silent> <F3> :call SynGroup()<CR>
-    ]], false
-)
-
 ------------   
 -- COLORS --
 ------------
@@ -159,17 +149,33 @@ cmd([[
     highlight clear
     syntax reset
 
+    highlight TSProperty ctermfg=4
+    highlight TSNumber ctermfg=4
+    highlight TSKeyword ctermfg=1
+    highlight TSInclude ctermfg=1
+    highlight TSKeywordFunction ctermfg=1
+    highlight TSConstBuiltin ctermfg=4
+    highlight TSTag ctermfg=3
+    highlight TSProperty ctermfg=4
+    highlight TSNumber ctermfg=4
+    highlight TSKeyword ctermfg=4
+    highlight TSInclude ctermfg=1
+    highlight TSKeywordFunction ctermfg=1
+    highlight TSConstBuiltin ctermfg=4
+    highlight TSTag ctermfg=3
     highlight TSFunction ctermfg=13
     highlight TSString ctermfg=2
     highlight TSComment ctermfg=8
     highlight TSNumber ctermfg=4
     highlight TSType ctermfg=4
+    highlight TSVariable ctermfg=NONE
+    highlight TSPunctBracket ctermfg=NONE
+    highlight TSPunctSpecial ctermfg=NONE
+    highlight TSPunctDelimiter ctermfg=NONE
 
     highlight Cursor ctermfg=NONE ctermbg=NONE cterm=reverse
-    highlight CursorLineNr ctermbg=NONE ctermfg=NONE cterm=bold
-    highlight CursorLine ctermbg=NONE ctermfg=NONE cterm=NONE
     highlight Visual ctermbg=0 ctermfg=NONE
-    highlight LineNr ctermbg=NONE ctermfg=8
+    highlight LineNr ctermbg=NONE ctermfg=0
     highlight TabLineFill ctermbg=NONE ctermfg=0
     highlight TabLine ctermbg=7 ctermfg=0 cterm=reverse
     highlight TabLineSel ctermbg=8 ctermfg=NONE
@@ -179,50 +185,8 @@ cmd([[
     highlight Visual ctermbg=0 ctermfg=NONE
     highlight TODO ctermbg=8 ctermfg=NONE cterm=bold
 
-    highlight IndentBlanklineChar ctermfg=8
+    highlight IndentBlanklineChar ctermfg=0
 ]])
-
--- cmd("colorscheme default")
--- cmd("set termguicolors")
-
---[=[
-
-cmd([[
-    highlight clear
-    syntax reset
-
-    highlight Comment ctermfg=2
-    highlight Title ctermfg=3
-    highlight Underlined ctermfg=NONE cterm=underline
-
-    highlight PreProc ctermfg=NONE
-    highlight Type ctermfg=NONE
-    highlight String ctermfg=NONE
-    highlight Statement ctermfg=NONE
-    highlight Constant ctermfg=NONE
-    highlight Identifier ctermfg=NONE
-    highlight Special ctermfg=NONE
-
-    highlight Cursor ctermfg=NONE ctermbg=NONE cterm=reverse
-    highlight CursorLine ctermbg=NONE ctermfg=NONE cterm=NONE
-    highlight Visual ctermbg=0 ctermfg=NONE
-    highlight LineNr ctermbg=NONE ctermfg=8
-    highlight CursorLineNr ctermbg=NONE ctermfg=NONE cterm=bold
-    highlight TabLineFill ctermbg=NONE ctermfg=0
-    highlight TabLine ctermbg=7 ctermfg=0 cterm=reverse
-    highlight TabLineSel ctermbg=8 ctermfg=NONE
-    highlight StatusLine ctermbg=0 ctermfg=NONE cterm=NONE
-    highlight StatusLineNC ctermbg=0 ctermfg=0 cterm=NONE
-    highlight VertSplit ctermbg=0 ctermfg=8 cterm=NONE
-    highlight ColorColumn ctermbg=0
-    highlight Visual ctermbg=0 ctermfg=NONE
-    highlight TODO ctermbg=8 ctermfg=NONE cterm=bold
-
-    " indent-blankline.nvim
-    highlight IndentBlanklineChar ctermfg=8
-]])
-
---]=]
 
 ---------------
 -- VIMSCRIPT --

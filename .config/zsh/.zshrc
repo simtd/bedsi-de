@@ -49,7 +49,7 @@ alias gc="git commit"
 alias gr="git rm --cached"
 alias gp="git push"
 
-alias mpv="setsid -f mpv --no-terminal"
+alias mpv="setsid -f mpv --no-terminal --ytdl-format='(bestvideo[height<=?1080]+bestaudio/best)'"
 alias open="xdg-open"
 alias py="python3"
 alias ac="arduino-cli"

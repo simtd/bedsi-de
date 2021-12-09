@@ -1,63 +1,63 @@
 colors:
   primary:
     # colorize BG
-    background: '#2E3440'
+    background: '#1E1E28'
     # colorize FG
-    foreground: '#D8DEE9'
+    foreground: '#D7DAE0'
 
   normal:
     # colorize BLACK
-    black:   '#3B4252'
+    black:   '#3E3D45'
     # colorize RED
-    red:     '#BF616A'
+    red:     '#E28C8C'
     # colorize GREEN
-    green:   '#A3BE8C'
+    green:   '#B3E1A3'
     # colorize YELLOW
-    yellow:  '#EBCB8B'
+    yellow:  '#EADDA0'
     # colorize BLUE
-    blue:    '#81A1C1'
+    blue:    '#A4B9EF'
     # colorize MAGENTA
-    magenta: '#B48EAD'
+    magenta: '#C6AAE8'
     # colorize CYAN
-    cyan:    '#88C0D0'
+    cyan:    '#F0AFE1'
     # colorize WHITE
-    white:   '#E5E9F0'
+    white:   '#D7DAE0'
 
   bright:
     # colorize BLACK_BRIGHT
-    black:   '#4c566a'
+    black:   '#6E6C7C'
     # colorize RED_BRIGHT
-    red:     '#BF616A'
+    red:     '#E28C8C'
     # colorize GREEN_BRIGHT
-    green:   '#A3BE8C'
+    green:   '#B3E1A3'
     # colorize YELLOW_BRIGHT
-    yellow:  '#EBCB8B'
+    yellow:  '#EADDA0'
     # colorize BLUE_BRIGHT
-    blue:    '#81A1C1'
+    blue:    '#A4B9EF'
     # colorize MAGENTA_BRIGHT
-    magenta: '#B48EAD'
+    magenta: '#C6AAE8'
     # colorize CYAN_BRIGHT
-    cyan:    '#88C0D0'
+    cyan:    '#F0AFE1'
     # colorize WHITE_BRIGHT
-    white:   '#E5E9F0'
+    white:   '#D7DAE0'
 
   dim:
     # colorize BLACK
-    black:   '#3B4252'
+    black:   '#3E3D45'
     # colorize RED
-    red:     '#BF616A'
+    red:     '#E28C8C'
     # colorize GREEN
-    green:   '#A3BE8C'
+    green:   '#B3E1A3'
     # colorize YELLOW
-    yellow:  '#EBCB8B'
+    yellow:  '#EADDA0'
     # colorize BLUE
-    blue:    '#81A1C1'
+    blue:    '#A4B9EF'
     # colorize MAGENTA
-    magenta: '#B48EAD'
+    magenta: '#C6AAE8'
     # colorize CYAN
-    cyan:    '#88C0D0'
+    cyan:    '#F0AFE1'
     # colorize WHITE
-    white:   '#E5E9F0'
+    white:   '#D7DAE0'
 
 background_opacity: 0.5
 
@@ -75,7 +75,7 @@ font:
     family: "monospace"
     style: Bold Italic
 
-  size: 15
+  size: 14
 
   offset:
     x: 0
