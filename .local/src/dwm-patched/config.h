@@ -224,13 +224,7 @@ static Key keys[] = {
 	// regular dmenu run launcher
 	{ MODKEY|ShiftMask, XK_p, spawn, {.v = dmenucmd } },
 
-	// websearch
-	{ MODKEY|Mod5Mask, XK_1, spawn, SHCMD("dmenu-websearch") },
-	
 	// system theme changer
-	{ MODKEY|Mod5Mask, XK_2, spawn, SHCMD("dmenu-dotfiles") },
-
-	// select and edit dotfiles
 	{ MODKEY|Mod5Mask, XK_3, spawn, SHCMD("dmenu-theme-changer") },
 
 	/*
