@@ -1,11 +1,12 @@
---    _       _ __    __
---   (_)___  (_) /_  / /_  ______ _
---  / / __ \/ / __/ / / / / / __ `/
--- / / / / / / /__ / / /_/ / /_/ /
---/_/_/ /_/_/\__(_)_/\__,_/\__,_/
+--     _       _ __    __
+--    (_)___  (_) /_  / /_  ______ _
+--   / / __ \/ / __/ / / / / / __ `/
+--  / / / / / / /__ / / /_/ / /_/ /
+-- /_/_/ /_/_/\__(_)_/\__,_/\__,_/
+-- A less broken neovim experience in one file!
 --
 
--- dependencies
+-- Dependencies:
 -- * packer plugin manager
 -- * fzf fuzzy finder binary
 
@@ -44,9 +45,9 @@ require'nvim-treesitter.configs'.setup {
     },
 }
 
--------------
--- OPTIONS --
--------------
+--------------
+-- SETTINGS --
+--------------
 
 opt.mouse = 'a' -- mouse interaction
 opt.clipboard = 'unnamedplus' -- use system clipboard
@@ -64,16 +65,22 @@ opt.showmode = true -- showing mode below statusline
 opt.updatetime = 300 -- decrease update time for faster feel
 opt.completeopt = 'menuone,noselect' -- better completion experience
 opt.timeoutlen = 2000 -- more time for leader hotkeys
--- opt.scrolloff = 999 -- keep the cursor in the middle
--- opt.list = true -- symbols for space and end of line
+opt.scrolloff = 10 -- start moving buffer as cursor reaches x lines
+-- opt.list = true -- symbols for spaces and end of line
 
 g['loaded_matchparen'] = 1 -- disable highlighing matching parenthesies
 g.mapleader = ',' -- change the <leader> key to be comma
 
--- disable auto comment
-opt.formatoptions = opt.formatoptions - "o"
-opt.formatoptions = opt.formatoptions - "r"
-opt.formatoptions = opt.formatoptions - "c"
+-- enabling highlight on yank
+vim.api.nvim_exec(
+    [[
+    augroup YankHighlight
+        autocmd!
+        autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+    augroup end
+    ]],
+    false
+)
 
 ----------------------
 -- CUSTOM FUNCTIONS --
@@ -81,8 +88,9 @@ opt.formatoptions = opt.formatoptions - "c"
 
 -- template for fzf functionality with nvim-fzf
 -- requires fzf variable to be set (nvim_fzf)
--- cmd_src = items to display in fzf
--- cmd_act = vim command to use on selected item
+-- Parameters:
+-- * cmd_src = items to display in fzf
+-- * cmd_act = vim command to use on selected item
 function _G.fzf_template(cmd_src, cmd_act)
     coroutine.wrap(function()
         vim.cmd('below new')
@@ -187,18 +195,3 @@ cmd([[
 
     highlight IndentBlanklineChar ctermfg=0
 ]])
-
----------------
--- VIMSCRIPT --
----------------
-
--- highlight on yank
-vim.api.nvim_exec(
-    [[
-    augroup YankHighlight
-        autocmd!
-        autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-    augroup end
-    ]],
-    false
-)

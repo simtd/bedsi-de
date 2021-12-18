@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# lists tracked dotfiles and opens selected one in default editor 
-
-files=$(git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME ls-tree --full-tree --name-only -r HEAD)
-file=$(printf '%b\n' "$files" | dmenu-wrapper -i -p 'Edit configuration file:')
-[ -z "$file" ] || "$TERMINAL" --title "$file - $EDITOR" -e sh -c "sleep 0.1 && $EDITOR $HOME/$file"
