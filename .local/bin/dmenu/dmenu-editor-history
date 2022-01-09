@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+# Provides a convinient workflow for quickly recalling previously opened files
+# from dmenu
+
+# CHANGE EDITOR AND DMENU COMMANDS TO SUIT YOUR NEEDS!
+editor_cmd='subl'
+dmenu_cmd='dmenu-wrapper -i -l 50'
+
+help='Usage:
+
+1) Open a new file (or directory) from cmd-line:
+   $ dmenu-editor-history --open example.txt
+   (intented to be run via a shell alias)
+
+2) Open a previously opened file from dmenu:
+   $ dmenu-editor-history
+   (intented to be run via a custom hotkey)
+
+   Clear history:
+   $ dmenu-editor-history --clear
+
+   Print out this help text:
+   $ dmenu-editor-history --help'
+
+err() {
+    printf "ERROR: $1\n" 1>&2
+    exit 1
+}
+
+# file to store history in
+if [[ -d $XDG_CACHE_HOME ]]; then
+    histfile="$XDG_CACHE_HOME/dmenu-editor-history"
+elif [[ -d $HOME ]]; then
+    histfile="$HOME/.dmenu-editor-history"
+else
+    err 'issue with history file path'
+fi
+[[ -f $histfile ]] || touch "$histfile"
+
+case "$1" in
+    '')
+        dir_indicator='[DIR]'
+
+        # pipe file into dmenu
+        filename="$(
+            while read line; do
+                if [[ -d  ]]
+
+
+                printf "$line\n"
+            done < "$histfile" | $dmenu_cmd -p 'File history:'
+        )"
+
+        # do not allow users to enter their own text or deleted/unsaved files
+        [[ -e $filename ]] || err 'no existing file selected'
+
+        $editor_cmd "$filename" ;;
+
+    --open)
+        # absolute path to specified file
+        case "$2" in
+            '')
+                $editor_cmd
+                exit ;;
+            .)
+                filename="$PWD" ;;
+            ..)
+                cwd="${PWD##*/}"
+                filename="${PWD%/$cwd}" ;;
+            *)
+                filename="$PWD/${2##*/}" ;;
+        esac
+
+        newfiles="$filename"
+
+        # if a directory also add the files inside because that's what I like
+        # (only regular files in first depth, not recursive)
+        if [[ -d $filename ]]; then
+            for f in "$filename"/*; do
+                [[ -f "$f" ]] && newfiles="$newfiles $f"
+            done
+        fi
+
+        # add new files to a temporary history file
+        temphist='/tmp/dmenu-editor-history-tmp'
+        for file in $newfiles; do
+            printf "$file\n" >> "$temphist"
+        done
+
+        # append previous history file to temporary history (without duplicates)
+        while read line; do
+            for possible_duplicate in $newfiles; do
+                [[ $line = $possible_duplicate ]] && continue 2
+            done
+            printf "$line\n"
+        done < "$histfile" >> "$temphist"
+
+        mv "$temphist" "$histfile"
+        
+        $editor_cmd "$filename" ;;
+
+    --clear)
+        read -p "delete $histfile? [y/N]: " del
+        case "$del" in
+            y|Y|yes|YES|Yes) rm -v "$histfile"
+        esac ;;
+
+    --help)
+        printf "$help\n" ;;
+
+    *)
+        err 'invalid option(s), see --help for information about usage' ;;
+esac
