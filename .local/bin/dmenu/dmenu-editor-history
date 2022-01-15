@@ -4,8 +4,8 @@
 # from dmenu
 
 # CHANGE EDITOR AND DMENU COMMANDS TO SUIT YOUR NEEDS!
-editor_cmd='subl'
-dmenu_cmd='dmenu-wrapper -i -l 50'
+editor_cmd=(subl)
+dmenu_cmd=(dmenu-wrapper -i -l 50 -p "File history:")
 
 help='Usage:
 
@@ -24,7 +24,7 @@ help='Usage:
    $ dmenu-editor-history --help'
 
 err() {
-    printf "ERROR: $1\n" 1>&2
+    printf "ERROR: $1!\n" 1>&2
     exit 1
 }
 
@@ -38,30 +38,69 @@ else
 fi
 [[ -f $histfile ]] || touch "$histfile"
 
+new_hist_item() {
+    # $1 = absolute path to a file
+
+    temphist='/tmp/dmenu-editor-history-tmp'
+
+    printf "$1\n" > "$temphist" 
+
+    # if a directory also add the files inside because that's what I like
+    # (only regular files in first depth, not recursive)
+    if [[ -d $1 ]]; then
+        for f in "$1"/*; do
+            [[ -f $f ]] && printf "$f\n" >> "$temphist"
+        done
+    fi
+
+    # adding previous part of history without duplicates of new items
+    dont_duplicate=$(while read; do printf "$REPLY "; done < $temphist)
+    while read; do
+        for item in $dont_duplicate; do
+            [[ $REPLY = $item ]] && continue 2
+        done
+        printf "$REPLY\n"
+    done < "$histfile" >> "$temphist"
+
+    mv "$temphist" "$histfile"
+}
+
+## cmd arguments
 case "$1" in
     '')
         dir_indicator='[DIR]'
 
-        # pipe file into dmenu
+        # pipe file into dmenu with indicator for directories
         filename="$(
-            while read line; do
-                if [[ -d  ]]
-
-
-                printf "$line\n"
-            done < "$histfile" | $dmenu_cmd -p 'File history:'
+            while read; do
+                if [[ -d $REPLY ]]; then
+                    printf "$dir_indicator $REPLY\n"
+                else
+                    printf "$REPLY\n"
+                fi
+            done < "$histfile" | "${dmenu_cmd[@]}"
         )"
 
-        # do not allow users to enter their own text or deleted/unsaved files
-        [[ -e $filename ]] || err 'no existing file selected'
+        [[ -z $filename ]] && err 'empty selection'
 
-        $editor_cmd "$filename" ;;
+        filename=${filename/"$dir_indicator" /}
+
+        # if the file doesn't exit remove it from the list and error out
+        if ! [[ -e $filename ]]; then
+            printf "$(while read; do
+                    [[ $REPLY = $filename ]] || printf "$REPLY\n"
+                    done < $histfile)\n" > "$histfile"
+            err "$filename does not exist"
+        fi
+
+        new_hist_item "$filename"
+        "${editor_cmd[@]}" "$filename" ;;
 
     --open)
         # absolute path to specified file
         case "$2" in
             '')
-                $editor_cmd
+                "${editor_cmd[@]}"
                 exit ;;
             .)
                 filename="$PWD" ;;
@@ -72,38 +111,13 @@ case "$1" in
                 filename="$PWD/${2##*/}" ;;
         esac
 
-        newfiles="$filename"
-
-        # if a directory also add the files inside because that's what I like
-        # (only regular files in first depth, not recursive)
-        if [[ -d $filename ]]; then
-            for f in "$filename"/*; do
-                [[ -f "$f" ]] && newfiles="$newfiles $f"
-            done
-        fi
-
-        # add new files to a temporary history file
-        temphist='/tmp/dmenu-editor-history-tmp'
-        for file in $newfiles; do
-            printf "$file\n" >> "$temphist"
-        done
-
-        # append previous history file to temporary history (without duplicates)
-        while read line; do
-            for possible_duplicate in $newfiles; do
-                [[ $line = $possible_duplicate ]] && continue 2
-            done
-            printf "$line\n"
-        done < "$histfile" >> "$temphist"
-
-        mv "$temphist" "$histfile"
-        
-        $editor_cmd "$filename" ;;
+        new_hist_item "$filename"
+        "${editor_cmd[@]}" "$filename" ;;
 
     --clear)
-        read -p "delete $histfile? [y/N]: " del
+        read -p "delete $histfile? [y/n]: " del
         case "$del" in
-            y|Y|yes|YES|Yes) rm -v "$histfile"
+            y|Y|yes|Yes|YES) rm -v "$histfile"
         esac ;;
 
     --help)
