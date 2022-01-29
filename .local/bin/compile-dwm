@@ -1,3 +1,3 @@
 #!/bin/sh
 
-"$TERMINAL" --working-directory "$HOME/.local/src/dwm-patched" -e "doas" "make" "clean" "install"
+"$TERMINAL" --working-directory "$HOME/.local/src/suckless/dwm" -e "doas" "make" "clean" "install"

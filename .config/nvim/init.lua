@@ -4,7 +4,6 @@
 --  / / / / / / /__ / / /_/ / /_/ /
 -- /_/_/ /_/_/\__(_)_/\__,_/\__,_/
 -- A less broken neovim experience in one file!
---
 
 -- Dependencies:
 -- * packer plugin manager
@@ -62,10 +61,10 @@ opt.smartindent = true -- automatically indent new lines
 -- opt.guicursor = '' -- disable cursor changes for different modes
 opt.laststatus = 0 -- show/hide status line
 opt.showmode = true -- showing mode below statusline
-opt.updatetime = 300 -- decrease update time for faster feel
+opt.updatetime = 250 -- decrease update time for faster feel
 opt.completeopt = 'menuone,noselect' -- better completion experience
 opt.timeoutlen = 2000 -- more time for leader hotkeys
-opt.scrolloff = 10 -- start moving buffer as cursor reaches x lines
+-- opt.scrolloff = 100 -- start moving buffer as cursor reaches x lines
 -- opt.list = true -- symbols for spaces and end of line
 
 g['loaded_matchparen'] = 1 -- disable highlighing matching parenthesies
@@ -148,50 +147,3 @@ keymap('n', '<C-l>', ':wincmd l<CR>', silent)
 -- move between open buffers
 keymap('n', '<A-j>', ':bnext<CR>', silent)
 keymap('n', '<A-k>', ':bprev<CR>', silent)
-
-------------   
--- COLORS --
-------------
-
-cmd([[
-    highlight clear
-    syntax reset
-
-    highlight TSProperty ctermfg=4
-    highlight TSNumber ctermfg=4
-    highlight TSKeyword ctermfg=1
-    highlight TSInclude ctermfg=1
-    highlight TSKeywordFunction ctermfg=1
-    highlight TSConstBuiltin ctermfg=4
-    highlight TSTag ctermfg=3
-    highlight TSProperty ctermfg=4
-    highlight TSNumber ctermfg=4
-    highlight TSKeyword ctermfg=4
-    highlight TSInclude ctermfg=1
-    highlight TSKeywordFunction ctermfg=1
-    highlight TSConstBuiltin ctermfg=4
-    highlight TSTag ctermfg=3
-    highlight TSFunction ctermfg=13
-    highlight TSString ctermfg=2
-    highlight TSComment ctermfg=8
-    highlight TSNumber ctermfg=4
-    highlight TSType ctermfg=4
-    highlight TSVariable ctermfg=NONE
-    highlight TSPunctBracket ctermfg=NONE
-    highlight TSPunctSpecial ctermfg=NONE
-    highlight TSPunctDelimiter ctermfg=NONE
-
-    highlight Cursor ctermfg=NONE ctermbg=NONE cterm=reverse
-    highlight Visual ctermbg=0 ctermfg=NONE
-    highlight LineNr ctermbg=NONE ctermfg=0
-    highlight TabLineFill ctermbg=NONE ctermfg=0
-    highlight TabLine ctermbg=7 ctermfg=0 cterm=reverse
-    highlight TabLineSel ctermbg=8 ctermfg=NONE
-    highlight StatusLine ctermbg=0 ctermfg=NONE cterm=NONE
-    highlight StatusLineNC ctermbg=0 ctermfg=0 cterm=NONE
-    highlight VertSplit ctermbg=0 ctermfg=8 cterm=NONE
-    highlight Visual ctermbg=0 ctermfg=NONE
-    highlight TODO ctermbg=8 ctermfg=NONE cterm=bold
-
-    highlight IndentBlanklineChar ctermfg=0
-]])

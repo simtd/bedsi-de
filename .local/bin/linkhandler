@@ -5,6 +5,7 @@
 
 case "$1" in
     *png|*jpg|*gif) feh "$1" ;;
-    *youtube.com/watch*|*mp3) setsid -f mpv --no-terminal --ytdl-format="(bestvideo[height<=?1080]+bestaudio/best)" "$1" ;;
+    *mp3) mpv "$1" ;;
+    *youtube.com/watch*) setsid -f mpv --no-terminal --ytdl-format="(bestvideo[height<=?1080]+bestaudio/best)" "$1" ;;
     *) "$BROWSER" --new-window "$1" ;;
 esac

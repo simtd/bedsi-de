@@ -1,4 +1,0 @@
-#!/bin/sh
-
-kill-statusbar
-dwm-status &

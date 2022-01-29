@@ -20,9 +20,6 @@ xrdb "$XRESOURCES"
 # setting correct mouse cursor
 xsetroot -cursor_name left_ptr
 
-# adding tab as a modifier key for use in certain hotkeys
-xmodmap -e "add mod3 = Tab"
-
 # increase key speed
 xset r rate 300 50
 
@@ -39,9 +36,8 @@ playerctld daemon &
 # wallpaper
 nitrogen --restore &
 
-# statusbar scripts for dwm panel
-# (forked so it can be restarted without killing dwm)
-setsid dwm-status &
+# statusbar script for dwm panel
+rnstatus start &
 
 # launching window manager
 exec dwm

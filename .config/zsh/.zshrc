@@ -2,25 +2,11 @@
 ## PROMPT ##
 ############
 
-function truncated_path() {
-    local i pwd
-    pwd=("${(s:/:)PWD/#$HOME/~}")
-    if (( $#pwd > 1 )); then
-        for i in {1..$(($#pwd-1))}; do
-            if [[ "$pwd[$i]" = .* ]]; then
-                pwd[$i]="${${pwd[$i]}[1,2]}"
-            else
-                pwd[$i]="${${pwd[$i]}[1]}"
-            fi
-        done
-    fi
-    echo "${(j:/:)pwd}"
-}
-
 function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    [[ -z $git_branch ]] || git_branch=" %F{6}${git_branch//\%/%%}%f"
-    PROMPT="%F{4}$(truncated_path)%f$git_branch%B%F{1}%(?.. [%?])%f%b %B%F{5}>%f%b "
+    [[ -z $git_branch ]] || git_branch=" %F{8}${git_branch//\%/%%}%f"
+    local newline=$'\n'
+    PROMPT="%F{4}%2d%f$git_branch%B%F{1}%(?.. [%?])%f%b$newline%B%F{5}>%f%b "
 }
 
 autoload -Uz add-zsh-hook
@@ -31,6 +17,7 @@ add-zsh-hook precmd set-prompt
 #############
 
 alias ..="cd .."
+alias ...="cd ../.."
 alias ls="ls --color"
 alias l="ls -lah --time-style='+%d-%m-%y'"
 alias mv="mv -iv"
@@ -49,6 +36,7 @@ alias gc="git commit"
 alias gr="git rm --cached"
 alias gp="git push"
 
+alias e="dmenu-editor-history --open"
 alias mpv="setsid -f mpv --no-terminal --ytdl-format='(bestvideo[height<=?1080]+bestaudio/best)'"
 alias open="xdg-open"
 alias py="python3"
@@ -74,27 +62,6 @@ d() {
     cd "$HOME/$dir"
 }
 
-#############
-## VI MODE ##
-#############
-
-bindkey -v
-export KEYTIMEOUT=1
-
-function zle-keymap-select () {
-    case $KEYMAP in
-        vicmd) echo -ne '\e[1 q';;      # block
-        viins|main) echo -ne '\e[5 q';; # beam
-    esac
-}
-zle -N zle-keymap-select
-zle-line-init() {
-    echo -ne "\e[5 q"
-}
-zle -N zle-line-init
-echo -ne '\e[5 q' # use beam shape cursor on startup
-preexec() { echo -ne '\e[5 q' ;} # use beam shape cursor for each new prompt
-
 #################
 ## COMPLETIONS ##
 #################
@@ -105,18 +72,13 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
 compinit
-_comp_options+=(globdots)
 
 #############
-## HISTORY ##
+## VI MODE ##
 #############
 
-# searching history up arrow based on what's typed in
-autoload -U history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^[[A" history-beginning-search-backward-end
-bindkey "^[[B" history-beginning-search-forward-end
+bindkey -v
+export KEYTIMEOUT=1
 
 #################
 ## KEYBINDINGS ##

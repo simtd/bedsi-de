@@ -1,121 +1,20 @@
-colors:
-  primary:
-    # colorize BG
-    background: '#2E3440'
-    # colorize FG
-    foreground: '#D8DEE9'
-
-  normal:
-    # colorize BLACK
-    black:   '#3B4252'
-    # colorize RED
-    red:     '#BF616A'
-    # colorize GREEN
-    green:   '#A3BE8C'
-    # colorize YELLOW
-    yellow:  '#EBCB8B'
-    # colorize BLUE
-    blue:    '#81A1C1'
-    # colorize MAGENTA
-    magenta: '#B48EAD'
-    # colorize CYAN
-    cyan:    '#88C0D0'
-    # colorize WHITE
-    white:   '#E5E9F0'
-
-  bright:
-    # colorize BLACK_BRIGHT
-    black:   '#4c566a'
-    # colorize RED_BRIGHT
-    red:     '#BF616A'
-    # colorize GREEN_BRIGHT
-    green:   '#A3BE8C'
-    # colorize YELLOW_BRIGHT
-    yellow:  '#EBCB8B'
-    # colorize BLUE_BRIGHT
-    blue:    '#81A1C1'
-    # colorize MAGENTA_BRIGHT
-    magenta: '#B48EAD'
-    # colorize CYAN_BRIGHT
-    cyan:    '#88C0D0'
-    # colorize WHITE_BRIGHT
-    white:   '#E5E9F0'
-
-  dim:
-    # colorize BLACK
-    black:   '#3B4252'
-    # colorize RED
-    red:     '#BF616A'
-    # colorize GREEN
-    green:   '#A3BE8C'
-    # colorize YELLOW
-    yellow:  '#EBCB8B'
-    # colorize BLUE
-    blue:    '#81A1C1'
-    # colorize MAGENTA
-    magenta: '#B48EAD'
-    # colorize CYAN
-    cyan:    '#88C0D0'
-    # colorize WHITE
-    white:   '#E5E9F0'
-
-background_opacity: 1.0
+background_opacity: 0.9
 
 font:
-  normal:
-    family: "monospace"
-    style: Bold
-  bold:
-    family: "monospace"
-    style: Bold
-  italic:
-    family: "monospace"
-    style: Bold
-  bold_italic:
-    family: "monospace"
-    style: Bold Italic
-
   size: 14
-
-  offset:
-    x: 0
-    y: 0
-  glyph_offset:
-    x: 0
-    y: 0
 
 window:
   padding:
-    x: 5
-    y: 5
+    x: 10
+    y: 10
 
-  dynamic_padding: true
+  dynamic_padding: false
 
-scrolling:
-  history: 10000
-  multiplier: 10
-
-draw_bold_text_with_bright_colors: true
-
-selection:
-  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
-  save_to_clipboard: true
-
-live_config_reload: true
-
-cursor:
-#   unfocused_hollow: false
-#   style: Underline
-  style:
-    blinking: Never
-#   blink_interval: 450
+# cursor:
+#   style:
+#     blinking: Always
+#   blink_interval: 300
 
 key_bindings:
-  - { key: V, mods: Control|Shift, action: Paste }
-  - { key: C, mods: Control|Shift, action: Copy }
-  - { key: Key0, mods: Control, action: ResetFontSize }
-  - { key: Equals, mods: Control, action: IncreaseFontSize }
-  - { key: Plus, mods: Control, action: IncreaseFontSize }
-  - { key: NumpadSubtract, mods: Control, action: DecreaseFontSize }
-  - { key: Minus, mods: Control, action: DecreaseFontSize }
   - { key: Return, mods: Control, action: SpawnNewInstance }
+  

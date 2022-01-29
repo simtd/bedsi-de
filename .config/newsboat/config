@@ -13,7 +13,7 @@ color listfocus cyan default reverse
 color listfocus_unread cyan default reverse
 color info magenta default
 
-highlight all "---.*---" yellow default
+highlight all "---.*---" yellow default bold
 highlight article "^(Feed|Link):.*$" color6 default bold
 highlight article "^(Title|Date|Author):.*$" color6 default bold
 highlight article "https?://[^ ]+" color10 default underline

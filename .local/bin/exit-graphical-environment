@@ -1,4 +1,4 @@
 #!/bin/sh
 
-kill-statusbar
+rnstatus stop
 pkill -15 Xorg

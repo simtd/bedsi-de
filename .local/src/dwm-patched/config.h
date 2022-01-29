@@ -29,7 +29,7 @@ static char *colors[][3] = {
 */
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-// static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+//static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -107,13 +107,13 @@ static Key keys[] = {
 	// quit graphical environment
 	{ MODKEY|Mod5Mask, XK_q, spawn, SHCMD("exit-graphical-environment") },
 
-	// quit dwm (don't use this)
+	// quit dwm (don't use this!)
 	{ MODKEY|Mod5Mask|ShiftMask, XK_q, quit, {0} },
 
 	// compile dwm
 	{ MODKEY|Mod5Mask, XK_c, spawn, SHCMD("compile-dwm") },
 
-	// restart statusbar scripts
+	// restart statusbar script
 	{ MODKEY|Mod5Mask, XK_p, spawn, SHCMD("restart-statusbar") },
 
 	// close window
@@ -141,13 +141,10 @@ static Key keys[] = {
 	{ MODKEY, XK_l, setmfact, {.f = +0.05} },
 
 	// decrease window gaps size
-	{ MODKEY, XK_plus, setgaps, {.i = -10 } },
+	{ MODKEY, XK_minus, setgaps, {.i = -10 } },
 
 	// increase window gaps size
-	{ MODKEY, XK_minus, setgaps, {.i = +10 } },
-
-	// reset window gaps size
-	{ MODKEY|ShiftMask, XK_plus, setgaps, {.i = 10 } },
+	{ MODKEY, XK_plus, setgaps, {.i = +10 } },
 
 	// add an extra master window
 	{ MODKEY, XK_i, incnmaster, {.i = +1 } },
@@ -170,14 +167,8 @@ static Key keys[] = {
 	// set layout - monocle
 	{ MODKEY|ShiftMask, XK_n, setlayout, {.v = &layouts[2]} },
 
-	// jump between current and recent tag
-	{ MODKEY|ShiftMask, XK_Tab, view, {0} },
-
 	// view all windows with any tag
 	{ MODKEY, XK_0, view, {.ui = ~0 } },
-
-	// apply all tags to focused window
-	{ MODKEY|ShiftMask, XK_0, tag, {.ui = ~0 } },
 
 	// go to prevous occupied tag
 	{ MODKEY, XK_comma, shiftviewclients, { .i = -1 } },
@@ -185,7 +176,7 @@ static Key keys[] = {
 	// go to next occupined
 	{ MODKEY, XK_period, shiftviewclients, { .i = +1 } },
 	
-	// tag hotkeys related to number keys (see above)
+	// tag hotkeys related to number keys (see above for function definition)
 	TAGKEYS(XK_1, 0)
 	TAGKEYS(XK_2, 1)
 	TAGKEYS(XK_3, 2)
@@ -203,10 +194,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask, XK_period, focusmon, {.i = +1 } },
 
 	// send active window to previous screen
-	{ MODKEY|ShiftMask, XK_comma, tagmon, {.i = -1 } },
+	{ MODKEY|ShiftMask, XK_h, tagmon, {.i = -1 } },
 
 	// send active window to next screen
-	{ MODKEY|ShiftMask, XK_period, tagmon, {.i = +1 } },
+	{ MODKEY|ShiftMask, XK_l, tagmon, {.i = +1 } },
 
 	// refresh colors from Xresources
 	{ MODKEY, XK_F5, xrdb, {.v = NULL } },
@@ -223,6 +214,9 @@ static Key keys[] = {
 
 	// regular dmenu run launcher
 	{ MODKEY|ShiftMask, XK_p, spawn, {.v = dmenucmd } },
+
+	// code editor history
+	{ MODKEY, XK_e, spawn, SHCMD("dmenu-editor-history") },
 
 	// system theme changer
 	{ MODKEY|Mod5Mask, XK_3, spawn, SHCMD("dmenu-theme-changer") },
@@ -258,9 +252,6 @@ static Key keys[] = {
 
 	// screenshot seleted area to clipboard
 	{ MODKEY|ShiftMask, XK_Print, spawn, SHCMD("maim -u -s | xclip -selection clipboard -target image/png") },
-
-	// open link from clipboard in mpv
-	{ MODKEY|Mod5Mask, XF86XK_Favorites, spawn, SHCMD("mpv \"$(xclip -o)\"") },
 
 	// screenlocker
 	{ MODKEY|Mod5Mask, XK_l, spawn, SHCMD("i3lock -c $(grep 'BG=' $THEME | awk -F '\"' '{print $2}') -p default") },
