@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# ensures dmenu is run with correct font and theme for custom scripts
-# use "dmenu-wrapper" instead of regular "dmenu" command 
-
-. "$THEME"
-
-dmenu -fn 'Terminus:size=12:antialias=false:autohint=false' -nb "$BG" -nf "$FG" -sb "$BG_ALT" -sf "$FG_ALT" "$@"

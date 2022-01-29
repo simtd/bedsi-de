@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# script to change system color theme from dmenu
+# used to interactively change system themes with my "theme-changer" script
 
-themes_dir="$HOME/.local/share/bedsi"
+themes_loc="$HOME/.local/share/bedsi"
 
-current_theme=$(head -1 < "$themes_dir"/theme)
+current_theme=$(head -1 < "$themes_loc"/theme)
 
 choose_theme() {
-    for file in "$themes_dir/themes"/*; do
+    for file in "$themes_loc/themes"/*; do
         [ -f "$file" ] || continue
         file="${file##*/}"
         [ "$file" = "${0##*/}" ] && continue

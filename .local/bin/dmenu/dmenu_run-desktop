@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# DMENU-DESKTOP-APPS
+# ------------------
+
+# Alternative to dmenu_run that only lists executables from .desktop files
+# Dependency: gtk-launch (part of gtk3 package in arch)
+
+dir='/usr/share/applications'
+
+appfile=$(
+	for f in "$dir"/*; do
+		case "$f" in
+			*.desktop)
+				if [ -f "$f" ]; then
+					f="${f#$dir/}"
+					printf '%s\n' "${f%.desktop}"
+				fi ;;
+		esac
+	done | dmenu -i -p 'Desktop apps:'
+)
+
+if [ -z $appfile ]; then
+	printf 'Empty selection, exiting\n' 1>&2
+	exit 1
+fi
+ 
+gtk-launch "$appfile"

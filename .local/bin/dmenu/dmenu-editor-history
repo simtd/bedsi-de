@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 
+# TODO: figure out hidden files, link files, files with spaces in them
+# files with spaces does get added multiple times!
+# TODO: add a heredoc too --help so help text can be moved down there
+
+# DMENU-EDITOR-HISTORY
+# --------------------
+
 # Provides a convinient workflow for quickly recalling previously opened files
-# from dmenu
+# from dmenu, see --help for usage
 
 # CHANGE EDITOR AND DMENU COMMANDS TO SUIT YOUR NEEDS!
 editor_cmd=(subl)
-dmenu_cmd=(dmenu-wrapper -i -l 50 -p "File history:")
+dmenu_cmd=(dmenu -i -l 20 -p 'File history:')
 
-help='Usage:
+help='Usage (long options):
 
 1) Open a new file (or directory) from cmd-line:
    $ dmenu-editor-history --open example.txt
@@ -18,7 +25,14 @@ help='Usage:
    (intented to be run via a custom hotkey)
 
    Clear history:
-   $ dmenu-editor-history --clear
+   $ dmenu-editor-history --purge
+
+   Automatically create a history from some files/directories in $HOME:
+   $ dmenu-editor-history --fill
+
+   Remove all files from history that does not exits:
+   $ dmenu-editor-history --clean
+   (this also runs if a non-existent file is selected from dmenu)
 
    Print out this help text:
    $ dmenu-editor-history --help'
@@ -28,36 +42,52 @@ err() {
     exit 1
 }
 
-# file to store history in
+# File to store history in
 if [[ -d $XDG_CACHE_HOME ]]; then
     histfile="$XDG_CACHE_HOME/dmenu-editor-history"
 elif [[ -d $HOME ]]; then
     histfile="$HOME/.dmenu-editor-history"
 else
-    err 'issue with history file path'
+    err 'XDG_CACHE_HOME or HOME environment variable needs to be set'
 fi
 [[ -f $histfile ]] || touch "$histfile"
 
-new_hist_item() {
-    # $1 = absolute path to a file
+temphist='/tmp/dmenu-editor-history-tmp'
 
-    temphist='/tmp/dmenu-editor-history-tmp'
+append_dir() {
+    # Append filenames from a directory to a file
+
+    # Parameters:
+    # $1 = absolute path to a directory
+    # $2 = file to append to
+    # $3 = number of directories to descend (depth)
+
+    for f in "$1"/*; do
+        if [[ -f $f ]]; then
+            printf "$f\n"
+        elif [[ -d $f ]]; then
+            printf "$f\n"
+            [[ $3 -gt 0 ]] && append_dir "$f" "$2" $(($3-1))
+        fi
+    done >> "$2"
+}
+
+new_item() {
+    # New history item
+
+    # Parameters:
+    # $1 = absolute path to a file
 
     printf "$1\n" > "$temphist" 
 
-    # if a directory also add the files inside because that's what I like
+    # If a directory also add the files inside because that's what I like
     # (only regular files in first depth, not recursive)
-    if [[ -d $1 ]]; then
-        for f in "$1"/*; do
-            [[ -f $f ]] && printf "$f\n" >> "$temphist"
-        done
-    fi
+    [[ -d $1 ]] && append_dir "$1" "$temphist" 0
 
-    # adding previous part of history without duplicates of new items
-    dont_duplicate=$(while read; do printf "$REPLY "; done < $temphist)
+    # Adding previous part of history without duplicates of new items
     while read; do
-        for item in $dont_duplicate; do
-            [[ $REPLY = $item ]] && continue 2
+        for item in $(< $temphist); do
+            [[ $REPLY == $item ]] && continue 2
         done
         printf "$REPLY\n"
     done < "$histfile" >> "$temphist"
@@ -65,12 +95,22 @@ new_hist_item() {
     mv "$temphist" "$histfile"
 }
 
-## cmd arguments
+rm_non_exist() {
+    # Remove non-existant files from history
+
+    while read; do
+        [[ -f "$REPLY" ]] && printf "$REPLY\n"
+    done < "$histfile" > "$temphist"
+
+    mv "$temphist" "$histfile"
+}
+
+## Cmd arguments
 case "$1" in
     '')
         dir_indicator='[DIR]'
 
-        # pipe file into dmenu with indicator for directories
+        # Pipe file into dmenu with indicator for directories
         filename="$(
             while read; do
                 if [[ -d $REPLY ]]; then
@@ -85,19 +125,17 @@ case "$1" in
 
         filename=${filename/"$dir_indicator" /}
 
-        # if the file doesn't exit remove it from the list and error out
+        # If the file doesn't exist clean history and error out
         if ! [[ -e $filename ]]; then
-            printf "$(while read; do
-                    [[ $REPLY = $filename ]] || printf "$REPLY\n"
-                    done < $histfile)\n" > "$histfile"
+            rm_non_exist
             err "$filename does not exist"
         fi
 
-        new_hist_item "$filename"
+        new_item "$filename"
         "${editor_cmd[@]}" "$filename" ;;
 
-    --open)
-        # absolute path to specified file
+    --open|-o)
+        # Absolute path to specified file
         case "$2" in
             '')
                 "${editor_cmd[@]}"
@@ -111,16 +149,42 @@ case "$1" in
                 filename="$PWD/${2##*/}" ;;
         esac
 
-        new_hist_item "$filename"
+        new_item "$filename"
         "${editor_cmd[@]}" "$filename" ;;
 
-    --clear)
+    --purge|-p)
         read -p "delete $histfile? [y/n]: " del
         case "$del" in
-            y|Y|yes|Yes|YES) rm -v "$histfile"
+            y|Y|yes|Yes|YES) rm -v "$histfile" ;;
         esac ;;
 
-    --help)
+    --clean|-c)
+        rm_non_exist ;;
+
+    --fill|-f)
+        read -p "replace $histfile? [y/n]: " rep
+        case "$rep" in
+            y|Y|yes|Yes|YES)
+                
+                [[ -d $HOME ]] || err 'HOME environment variable not defined'
+
+                > "$temphist"
+                
+                # Adding files from home directory
+                append_dir "$HOME" "$temphist" 0
+
+                # Recursively adding files from useful directories
+                recdirs+="$HOME/.local/bin "
+                recdirs+="$HOME/.local/src "
+                recdirs+="$HOME/.config"
+                for d in $recdirs; do
+                    [[ -d $d ]] && append_dir "$d" "$temphist" 1
+                done
+
+                mv "$temphist" "$histfile" ;;
+        esac ;;
+
+    --help|-h)
         printf "$help\n" ;;
 
     *)
