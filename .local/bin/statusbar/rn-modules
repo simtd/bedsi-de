@@ -1,0 +1,73 @@
+# IMPORTANT FILES AND COMMANDS
+
+wifi_operstate='/sys/class/net/w*/operstate' # up/down if wifi connected or not
+wifi_enabled='/sys/class/net/w*/link_mode' # 1/0 if wifi is enabled or not
+bat_level='/sys/class/power_supply/BAT0/capacity' # 0-100 level
+bat_status='/sys/class/power_supply/BAT0/status' # text status (Discharging etc.)
+backlight_cmd='light -G' # getting backlight level from a cmd program
+
+# HELPER FUNCTIONS
+
+read_file() {
+    while read l; do printf "$l"; done < "$1"
+}
+
+extract_field() {
+    # $1 = string seperated by spaces
+    # $2 = index of field to extract
+
+    count=0
+    for word in $1; do
+        if [ "$count" = "$2" ]; then
+            printf '%s' "$word"
+            break
+        fi
+        count=$((count+1))
+    done
+}
+
+# MODULES
+
+vol_module() {
+    printf 'V%s\n' "$(
+        pactl list sinks | while read line; do
+            case "$line" in
+                Mute:*)
+                    [ "${line#Mute: }" = 'yes' ] && printf 'Mute ' ;;
+                Volume:*)
+                    extract_field "$line" 4
+                    printf ' ' ;;
+                'Active Port:'*)
+                    extract_field "$line" 3 ;;
+            esac
+        done)"
+}
+
+date_module() {
+    date +'D%A %d %b %Y-W%W %H:%M:%S'
+}
+
+wifi_module() {
+    case "$(read_file $wifi_operstate)" in
+        up) text='WiFi' ;;
+        down)
+            case "$(read_file $wifi_enabled)" in
+                0) text='- -' ;; # wifi disabled
+                1) text='---' ;; # wifi enabled
+            esac ;;
+    esac
+    printf "W$text\n"
+}
+
+bat_module() {
+    lvl="$(read_file $bat_level)"
+    stat="$(read_file $bat_status)"
+    if [ "$lvl" -le '10' ] && [ "$stat" = 'Discharging' ]; then
+        stat='LOW BATTERY'
+    fi
+    printf "B$lvl%% $stat\n"
+}
+
+bl_module() {
+    printf '%s%.0f%s %s\n' 'L' "$($backlight_cmd)" '%' 'Bright'
+}

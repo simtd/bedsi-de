@@ -29,6 +29,7 @@ alias c="clear"
 
 alias bedsi="git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME"
 alias beds="bedsi status"
+alias bedsrm="bedsi rm --cached"
 
 alias gs="git status"
 alias ga="git add"
