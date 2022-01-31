@@ -4,12 +4,10 @@ bat
 calcurse
 checkbashisms
 dash
-dmenu
 feh
 gcc
 git
 gvfs
-i3lock
 light
 maim
 mpv
@@ -42,4 +40,3 @@ xorg
 xorg-xinit
 yt-dlp
 zsh
-zsh-autosuggestions

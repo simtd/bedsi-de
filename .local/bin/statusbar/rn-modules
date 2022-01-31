@@ -43,6 +43,21 @@ vol_module() {
         done)"
 }
 
+# vol_module() {
+#     pactl list sinks | while read line; do
+#         case "$line" in
+#             'Mute: yes'*) mute="Mute " ;;
+#             'Volume:'*) vol=$(extract_field "$line" 4) ;;
+#             'Active Port:'*)
+#                 case "$(extract_field "$line" 3)" in
+#                     Headphones) port='Head' ;;
+#                     Speaker) port='Speak' ;;
+#                 esac ;;
+#         esac
+#     done
+#     printf "W$mute$port $vol\n"
+# }
+
 date_module() {
     date +'D%A %d %b %Y-W%W %H:%M:%S'
 }
@@ -65,9 +80,9 @@ bat_module() {
     if [ "$lvl" -le '10' ] && [ "$stat" = 'Discharging' ]; then
         stat='LOW BATTERY'
     fi
-    printf "B$lvl%% $stat\n"
+    printf "B$stat $lvl\n"
 }
 
 bl_module() {
-    printf '%s%.0f%s %s\n' 'L' "$($backlight_cmd)" '%' 'Bright'
+    printf '%s%s %.0f\n' 'L' 'Bright' "$($backlight_cmd)"
 }

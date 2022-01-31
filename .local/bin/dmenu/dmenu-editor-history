@@ -12,7 +12,7 @@
 
 # CHANGE EDITOR AND DMENU COMMANDS TO SUIT YOUR NEEDS!
 editor_cmd=(subl)
-dmenu_cmd=(dmenu -i -l 20 -p 'File history:')
+dmenu_cmd=(fzfmenu "--prompt='Hist > '")
 
 help='Usage (long options):
 

@@ -10,15 +10,6 @@ export BROWSER="brave"
 # adding ~/.local/bin to path
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':')"
 
-# for statusbar
-export STATUS_PIPE="/tmp/statusbar-fifo"
-
-# theme file that is imported in multiple scripts
-export THEME="$HOME/.local/share/bedsi/theme"
-
-# for neovim remote
-export NVIM_LISTEN_ADDRESS="/tmp/nvimsocket nvim"
-
 # coloring manpages
 export LESS_TERMCAP_md=$'\e[01;34m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -28,7 +19,7 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[01;32m'
 
 # default fzf settings
-export FZF_DEFAULT_OPTS='--cycle --height 50% --border=sharp --color=16,bg+:-1,prompt:5,pointer:4'
+export FZF_DEFAULT_OPTS='--cycle --height 50% --border=rounded --color=16,bg+:-1,prompt:5,pointer:4,border:8'
 
 # cleaning up ~
 export XDG_CONFIG_HOME="$HOME/.config"

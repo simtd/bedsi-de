@@ -6,7 +6,7 @@ function set-prompt() {
     local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     [[ -z $git_branch ]] || git_branch=" %F{8}${git_branch//\%/%%}%f"
     local newline=$'\n'
-    PROMPT="%F{4}%2d%f$git_branch%B%F{1}%(?.. [%?])%f%b$newline%B%F{5}>%f%b "
+    PROMPT="%F{4}%2d%f$git_branch%B%F{1}%(?.. [%?])%f%b%B%F{5}$newline$%f%b "
 }
 
 autoload -Uz add-zsh-hook
