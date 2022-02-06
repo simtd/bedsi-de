@@ -2,6 +2,7 @@
 
 # FZFMENU
 # -------
+
 # A fast dmenu/rofi replacement using fzf and st
 
 # A rule needs to be set in window manager configuration to enable
@@ -9,7 +10,7 @@
 
 instance_name='floating st'
 font='monospace:size=12'
-fzf_flags='--margin 5% --cycle --color=16,bg+:-1,prompt:5,pointer:4'
+fzf_flags='--margin 5% --color=16,bg+:-1,prompt:5,pointer:4'
 
 export FZF_DEFAULT_OPTS="$fzf_flags"
-st -n "$instance_name" -f "$font" -e sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"
+st -n "$instance_name" -f "$font" -t 'fzfmenu' sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"

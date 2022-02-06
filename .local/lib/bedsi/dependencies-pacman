@@ -2,9 +2,10 @@ alacritty
 base-devel
 bat
 calcurse
-checkbashisms
 dash
+dmenu
 feh
+fzf
 gcc
 git
 gvfs
@@ -26,13 +27,11 @@ pkgconf
 playerctl
 pipewire
 pipewire-pulse
-socat
 terminus-font
 tldr
 ufw
 unclutter
 wget
-xcape
 xclip
 xdg-user-dirs
 xdo

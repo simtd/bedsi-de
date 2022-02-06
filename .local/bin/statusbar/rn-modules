@@ -12,51 +12,32 @@ read_file() {
     while read l; do printf "$l"; done < "$1"
 }
 
-extract_field() {
-    # $1 = string seperated by spaces
-    # $2 = index of field to extract
-
-    count=0
-    for word in $1; do
-        if [ "$count" = "$2" ]; then
-            printf '%s' "$word"
-            break
-        fi
-        count=$((count+1))
-    done
-}
-
 # MODULES
 
 vol_module() {
-    printf 'V%s\n' "$(
+    info=$(
         pactl list sinks | while read line; do
             case "$line" in
-                Mute:*)
-                    [ "${line#Mute: }" = 'yes' ] && printf 'Mute ' ;;
-                Volume:*)
-                    extract_field "$line" 4
-                    printf ' ' ;;
-                'Active Port:'*)
-                    extract_field "$line" 3 ;;
+                'Mute:'*|'Volume:'*|'Active Port:'*) printf '%s' "$line " ;;
             esac
-        done)"
-}
+        done)
 
-# vol_module() {
-#     pactl list sinks | while read line; do
-#         case "$line" in
-#             'Mute: yes'*) mute="Mute " ;;
-#             'Volume:'*) vol=$(extract_field "$line" 4) ;;
-#             'Active Port:'*)
-#                 case "$(extract_field "$line" 3)" in
-#                     Headphones) port='Head' ;;
-#                     Speaker) port='Speak' ;;
-#                 esac ;;
-#         esac
-#     done
-#     printf "W$mute$port $vol\n"
-# }
+    count=0
+    for word in $info; do
+        case $count in
+            1) [ "$word" = 'yes' ] && mute='Mute ' ;;
+            6) lvl="$word" ;;
+            20)
+                case "$word" in
+                    Headphones) port='Head' ;;
+                    Speaker) port='Speak' ;;
+                esac ;;
+        esac
+        count=$((count+1))
+    done
+
+    printf 'V%s%s %s\n' "$mute" "$port" "$lvl"
+}
 
 date_module() {
     date +'D%A %d %b %Y-W%W %H:%M:%S'
@@ -80,9 +61,9 @@ bat_module() {
     if [ "$lvl" -le '10' ] && [ "$stat" = 'Discharging' ]; then
         stat='LOW BATTERY'
     fi
-    printf "B$stat $lvl\n"
+    printf "B$stat $lvl%%\n"
 }
 
 bl_module() {
-    printf '%s%s %.0f\n' 'L' 'Bright' "$($backlight_cmd)"
+    printf '%s%s %.0f%s\n' 'L' 'Disp' "$($backlight_cmd)" '%'
 }
