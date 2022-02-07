@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# TODO: need to work with hidden files, maybe write a custom test function
+# TODO add a special flag for linkfiles
 
 # DMENU-EDITOR-HISTORY
 # --------------------
@@ -11,6 +11,10 @@
 # Change editor and dmenu commands to suit your needs!
 editor_cmd=(subl)
 dmenu_cmd=(fzfmenu "--prompt='Hist > '")
+
+# Shell options
+shopt -s dotglob # (include hidden files)
+shopt -s extglob
 
 err() {
     printf "ERROR: $1!\n" 1>&2
@@ -80,12 +84,15 @@ rm_non_exist() {
 case "$1" in
     '')
         dir_indicator='[DIR]'
+        link_indicator='[LNK]'
 
-        # Pipe file into dmenu with indicator for directories
+        # Pipe file into dmenu with indicator for directories and symbolic links
         filename="$(
             while read; do
                 if [[ -d $REPLY ]]; then
                     printf "$dir_indicator $REPLY\n"
+                elif [[ -h $REPLY ]]; then
+                    printf "$link_indicator $REPLY\n"
                 else
                     printf "$REPLY\n"
                 fi
@@ -94,7 +101,8 @@ case "$1" in
 
         [[ -z $filename ]] && err 'empty selection'
 
-        filename=${filename/"$dir_indicator" /}
+        # Remove indicators
+        filename=${filename#@("$dir_indicator "|"$link_indicator ")}
 
         # If the file doesn't exist clean history and error out
         if ! [[ -e $filename ]]; then
