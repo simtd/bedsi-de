@@ -4,7 +4,6 @@
 ## VARIOUS ##
 #############
 
-# Xresources for dwm colors
 xrdb "$XRESOURCES"
 
 # personal init script

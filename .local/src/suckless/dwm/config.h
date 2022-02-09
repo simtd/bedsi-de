@@ -6,20 +6,27 @@ static const unsigned int gappx     = 10;       /* gaps between windows */
 static const unsigned int snap      = 16;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#000000";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
 
-// custom highlight color:
-static const char col_cyan[]        = "#7aa2f7";
+static const char *fonts[]          = { "Terminus" };
+static const char dmenufont[]       = "Terminus";
+
+// static const char col_gray1[]       = "#000000";
+// static const char col_gray2[]       = "#444444";
+// static const char col_gray3[]       = "#bbbbbb";
+// static const char col_gray4[]       = "#eeeeee";
+// static const char col_cyan[]        = "#005577";
+
+// TOKYO NIGHT SCHEME
+static const char col_gray1[]       = "#1a1b26";
+static const char col_gray2[]       = "#32344a";
+static const char col_gray3[]       = "#a9b1d6";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#444b6a";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_cyan,  col_gray1, col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
 /* tagging */
@@ -82,7 +89,7 @@ static Key keys[] = {
 	// compile-dwm
 	{ MODKEY|Mod5Mask,              XK_c,                     spawn,            SHCMD("compile-dwm") },
 	// restart statusbar script
-	{ MODKEY|Mod5Mask,              XK_p,                     spawn,            SHCMD("restart-statusbar") },
+	{ MODKEY|Mod5Mask,              XK_p,                     spawn,            SHCMD("rnstatus restart") },
 	// close window
 	{ MODKEY,                       XK_q,                     killclient,       {0} },
 	// swap master window

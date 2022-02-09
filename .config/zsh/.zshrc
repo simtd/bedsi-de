@@ -37,8 +37,10 @@ alias gc="git commit"
 alias gr="git rm --cached"
 alias gp="git push"
 
-alias e="dmenu-editor-history --open"
 alias mpv="setsid -f mpv --no-terminal --ytdl-format='(bestvideo[height<=?1080]+bestaudio/best)'"
+alias yt-dlp="yt-dlp -f '(bestvideo[height<=?1080]+bestaudio/best)'"
+
+alias e="dmenu-editor-history --open"
 alias open="xdg-open"
 alias py="python3"
 alias ac="arduino-cli"

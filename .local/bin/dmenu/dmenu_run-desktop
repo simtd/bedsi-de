@@ -6,8 +6,9 @@
 # Alternative to dmenu_run that only lists executables from .desktop files
 # Dependency: gtk-launch (part of gtk3 package in arch)
 
-dir='/usr/share/applications'
 dmenu_cmd="fzfmenu --prompt='Apps > '"
+
+dir='/usr/share/applications'
 
 appfile=$(
     for f in "$dir"/*; do

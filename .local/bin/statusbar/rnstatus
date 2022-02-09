@@ -3,23 +3,23 @@
 # ROOT NAME STATUS
 # ----------------
 
-# POSIX statusbar script for window managers that use "xsetroot -name"
-
-# Usage:
-# * run the script: $ rnstatus start/stop/restart &
-# * update modules that are intended for hotkeys: $ rnstatus volume/backlight
+# Simple POSIX statusbar script for window managers that use "xsetroot -name"
 
 # Dependencies:
 # * xsetroot
 # * pkill, pgrep
-# * light (read backlight level)
+# * light (read backlight level, can be easily changed in rn-modules)
 # * pactl (read audio information)
 # * date
 
 # Code structure:
 # * rnstatus: user interaction, start/stop and update certain modules etc.
-# * rn-modules: functions that provide actual status text
-# * rn-stream: in backround, handles data stream, updates modules on timer
+# * rn-modules: functions that provide the actual status text
+# * rn-stream: runs in backround, handles data stream, updates modules on timer
+
+help='Usage:
+- Run the script: $ rnstatus [start/stop/restart]
+- Update special modules: $ rnstatus [volume/backlight]'
 
 dir="$HOME/.local/bin/statusbar"
 pipe='/tmp/rnstatus-fifo'
@@ -27,8 +27,8 @@ pipe='/tmp/rnstatus-fifo'
 . "$dir/rn-modules"
 
 err() {
-	printf "ERROR: $1!\n" 1>&2
-	exit 1
+    printf "ERROR: $1!\n" 1>&2
+    exit 1
 }
 
 case "$1" in
@@ -37,13 +37,15 @@ case "$1" in
     backlight)
         . "$dir/rn-modules"
         bl_module > "$pipe" ;;
+    help|-h)
+        printf "$help\n" ;;
     *)
         [ -p "$pipe" ] || mkfifo "$pipe"
 
         start_stream() {
-            pgrep -x 'rn-stream' 1> /dev/null 2>&1 && err 'already running' 
+            pgrep -x 'rn-stream' 1> /dev/null 2>&1 && err 'Already running' 
 
-    		"$dir/rn-stream" "$dir" "$pipe" &
+            "$dir/rn-stream" "$dir" "$pipe" &
             vol_module > "$pipe" &
             bl_module > "$pipe" &
         }
@@ -60,7 +62,7 @@ case "$1" in
             restart)
                 stop_stream
                 start_stream ;;
-        	*)
-				err 'invalid argument(s)' ;;
+            *)
+                err 'Invalid argument(s)' ;;
         esac ;;
 esac

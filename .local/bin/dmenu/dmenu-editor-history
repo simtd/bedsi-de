@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO: fix some duplicates in generated history from --fill
+
 # DMENU-EDITOR-HISTORY
 # --------------------
 
@@ -97,7 +99,7 @@ case "$1" in
             done < "$hist" | "${dmenu_cmd[@]}"
         )"
 
-        [[ -z $filename ]] && err 'empty selection'
+        [[ -z $filename ]] && err 'Empty selection'
 
         # Remove indicators
         filename=${filename#@("$dir_indicator "|"$link_indicator ")}
@@ -157,6 +159,8 @@ case "$1" in
                 > "$temp"
 
                 append_dir() {
+                    # Recursively append files from a directory to temp
+
                     # Arguments:
                     # $1 = path to a directory
                     # $2 = number of directories to descend (recursive depth)
@@ -173,6 +177,14 @@ case "$1" in
 
                 for dir in "${!dirs[@]}"; do
                     append_dir "$dir" "${dirs[$dir]}"
+
+                    # Add to hist if not a subdir already
+                    parent="${dir%/*}"
+                    sub=0
+                    for dir in "${!dirs[@]}"; do
+                        [[ $parent == $dir ]] && sub=1
+                    done
+                    (( sub )) || printf '%s\n' "$dir" >> "$temp"
                 done
 
                 mv "$temp" "$hist" ;;
@@ -206,5 +218,5 @@ case "$1" in
         printf "$helptext\n" ;;
 
     *)
-        err 'invalid option(s), see --help for information about usage' ;;
+        err 'Invalid option(s), see --help for information about usage' ;;
 esac

@@ -12,15 +12,15 @@ loop() {
     done > "$pipe" &
 }
 
-# modules that update in intervals
+# Modules that update in intervals
 # (loop function seconds)
 loop "bat_module" 7
 loop "wifi_module" 5
 loop "date_module" 1
 
-# continuously read and sort incoming output from modules
-# sort based on update signal (first char)
-# set the actual status text
+# Continuously read and sort incoming output from modules
+# Sort based on update signal (first char)
+# Set the actual status text
 while read line; do
     case "$line" in
         B*) bat="${line#?}" ;;

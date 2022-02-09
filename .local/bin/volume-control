@@ -7,7 +7,7 @@
 # slight decrease: volume-control slight down
 # mute: volume-control mute
 
-[[ $1 = "mute" ]] && pactl set-sink-mute @DEFAULT_SINK@ toggle && exit 0
+[[ $1 = "mute" ]] && pactl set-sink-mute @DEFAULT_SINK@ toggle && exit
 
 vol=$(pactl list sinks | grep -o -m 1 "Volume:[^%]*")
 vol=${vol##* }
