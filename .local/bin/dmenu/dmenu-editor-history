@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# TODO: replace $HOME with ~ in dmenu
 # TODO: fix some duplicates in generated history from --fill
 
 # DMENU-EDITOR-HISTORY
@@ -83,16 +84,17 @@ rm_non_exist() {
 ## Cmd arguments
 case "$1" in
     '')
-        dir_indicator='[DIR]'
-        link_indicator='[LNK]'
+        # Indicators for special file types
+        indc_dir='[DIR]'
+        indc_link='[LNK]'
 
         # Pipe file into dmenu with indicator for directories and symbolic links
         filename="$(
             while read; do
                 if [[ -d $REPLY ]]; then
-                    printf "$dir_indicator $REPLY\n"
+                    printf "$indc_dir $REPLY\n"
                 elif [[ -h $REPLY ]]; then
-                    printf "$link_indicator $REPLY\n"
+                    printf "$indc_link $REPLY\n"
                 else
                     printf "$REPLY\n"
                 fi
@@ -102,7 +104,7 @@ case "$1" in
         [[ -z $filename ]] && err 'Empty selection'
 
         # Remove indicators
-        filename=${filename#@("$dir_indicator "|"$link_indicator ")}
+        filename=${filename#@("$indc_dir "|"$indc_link ")}
 
         # If the file doesn't exist clean history and error out
         if ! [[ -e $filename ]]; then

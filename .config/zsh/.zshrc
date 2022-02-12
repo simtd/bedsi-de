@@ -24,7 +24,7 @@ alias mv="mv -iv"
 alias cp="cp -riv"
 alias mkdir="mkdir -vp"
 alias rm="rm -vI"
-alias grep="grep -i --color"
+alias grep="grep -i -H -n --color -A 5 -B 2"
 alias c="clear"
 
 alias bedsi="git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME"
