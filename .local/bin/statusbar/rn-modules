@@ -29,8 +29,8 @@ vol_module() {
             6) lvl="$word" ;;
             20)
                 case "$word" in
-                    Headphones) port='Head' ;;
-                    Speaker) port='Speak' ;;
+                    Headphones) port='Head:' ;;
+                    Speaker) port='Speak:' ;;
                 esac ;;
         esac
         count=$((count+1))
@@ -61,9 +61,9 @@ bat_module() {
     if [ "$lvl" -le '10' ] && [ "$stat" = 'Discharging' ]; then
         stat='LOW BATTERY'
     fi
-    printf "B$stat $lvl%%\n"
+    printf "B$stat: $lvl%%\n"
 }
 
 bl_module() {
-    printf '%s%s %.0f%s\n' 'L' 'Disp' "$($backlight_cmd)" '%'
+    printf '%s%s %.0f%s\n' 'L' 'Disp:' "$($backlight_cmd)" '%'
 }

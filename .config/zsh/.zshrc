@@ -3,10 +3,10 @@
 ############
 
 function set-prompt() {
-    local git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    [[ -z $git_branch ]] || git_branch=" %F{8}${git_branch//\%/%%}%f"
-    local newline=$'\n'
-    PROMPT="%F{4}%2d%f$git_branch%B%F{1}%(?.. [%?])%f%b%B%F{5}$newline>%f%b "
+    local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+    [[ -z $branch ]] || branch=" %F{8}${branch//\%/%%}%f"
+    # local newline=$'\n'
+    PROMPT="%F{6}%1d%f$branch %B%(?.%F{5}>%f.%F{1}%?%f %F{5}X%f)%f%b "
 }
 
 autoload -Uz add-zsh-hook
@@ -18,13 +18,15 @@ add-zsh-hook precmd set-prompt
 
 alias ..="cd .."
 alias ...="cd ../.."
+
 alias ls="ls --color"
 alias l="ls -lah --time-style='+%d-%m-%y'"
 alias mv="mv -iv"
 alias cp="cp -riv"
 alias mkdir="mkdir -vp"
 alias rm="rm -vI"
-alias grep="grep -i -H -n --color -A 5 -B 2"
+# alias grep="grep -i -H -n --color -A 5 -B 2"
+alias grep="grep -i -H -n --color"
 alias c="clear"
 
 alias bedsi="git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME"
@@ -37,14 +39,11 @@ alias gc="git commit"
 alias gr="git rm --cached"
 alias gp="git push"
 
-alias mpv="setsid -f mpv --no-terminal --ytdl-format='(bestvideo[height<=?1080]+bestaudio/best)'"
-alias yt-dlp="yt-dlp -f '(bestvideo[height<=?1080]+bestaudio/best)'"
+alias mpv="linkhandler -m"
+alias yt-dlp="linkhandler -d"
 
 alias e="dmenu-editor-history --open"
-alias open="xdg-open"
 alias py="python3"
-alias ac="arduino-cli"
-alias cb="checkbashisms"
 alias nf="neofetch"
 
 alias storage="df -h -x tmpfs"
@@ -72,7 +71,11 @@ d() {
 # improving tab completion (menu, case-insensitive etc.)
 autoload -U compinit
 zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
 zmodload zsh/complist
 compinit
 

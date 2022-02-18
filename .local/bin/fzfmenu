@@ -8,9 +8,11 @@
 # A rule needs to be set in window manager configuration to enable
 # floating based on the instance name
 
-instance_name='floating st'
-font='monospace:size=12'
-fzf_flags='--margin 5% --color=16,bg+:-1,prompt:5,pointer:4'
+theme="
+--color='bg:-1,bg+:-1,info:#e0af68,border:#444b6a,spinner:-1,hl:#eeeeee' \
+--color='fg:#eeeeee,header:#ff7a93,fg+:#7da6ff,pointer:#7da6ff,marker:#7da6ff' \
+--color='prompt:#bb9af7,hl+:#9ece6a'
+"
 
-export FZF_DEFAULT_OPTS="$fzf_flags"
-st -n "$instance_name" -f "$font" -t 'fzfmenu' sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"
+export FZF_DEFAULT_OPTS="--margin=5% $theme"
+st -g '' -n 'floating st' -f "monospace:size=12" -t 'fzfmenu' sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"

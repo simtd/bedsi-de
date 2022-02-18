@@ -5,10 +5,12 @@
 
 # Usages:
 # -------
-# Automatically choose program:
-# -- $ linkhandler "link"
-# Manually choose program:
-# -- $ linkhandler browser "link"
+# Automatic:
+#   $ linkhandler "link"
+# Manual:
+#   $ linkhandler browser "link"
+#   $ linkhandler dl "link"
+#   $ linkhandler mpv "link"
 
 ytdl_format="(bestvideo[height<=?1080]+bestaudio/best)"
 
@@ -21,11 +23,11 @@ cmd_webbrowser() {
 }
 
 cmd_mpv() {
-    setsid -f mpv --no-terminal --ytdl-format="$ytdl_format" "$1"
-}
-
-cmd_musicplayer() {
-    setsid -f "$TERMINAL" -e mpv "$1"
+    case "$1" in
+        '') exit 1 ;;
+        *mp3|*wav) setsid -f "$TERMINAL" -e mpv "$1" ;;
+        *) setsid -f mpv --no-terminal --ytdl-format="$ytdl_format" "$1"
+    esac
 }
 
 cmd_ytdl() {
@@ -37,7 +39,6 @@ case "$1" in
     dl|-d) cmd_ytdl "$2" ;;
     mpv|-m) cmd_mpv "$2" ;;
     *png|*jpg|*gif) cmd_imgviewer "$1" ;;
-    *mp3|*wav) cmd_musicplayer "$1" ;;
-    *youtube.com/watch*|*.mp4|*.webm|*.mkv) cmd_mpv "$1" ;;
+    *mp3|*wav|*youtube.com/watch*|*mp4|*webm|*mkv) cmd_mpv "$1" ;;
     *) cmd_webbrowser "$1" ;;
 esac
