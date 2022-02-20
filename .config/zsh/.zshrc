@@ -39,6 +39,9 @@ alias gc="git commit"
 alias gr="git rm --cached"
 alias gp="git push"
 
+alias pac-install="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro doas pacman -S"
+alias pac-uninstall="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro doas pacman -Rns"
+
 alias mpv="linkhandler -m"
 alias yt-dlp="linkhandler -d"
 

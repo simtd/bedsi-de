@@ -8,10 +8,18 @@
 # A rule needs to be set in window manager configuration to enable
 # floating based on the instance name
 
+# Color scheme
+fg='#eeeeee'
+fg_dark='#a9b1d6'
+blue='#7da6ff'
+cyan='#449dab'
+magenta='#bb9af7'
+yellow='#e0af68'
+green='#9ece6a'
 theme="
---color='bg:-1,bg+:-1,info:#e0af68,border:#444b6a,spinner:-1,hl:#eeeeee' \
---color='fg:#eeeeee,header:#ff7a93,fg+:#7da6ff,pointer:#7da6ff,marker:#7da6ff' \
---color='prompt:#bb9af7,hl+:#9ece6a'
+--color='bg:-1,bg+:-1,info:$fg_dark,border:$fg_dark,spinner:-1,hl:$fg' \
+--color='fg:$fg,header:$fg_dark,fg+:$yellow,pointer:$blue,marker:$blue' \
+--color='prompt:$magenta,hl+:$green'
 "
 
 export FZF_DEFAULT_OPTS="--margin=5% $theme"

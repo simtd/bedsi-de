@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-# TODO: replace $HOME with ~ in dmenu
-
 # DMENU-EDITOR-HISTORY
 # --------------------
 
-# Bash script that provides an editor-indepentend selectable history list for
-# opened files, via dmenu. See --help for usage.
+# Bash script that provides an awesome editor-indepentend history list of
+# opened files, via dmenu. See --help for details.
 
 # CONFIGURATION -----------------------------------------------------------------
 
@@ -14,16 +12,13 @@ cmd_editor=(subl)
 cmd_dmenu=(fzfmenu "--prompt='Hist > '")
 
 cmd_find=(find "$HOME")
-txt_find='--- SEARCH ---'
+indc_find='--- SEARCH ---'
 
 # Indicators for special file types
 indc_dir='[DIR]' # directories
 indc_link='[LNK]' # symbolic links
 
 # -------------------------------------------------------------------------------
-
-# Include hidden files when looping over directories using * glob
-shopt -s dotglob
 
 err() {
     printf "ERROR: $1!\n" 1>&2
@@ -41,35 +36,19 @@ fi
 temp='/tmp/dmenu-editor-history-tmp'
 
 entry() {
-    # New history entry, directories get turned into multiple entries
-
-    # Arguments:
+    # New history entry
     # $1 = absolute path to a file
 
     printf '%s\n' "$1" > "$temp"
-    len=1
 
-    # If a directory also add the files inside because that's what I like
-    if [[ -d $1 ]]; then
-        for f in "$1"/*; do
-            if [[ -e $f ]]; then
-                printf '%s\n' "$f"
-                (( len++ ))
-            fi >> "$temp"
-        done
-    fi
-
-    # Adding previous part of history without duplicates of new entries
-    local IFS=$'\n'
-    dupcount=0
+    # Previous history without duplicate of new entry
+    dup_found=0
     while read; do
-        if [[ $dupcount -lt $len ]]; then
-            for ent in $(< $temp); do
-                if [[ $REPLY == $ent ]]; then
-                    (( dupcount++ ))
-                    continue 2
-                fi
-            done
+        if ! (( dup_found )); then
+            if [[ $REPLY == $1 ]]; then
+                dup_found=1
+                continue 2
+            fi
         fi
         printf '%s\n' "$REPLY"
     done < "$hist" >> "$temp"
@@ -91,7 +70,7 @@ rm_non_exist() {
 case "$1" in
     '')
         # Pipe file into dmenu with indicators
-        filename=$(printf '%s\n%s' "$txt_find" "$(
+        filename=$(printf '%s\n%s' "$indc_find" "$(
             while read; do
                 if [[ -d $REPLY ]]; then
                     printf "$indc_dir $REPLY\n"
@@ -103,11 +82,12 @@ case "$1" in
             done < "$hist"   
         )" | "${cmd_dmenu[@]}" )
 
-        [[ -z $filename ]] && err 'Empty selection'
-
-        if [[ $filename == $txt_find ]]; then
+        if [[ $filename == $indc_find ]]; then
             filename=$(${cmd_find[@]} | "${cmd_dmenu[@]}")
+            [[ -z $filename ]] && err 'Empty selection'
         else
+            [[ -z $filename ]] && err 'Empty selection'
+
             # Remove potential indicators
             filename=${filename#"$indc_dir "}
             filename=${filename#"$indc_link "}
@@ -168,7 +148,7 @@ case "$1" in
 
 			Remove all files from history that does not exist:
 			$ dmenu-editor-history --clean
-			(this also runs if a non-existent file is selected from dmenu)
+			(this also runs if a non-existant file is selected from dmenu)
 
 			Print out this help text:
 			$ dmenu-editor-history --help
