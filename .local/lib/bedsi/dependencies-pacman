@@ -3,7 +3,6 @@ base-devel
 bat
 calcurse
 dash
-dmenu
 feh
 fzf
 gcc
