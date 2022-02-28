@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Renames a file putting the current RFC3339 datetime in front
+
+# I'm using --iso-8601 instead of --rfc-3339 in date because I want the 'T' as
+# a seperator, which is not actually required in RFC3339
+
+separator='_' # between date and old filename
+
+err() {
+    printf "ERROR: $1!\n" 1>&2
+    exit 1
+}
+
+! [ -f $1 ] && err 'No valid file specified'
+
+nowdate="$(date --iso-8601=seconds)"
+
+mv -v "$1" "$nowdate$separator$1"
