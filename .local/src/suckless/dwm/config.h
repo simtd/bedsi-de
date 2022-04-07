@@ -157,7 +157,7 @@ static Key keys[] = {
 	// regular dmenu run launcher
 	{ MODKEY|ShiftMask,             XK_p,                     spawn,            {.v = dmenucmd } },
 	// text editor history script
-	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history") },
+	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history --dmenu=\"fzfmenu --prompt='Hist: '\" --sel") },
 
 	// LAUNCH PROGRAM HOTKEYS
 	// -----------------------

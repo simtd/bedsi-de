@@ -51,4 +51,3 @@ window:
 
 key_bindings:
   - { key: Return, mods: Control, action: SpawnNewInstance }
-  

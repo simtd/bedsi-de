@@ -12,8 +12,16 @@ err() {
     exit 1
 }
 
-! [ -f $1 ] && err 'No valid file specified'
-
 nowdate="$(date --iso-8601=seconds)"
 
-mv -v "$1" "$nowdate$separator$1"
+case "$1" in
+    '')
+        printf "$nowdate\n" ;;
+    *)
+        if [ -f $1 ]; then
+             mv -v "$1" "$nowdate$separator$1"
+        else
+            err 'No valid file specified'
+        fi ;;
+esac
+

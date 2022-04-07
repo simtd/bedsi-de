@@ -9,7 +9,7 @@ backlight_cmd='light -G' # getting backlight level from a cmd program
 # HELPER FUNCTIONS
 
 read_file() {
-    while read l; do printf "$l"; done < "$1"
+    while read l; do printf '%s' "$l"; done < "$1"
 }
 
 # MODULES
@@ -40,7 +40,7 @@ vol_module() {
 }
 
 date_module() {
-    date +'D%A %d %b %Y-W%W %H:%M:%S'
+    date +'D%a %d %b %Y-W%W %H:%M:%S'
 }
 
 wifi_module() {
