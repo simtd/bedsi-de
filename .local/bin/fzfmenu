@@ -9,14 +9,14 @@
 # floating based on the instance name
 
 # Color scheme
-fg='#eeeeee'
+fg='#1f1f1f'
 fg_dark='#a9b1d6'
 gray='#444b6a'
-blue='#7da6ff'
-cyan='#449dab'
-magenta='#bb9af7'
-yellow='#e0af68'
-green='#9ece6a'
+blue='#1971c2'
+cyan='#0c8599'
+magenta='#9c36b5'
+yellow='#f08c00'
+green='#2f9e44'
 theme="
 --color='bg:-1,bg+:-1,info:$fg_dark,border:$gray,spinner:-1,hl:$fg' \
 --color='fg:$fg,header:$fg_dark,fg+:$yellow,pointer:$blue,marker:$blue' \

@@ -53,7 +53,7 @@ case "$1" in
         stop_stream() {
             pkill --exact 'rn-stream'
         }
-        
+
         case "$1" in
             stop)
                 stop_stream ;;

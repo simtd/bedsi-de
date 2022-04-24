@@ -1,39 +1,37 @@
-# Colors (Tokyo Night)
 colors:
-  # Primary colors
   primary:
-    background: '#1a1b26'
-    foreground: '#a9b1d6'
+    background: "#F9FAFB"
+    foreground: "#343a40"
 
-  # Normal colors
   normal:
-    black:   '#32344a'
-    red:     '#f7768e'
-    green:   '#9ece6a'
-    yellow:  '#e0af68'
-    blue:    '#7aa2f7'
-    magenta: '#ad8ee6'
-    cyan:    '#449dab'
-    white:   '#787c99'
+    black:   '#110f18'
+    red:     '#e03131'
+    green:   '#2f9e44'
+    yellow:  '#f08c00'
+    blue:    '#1971c2'
+    magenta: '#9c36b5'
+    cyan:    '#0c8599'
+    white:   '#edecee'
 
-  # Bright colors
   bright:
-    black:   '#444b6a'
-    red:     '#ff7a93'
-    green:   '#b9f27c'
-    yellow:  '#ff9e64'
-    blue:    '#7da6ff'
-    magenta: '#bb9af7'
-    cyan:    '#0db9d7'
-    white:   '#acb0d0'
+    black:   '#110f18'
+    red:     '#e03131'
+    green:   '#2f9e44'
+    yellow:  '#f08c00'
+    blue:    '#1971c2'
+    magenta: '#9c36b5'
+    cyan:    '#0c8599'
+    white:   '#edecee'
+
+live_config_reload: true
 
 font:
-  # normal:
-    # family: Ehh
+  normal:
+    family: monospace
     # style: bold
-  size: 13
+  size: 12
 
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 
 window:
   opacity: 1.0
@@ -45,6 +43,7 @@ window:
   dynamic_padding: false
 
 # cursor:
+# style: underline
 #   style:
 #     blinking: Always
 #   blink_interval: 300

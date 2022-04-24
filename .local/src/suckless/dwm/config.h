@@ -16,17 +16,20 @@ static const char dmenufont[]       = "Terminus";
 // static const char col_gray4[]       = "#eeeeee";
 // static const char col_cyan[]        = "#005577";
 
-// TOKYO NIGHT SCHEME
-static const char col_gray1[]       = "#1a1b26";
-static const char col_gray2[]       = "#32344a";
-static const char col_gray3[]       = "#a9b1d6";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#444b6a";
+// CUSTOM COLOR SCHEME
+
+static const char fg_norm[]       = "#000000";
+static const char bg_norm[]       = "#bfbfbf";
+static const char border_norm[]   = "#bfbfbf";
+
+static const char fg_sel[]        = "#000000";
+static const char bg_sel[]        = "#F9FAFB";
+static const char border_sel[]    = "#343a40";
 
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	/*               fg       bg       border   */
+	[SchemeNorm] = { fg_norm, bg_norm, border_norm },
+	[SchemeSel]  = { fg_sel,  bg_sel,  border_sel  },
 };
 
 /* tagging */
@@ -70,7 +73,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", bg_norm, "-nf", fg_norm, "-sb", bg_sel, "-sf", fg_sel, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
 /* importing media keys */
