@@ -19,11 +19,10 @@ static const char dmenufont[]       = "Terminus";
 // CUSTOM COLOR SCHEME
 
 static const char fg_norm[]       = "#000000";
-static const char bg_norm[]       = "#bfbfbf";
-static const char border_norm[]   = "#bfbfbf";
-
+static const char bg_norm[]       = "#F9FAFB";
+static const char border_norm[]   = "#696969";
 static const char fg_sel[]        = "#000000";
-static const char bg_sel[]        = "#F9FAFB";
+static const char bg_sel[]        = "#bfbfbf";
 static const char border_sel[]    = "#343a40";
 
 static const char *colors[][3]      = {

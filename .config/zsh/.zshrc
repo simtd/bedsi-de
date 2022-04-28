@@ -4,9 +4,9 @@
 
 function set-prompt() {
     local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
-    [[ -z $branch ]] || branch=" %F{8}${branch//\%/%%}%f"
-    PROMPT="%B%(?.%F{5}$%f.%F{1}%?%f %F{5}X%f)%f%b "
-    [[ $PWD == $HOME ]] || PROMPT="%F{6}%1d%f$branch $PROMPT"
+    [[ -z $branch ]] || branch=" %F{6}${branch//\%/%%}%f"
+    PROMPT="%B%(?.%F{5}%#%f.%F{1}%?%f %F{5}X%f)%f%b "
+    [[ $PWD == $HOME ]] || PROMPT="%F{8}%1d%f$branch $PROMPT"
 }
 
 autoload -Uz add-zsh-hook
