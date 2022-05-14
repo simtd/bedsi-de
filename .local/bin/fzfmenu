@@ -23,5 +23,5 @@ theme="
 --color='prompt:$magenta,hl+:$green'
 "
 
-export FZF_DEFAULT_OPTS="--padding=5% $theme"
-st -g '' -n 'floating st' -f "Terminus:size=12:bold" -t 'fzfmenu' sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"
+export FZF_DEFAULT_OPTS="--padding=10% --reverse --info=inline $theme"
+st -g '' -n 'floating st' -f "monospace:size=12" -t 'fzfmenu' sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"

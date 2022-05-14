@@ -39,6 +39,6 @@ case "$1" in
     dl|-d) cmd_ytdl "$2" ;;
     mpv|-m) cmd_mpv "$2" ;;
     *png|*jpg|*gif) cmd_imgviewer "$1" ;;
-    *mp3|*wav|*youtube.com/watch*|*mp4|*webm|*mkv) cmd_mpv "$1" ;;
+    *mp3|*wav|*youtu.be/*|*youtube.com/watch*|*mp4|*webm|*mkv) cmd_mpv "$1" ;;
     *) cmd_webbrowser "$1" ;;
 esac

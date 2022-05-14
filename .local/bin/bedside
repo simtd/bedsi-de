@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+# BEDSI-DE
+# --------
+
+# A simple tool to make dealing with my dotfiles better. A git wrapper.
+# Installation of dotfiles is intended to be manual and is not included.
+# The files should be cloned into $local_repo as a bare repo and unpacked to home
+
+# Used for:
+# * keeping track of dependencies, can be fed into package manager for install
+# * any git command like add, commit, push
+# * seeing status of modified files (no arguments)
+# * safely removing files with --cached
+# * listing tracked files
+
+dependencies_pac='
+alacritty
+base-devel
+bat
+calcurse
+dash
+feh
+fzf
+gcc
+git
+gvfs
+htop
+light
+maim
+mpv
+mpv-mpris
+neofetch
+neovim
+networkmanager
+newsboat
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+nitrogen
+opendoas
+papirus-icon-theme
+pcmanfm-gtk3
+pkgconf
+playerctl
+pipewire
+pipewire-pulse
+terminus-font
+tldr
+ttf-nerd-fonts-symbols-mono
+ttf-ubuntu-font-family
+ufw
+unclutter
+wget
+xclip
+xdg-user-dirs
+xdo
+xorg
+xorg-xinit
+yt-dlp
+zsh'
+
+dependencies_aur='
+brave-bin
+dashbinsh
+paru-bin
+sublime-text-4'
+
+local_repo="$HOME/.bedsi-de"
+git_cmd=(git --git-dir="$local_repo" --work-tree="$HOME")
+
+case "$1" in
+    '')
+        "${git_cmd[@]}" status -s ;;
+
+    rm)
+        "${git_cmd[@]}" rm --cached "$2" ;;
+
+    list)
+        "${git_cmd[@]}" ls-tree --full-tree --name-only -r HEAD ;;
+
+    pac)
+        printf '%s\n' $dependencies_pac ;;
+
+    aur)
+        printf '%s\n' $dependencies_aur ;;
+    *)
+        "${git_cmd[@]}" $@ ;;
+esac

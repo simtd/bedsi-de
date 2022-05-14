@@ -17,14 +17,16 @@ add-zsh-hook precmd set-prompt
 #############
 
 # Dotfiles
-alias bedsi="git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME"
-alias beds="bedsi status"
-alias bedsrm="bedsi rm --cached"
+alias bed="bedside"
 
 # Fzf
-alias d="cd \$(find $HOME -maxdepth 4 -type d | fzf --no-multi)"
 alias pac-install="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro doas pacman -S"
 alias pac-uninstall="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro doas pacman -Rns"
+
+d() {
+    dir="$(find $HOME -maxdepth 4 -type d | fzf)"
+    [[ -z $dir ]] || cd "$dir"
+}
 
 # Basics
 alias ..="cd .."
@@ -46,6 +48,11 @@ alias py="python3"
 alias nf="neofetch"
 alias storage="df -h -x tmpfs"
 
+overview() {
+    du -h --max-depth=1 | sed -r '$d; s/^([.0-9]+[KMGTPEZY]\t)\.\//\1/' \
+    | sort -hr | column
+}
+
 # Git
 alias gs="git status"
 alias ga="git add"
@@ -60,6 +67,7 @@ alias wifi-connect="nmcli --ask device wifi connect"
 alias wifi-disconnect="nmcli connection delete"
 alias wifi-enable="nmcli radio wifi on"
 alias wifi-disable="nmcli radio wifi off"
+
 
 ######################
 ## COMPLETION SETUP ##
