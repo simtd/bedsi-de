@@ -85,5 +85,5 @@ case "$1" in
     aur)
         printf '%s\n' $dependencies_aur ;;
     *)
-        "${git_cmd[@]}" $@ ;;
+        "${git_cmd[@]}" "${@}" ;;
 esac

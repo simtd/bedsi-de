@@ -15,7 +15,10 @@ A complete desktop environment using the [dwm](https://dwm.suckless.org/) window
 
 Lifted from: https://www.atlassian.com/git/tutorials/dotfiles
 
-`echo .bedsi-de >> .gitignore`
-`git clone --bare https://github.com/simtd/bedsi-de.git $HOME/.bedsi-de`
-`git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME checkout` (fails if a file exists already)
-`bed config --local status.showUntrackedFiles no` (bed is an alias for the [bedside script](https://github.com/simtd/bedsi-de/blob/main/.local/bin/bedside) which is just a git wrapper)
+1) `echo .bedsi-de >> .gitignore`
+
+2) `git clone --bare https://github.com/simtd/bedsi-de.git $HOME/.bedsi-de`
+
+3) `git --git-dir=$HOME/.bedsi-de/ --work-tree=$HOME checkout` (fails if a file exists already)
+
+4) `bed config --local status.showUntrackedFiles no` (bed is an alias for the [bedside script](https://github.com/simtd/bedsi-de/blob/main/.local/bin/bedside) which is just a git wrapper)
