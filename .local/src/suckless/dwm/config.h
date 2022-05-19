@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 10;       /* gaps between windows */
+static const unsigned int gappx     = 5;       /* gaps between windows */
 static const unsigned int snap      = 16;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
@@ -17,7 +17,6 @@ static const char dmenufont[]       = "Terminus";
 // static const char col_cyan[]        = "#005577";
 
 // CUSTOM COLOR SCHEME
-
 static const char fg_norm[]       = "#000000";
 static const char bg_norm[]       = "#F9FAFB";
 static const char border_norm[]   = "#696969";

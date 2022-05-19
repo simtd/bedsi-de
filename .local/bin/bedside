@@ -3,8 +3,8 @@
 # BEDSI-DE
 # --------
 
-# A simple tool to make dealing with my dotfiles better. A git wrapper.
-# Installation of dotfiles is intended to be manual and is not included.
+# A simple tool to make dealing with my dotfiles better (just a git wrapper)
+# Installation of dotfiles is intended to be manual and is not included
 # The files should be cloned into $local_repo as a bare repo and unpacked to home
 
 # Used for:
