@@ -34,7 +34,6 @@ playerctld daemon &
 nitrogen --restore &
 
 # Statusbar script for dwm panel
-rnstatus start &
 
 # Launching window manager
 exec dwm

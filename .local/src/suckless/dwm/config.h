@@ -7,7 +7,7 @@ static const unsigned int snap      = 16;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 
-static const char *fonts[]          = { "Terminus" };
+static const char *fonts[]          = { "Terminus", "Symbols Nerd Font" };
 static const char dmenufont[]       = "Terminus";
 
 // static const char col_gray1[]       = "#000000";
@@ -89,8 +89,6 @@ static Key keys[] = {
 	{ MODKEY|Mod5Mask|ShiftMask,    XK_q,                     quit,             {0} },
 	// compile-dwm
 	{ MODKEY|Mod5Mask,              XK_c,                     spawn,            SHCMD("compile-dwm") },
-	// restart statusbar script
-	{ MODKEY|Mod5Mask,              XK_p,                     spawn,            SHCMD("rnstatus restart") },
 	// close window
 	{ MODKEY,                       XK_q,                     killclient,       {0} },
 	// swap master window
@@ -186,21 +184,21 @@ static Key keys[] = {
 	// -------------
 
 	// decrease volume with statusbar update
-	{ 0,                            XF86XK_AudioLowerVolume,  spawn,            SHCMD("volume-control down ; rnstatus volume") },
+	{ 0,                            XF86XK_AudioLowerVolume,  spawn,            SHCMD("volume-control down") },
 	// increase volume with statusbar update
-	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,            SHCMD("volume-control ; rnstatus volume") },
+	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,            SHCMD("volume-control") },
 	// slightly decrease volume with statusbar update
-	{ ShiftMask,                    XF86XK_AudioLowerVolume,  spawn,            SHCMD("volume-control slight down ; rnstatus volume") },
+	{ ShiftMask,                    XF86XK_AudioLowerVolume,  spawn,            SHCMD("volume-control slight down") },
 	// slightly increase volume with statusbar update
-	{ ShiftMask,                    XF86XK_AudioRaiseVolume,  spawn,            SHCMD("volume-control slight ; rnstatus volume") },
+	{ ShiftMask,                    XF86XK_AudioRaiseVolume,  spawn,            SHCMD("volume-control slight") },
 	// mute/unmute sound with statusbar update
-	{ 0,                            XF86XK_AudioMute,         spawn,            SHCMD("volume-control mute ; rnstatus volume") },
+	{ 0,                            XF86XK_AudioMute,         spawn,            SHCMD("volume-control mute") },
 	// mute/unmute microphone
 	{ 0,                            XF86XK_AudioMicMute,      spawn,            SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	// decrease screen backlight with statusbar update
-	{ 0,                            XF86XK_MonBrightnessDown, spawn,            SHCMD("light -U 5 ; rnstatus backlight") },
+	{ 0,                            XF86XK_MonBrightnessDown, spawn,            SHCMD("light -U 5") },
 	// increase screen backlight with statusbar update
-	{ 0,                            XF86XK_MonBrightnessUp,   spawn,            SHCMD("light -A 5 ; rnstatus backlight") },
+	{ 0,                            XF86XK_MonBrightnessUp,   spawn,            SHCMD("light -A 5") },
 	// keyboard backlight
 	{ MODKEY|Mod5Mask,              XK_space,                 spawn,            SHCMD("keyboard-backlight") },
 	// play/pause for media players
