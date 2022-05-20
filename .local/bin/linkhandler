@@ -12,7 +12,7 @@
 #   $ linkhandler dl "link"
 #   $ linkhandler mpv "link"
 
-ytdl_format="(bestvideo[height<=?1080]+bestaudio/best)"
+ytdl_format="(bestvideo[height<=?1080]+bestaudio/best)" # limit to 1080p
 
 cmd_imgviewer() {
     feh "$1"

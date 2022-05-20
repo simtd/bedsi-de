@@ -8,7 +8,7 @@ xrdb "$XRESOURCES"
 
 # Personal init script
 # Needs to be created manually
-[ -f "$XDG_CONFIG_HOME/bedsi/init" ] && "$XDG_CONFIG_HOME/bedsi/init"
+[ -f "$XDG_CONFIG_HOME/bedsi/init" ] && "$XDG_CONFIG_HOME/bedsi/init" &
 
 ############################
 ## INPUT DEVICES SETTINGS ##
