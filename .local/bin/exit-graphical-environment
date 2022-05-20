@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rnstatus stop
+pkill "gold-bar"
 pkill -15 Xorg

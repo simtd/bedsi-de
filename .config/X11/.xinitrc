@@ -34,6 +34,7 @@ playerctld daemon &
 nitrogen --restore &
 
 # Statusbar script for dwm panel
+gold-bar -rootname -color -colortheme light &
 
 # Launching window manager
 exec dwm
