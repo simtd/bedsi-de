@@ -85,12 +85,12 @@ case "$1" in
 
     various)
         # Add all changes and commit
-        read -p "Add all changes? [y/n]: " del
+        read -p "Commit all changes? [y/n]: " del
         case "$del" in
-            y|Y|yes|Yes|YES) rm -v "$hist" ;;
-        esac
-        "${git_cmd[@]}" add -u
-        "${git_cmd[@]}" commit -m "various" ;;
+            y|Y|yes|Yes|YES)
+                "${git_cmd[@]}" add -u
+                "${git_cmd[@]}" commit -m "various" ;;
+        esac ;;
 
     search)
         list ;;
