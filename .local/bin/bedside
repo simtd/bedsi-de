@@ -83,7 +83,7 @@ case "$1" in
     list)
         list ;;
 
-    various)
+    various|vari)
         # Add all changes and commit
         read -p "Commit all changes? [y/n]: " del
         case "$del" in
