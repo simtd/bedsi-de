@@ -69,6 +69,10 @@ sublime-text-4'
 local_repo="$HOME/.bedsi-de"
 git_cmd=(git --git-dir="$local_repo" --work-tree="$HOME")
 
+list() {
+    "${git_cmd[@]}" ls-tree --full-tree --name-only -r HEAD
+}
+
 case "$1" in
     '')
         "${git_cmd[@]}" status -s ;;
@@ -77,12 +81,19 @@ case "$1" in
         "${git_cmd[@]}" rm --cached "$2" ;;
 
     list)
-        "${git_cmd[@]}" ls-tree --full-tree --name-only -r HEAD ;;
+        list ;;
 
     various)
         # Add all changes and commit
+        read -p "Add all changes? [y/n]: " del
+        case "$del" in
+            y|Y|yes|Yes|YES) rm -v "$hist" ;;
+        esac
         "${git_cmd[@]}" add -u
         "${git_cmd[@]}" commit -m "various" ;;
+
+    search)
+        list ;;
 
     pac)
         printf '%s\n' $dependencies_pac ;;
