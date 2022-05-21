@@ -9,7 +9,7 @@
 
 # Used for:
 # * keeping track of dependencies, can be fed into package manager for install
-# * any git command like add, commit, push
+# * any git command like add, commit, push, diff
 # * seeing status of modified files (no arguments)
 # * safely removing files with --cached
 # * listing tracked files
@@ -78,6 +78,11 @@ case "$1" in
 
     list)
         "${git_cmd[@]}" ls-tree --full-tree --name-only -r HEAD ;;
+
+    various)
+        # Add all changes and commit
+        "${git_cmd[@]}" add -u
+        "${git_cmd[@]}" commit -m "various" ;;
 
     pac)
         printf '%s\n' $dependencies_pac ;;

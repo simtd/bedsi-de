@@ -23,6 +23,12 @@ alias bed="bedside"
 alias pac-install="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro doas pacman -S"
 alias pac-uninstall="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro doas pacman -Rns"
 
+
+rml() {
+    file="$(ls --color=never | fzf)"
+    rm -r -i "$file"
+}
+
 d() {
     dir="$(find $HOME -maxdepth 4 -type d | fzf)"
     [[ -z $dir ]] || cd "$dir"

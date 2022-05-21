@@ -7,7 +7,7 @@ static const unsigned int snap      = 16;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 
-static const char *fonts[]          = { "Terminus", "Symbols Nerd Font" };
+static const char *fonts[]          = { "Terminus:bold", "Symbols Nerd Font" };
 static const char dmenufont[]       = "Terminus";
 
 // static const char col_gray1[]       = "#000000";
