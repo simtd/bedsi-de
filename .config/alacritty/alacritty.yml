@@ -43,7 +43,7 @@ window:
   dynamic_padding: false
 
 # cursor:
-# style: underline
+#   style: underline
 #   style:
 #     blinking: Always
 #   blink_interval: 300

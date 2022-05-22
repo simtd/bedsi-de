@@ -13,6 +13,7 @@
 # * seeing status of modified files (no arguments)
 # * safely removing files with --cached
 # * listing tracked files
+# * etc.
 
 dependencies_pac='
 alacritty
@@ -85,15 +86,12 @@ case "$1" in
 
     various|vari)
         # Add all changes and commit
-        read -p "Commit all changes? [y/n]: " del
-        case "$del" in
+        read -p "Commit all changes? [y/n]: " input
+        case "$input" in
             y|Y|yes|Yes|YES)
                 "${git_cmd[@]}" add -u
                 "${git_cmd[@]}" commit -m "various" ;;
         esac ;;
-
-    search)
-        list ;;
 
     pac)
         printf '%s\n' $dependencies_pac ;;

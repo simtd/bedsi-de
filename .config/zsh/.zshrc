@@ -16,24 +16,6 @@ add-zsh-hook precmd set-prompt
 ## ALIASES ##
 #############
 
-# Dotfiles
-alias bed="bedside"
-
-# Fzf
-alias pac-install="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro doas pacman -S"
-alias pac-uninstall="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro doas pacman -Rns"
-
-
-rml() {
-    file="$(ls --color=never | fzf)"
-    rm -r -i "$file"
-}
-
-d() {
-    dir="$(find $HOME -maxdepth 4 -type d | fzf)"
-    [[ -z $dir ]] || cd "$dir"
-}
-
 # Basics
 alias ..="cd .."
 alias ...="cd ../.."
@@ -56,8 +38,28 @@ alias nf="neofetch --off"
 alias storage="df -h -x tmpfs"
 
 overview() {
+    # Size of directories in current directory
     du -h --max-depth=1 | sed -r '$d; s/^([.0-9]+[KMGTPEZY]\t)\.\//\1/' \
     | sort -hr | column
+}
+
+# Dotfiles
+alias bed="bedside"
+
+# Fzf
+alias pac-install="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro doas pacman -S"
+alias pac-uninstall="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro doas pacman -Rns"
+
+rml() {
+    # Delete file in working directory
+    file="$(ls --color=never | fzf --prompt "Delete: ")"
+    rm -v -r -i "$file"
+}
+
+d() {
+    # Change working directory
+    dir="$(find $HOME -maxdepth 4 -type d | fzf)"
+    [[ -z $dir ]] || cd "$dir"
 }
 
 # Git
