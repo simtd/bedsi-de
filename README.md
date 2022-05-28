@@ -2,6 +2,9 @@
 
 A complete desktop environment using the [dwm](https://dwm.suckless.org/) window manager.
 
+<img src="https://github.com/simtd/bedsi-de/blob/main/Pictures/screen.png" alt="screenshot">
+(screenshot may be outdated)
+
 ## Highlights
 
 * [Z shell configuration](https://github.com/simtd/bedsi-de/blob/main/.config/zsh/.zshrc)
