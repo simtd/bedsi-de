@@ -17,6 +17,6 @@
     "workbench.colorTheme": "chalice-color-theme-light",
     "workbench.iconTheme": "chalice-icon-theme",
     "explorer.confirmDragAndDrop": false,
-    "window.zoomLevel": 1,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "window.zoomLevel": 1
 }

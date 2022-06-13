@@ -65,7 +65,8 @@ dependencies_aur='
 brave-bin
 dashbinsh
 paru-bin
-sublime-text-4'
+sublime-text-4
+envypn-powerline-git'
 
 local_repo="$HOME/.bedsi-de"
 git_cmd=(git --git-dir="$local_repo" --work-tree="$HOME")
