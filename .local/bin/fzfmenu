@@ -9,19 +9,21 @@
 # floating based on the instance name
 
 # Color scheme
-fg='#1f1f1f'
-fg_dark='#1f1f1f'
-gray='#1f1f1f'
-blue='#1971c2'
-cyan='#0c8599'
-magenta='#9c36b5'
-yellow='#b8860b'
-green='#2f9e44'
-theme="
---color='bg:-1,bg+:-1,border:$gray,spinner:-1,hl:$fg' \
---color='fg:$fg,header:$fg_dark,fg+:$yellow,pointer:$blue,marker:$blue' \
---color='prompt:$magenta,hl+:$green'
-"
+# fg='#1f1f1f'
+# fg_dark='#1f1f1f'
+# gray='#1f1f1f'
+# blue='#1971c2'
+# cyan='#0c8599'
+# magenta='#9c36b5'
+# yellow='#b8860b'
+# green='#2f9e44'
+# theme="
+# --color='bg:-1,bg+:-1,border:$gray,spinner:-1,hl:$fg' \
+# --color='fg:$fg,header:$fg_dark,fg+:$yellow,pointer:$blue,marker:$blue' \
+# --color='prompt:$magenta,hl+:$green'
+# "
 
-export FZF_DEFAULT_OPTS="--padding=10% --reverse --info=inline $theme"
+theme="--color='bg:-1,bg+:-1'"
+
+export FZF_DEFAULT_OPTS="--padding=10% --layout='reverse' $theme"
 st -g '' -n 'floating st' -f "monospace:size=12" -t 'fzfmenu' sh -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"

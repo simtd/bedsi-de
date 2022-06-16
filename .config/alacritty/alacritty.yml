@@ -1,37 +1,12 @@
-# colors:
-#   primary:
-#     background: "#dfdfdf"
-#     foreground: "#343a40"
-
-#   normal:
-#     black:   '#2f4f4f'
-#     red:     '#e03131'
-#     green:   '#2f9e44'
-#     yellow:  '#b8860b'
-#     blue:    '#1971c2'
-#     magenta: '#9c36b5'
-#     cyan:    '#008080'
-#     white:   '#808080'
-
-#   bright:
-#     black:   '#2f4f4f'
-#     red:     '#e03131'
-#     green:   '#2f9e44'
-#     yellow:  '#b8860b'
-#     blue:    '#1971c2'
-#     magenta: '#9c36b5'
-#     cyan:    '#008080'
-#     white:   '#808080'
-
 live_config_reload: true
 
 font:
   normal:
     family: monospace
     # style: bold
-  size: 12
+  size: 11
 
-draw_bold_text_with_bright_colors: false
+draw_bold_text_with_bright_colors: true
 
 window:
   opacity: 1.0

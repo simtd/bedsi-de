@@ -5,7 +5,7 @@
 function set-prompt() {
     local branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
     [[ -z $branch ]] || branch=" %F{6}${branch//\%/%%}%f"
-    PROMPT="%B%(?.%F{5}%#%f.%F{1}%?%f %F{5}X%f)%f%b "
+    PROMPT="%B%(?.%F{5}>%f.%F{1}%?%f %F{5}X%f)%f%b "
     [[ $PWD == $HOME ]] || PROMPT="%F{8}%1d%f$branch $PROMPT"
 }
 
@@ -34,7 +34,7 @@ alias mpv="linkhandler -m"
 alias yt-dlp="linkhandler -d"
 alias e="dmenu-editor-history --open"
 alias py="python3"
-alias nf="neofetch --off"
+alias nf="neofetch"
 alias storage="df -h -x tmpfs"
 
 overview() {

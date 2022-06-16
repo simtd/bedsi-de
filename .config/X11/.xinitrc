@@ -10,6 +10,7 @@ xrdb "$XRESOURCES"
 # Needs to be created manually
 [ -f "$XDG_CONFIG_HOME/bedsi/init" ] && "$XDG_CONFIG_HOME/bedsi/init" &
 
+# Fixing envypn font that keeps disappearing
 xset fp+ /usr/share/fonts/envypn-powerline/
 
 ############################
@@ -36,7 +37,7 @@ playerctld daemon &
 nitrogen --restore &
 
 # Statusbar script for dwm panel
-gold-bar -rootname -color -colortheme light 2> $HOME/gold-bar-errors &
+gold-bar -rootname -color -colortheme nord 2> $HOME/gold-bar-errors &
 
 # Launching window manager
 exec dwm
