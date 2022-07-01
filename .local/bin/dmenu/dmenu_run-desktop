@@ -21,5 +21,5 @@ appfile=$(
         esac
     done | $dmenu_cmd
 )
- 
+
 [ -f "$dir/$appfile.desktop" ] && gtk-launch "$appfile"

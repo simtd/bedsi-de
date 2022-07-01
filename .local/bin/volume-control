@@ -15,5 +15,10 @@ vol=${vol##* }
 increment=5
 [[ $1 = "slight" ]] && increment=1
 [[ ${@:$#} = "down" ]] && increment=$(( $increment * -1 ))
-[[ $(( $vol % $increment )) -ne 0 ]] && increment=$(perl -le 'printf "%.0f", eval"@ARGV"' "($increment - $vol % $increment)")
+if [[ $(( $vol % $increment )) -ne 0 ]]; then
+    increment=$(
+        perl -le 'printf "%.0f", eval"@ARGV"' "($increment - $vol % $increment)"
+    )
+fi
+
 pactl set-sink-volume @DEFAULT_SINK@ "+$increment%"

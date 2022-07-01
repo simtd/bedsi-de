@@ -11,11 +11,9 @@
         80
     ],
     "editor.fontWeight": "normal",
-    "editor.fontFamily": "Monospace",
+    "editor.fontFamily": "Ubuntu Mono",
     "workbench.editor.enablePreview": false,
     "editor.fontSize": 13,
-    "workbench.colorTheme": "chalice-color-theme-light",
-    "workbench.iconTheme": "chalice-icon-theme",
     "explorer.confirmDragAndDrop": false,
     "editor.formatOnSave": true,
     "window.zoomLevel": 1
