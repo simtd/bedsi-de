@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # DMENU_RUN-DESKTOP
 # -----------------
@@ -6,7 +6,11 @@
 # Alternative to dmenu_run that only lists executables from .desktop files
 # Dependency: gtk-launch (part of gtk3 package in arch)
 
-dmenu_cmd="fzfmenu --prompt='Apps: '"
+case "$1" in
+    --dmenu=*) cmd_dmenu=(${1#*=}) ;;
+    '') cmd_dmenu=(dmenu -p 'Apps' -i) ;;
+    *) echo 'Error: unknown argument' && exit 1 ;;
+esac
 
 dir='/usr/share/applications'
 
@@ -19,7 +23,7 @@ appfile=$(
                     printf '%s\n' "${f%.desktop}"
                 fi ;;
         esac
-    done | $dmenu_cmd
+    done | "${cmd_dmenu[@]}"
 )
 
-[ -f "$dir/$appfile.desktop" ] && gtk-launch "$appfile"
+[[ -f $dir/$appfile.desktop ]] && gtk-launch "$appfile"

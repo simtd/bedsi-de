@@ -129,7 +129,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_comma,                 shiftviewclients, { .i = -1 } },
 	// go to next occupied tag
 	{ MODKEY,                       XK_period,                shiftviewclients, { .i = +1 } },
-	// tag hotkeys related to number keys (see TAGKEYS above)	
+	// tag hotkeys related to number keys (see TAGKEYS above)
 	TAGKEYS(                        XK_1,                     0)
 	TAGKEYS(                        XK_2,                     1)
 	TAGKEYS(                        XK_3,                     2)
@@ -152,11 +152,11 @@ static Key keys[] = {
 	// -------------
 
 	// desktop app launcher
-	{ MODKEY,                       XK_p,                     spawn,            SHCMD("dmenu_run-desktop") },
+	{ MODKEY,                       XK_p,                     spawn,            SHCMD("dmenu_run-desktop --dmenu=\"rofi -dmenu -i -p Apps\"") },
 	// regular dmenu run launcher
 	{ MODKEY|ShiftMask,             XK_p,                     spawn,            {.v = dmenucmd } },
 	// text editor history script
-	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history --dmenu=\"fzfmenu --prompt='Hist: '\" --sel") },
+	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history --dmenu=\"rofi -dmenu -i -p Hist\" --sel") },
 
 	// LAUNCH PROGRAM HOTKEYS
 	// -----------------------
