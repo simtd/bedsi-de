@@ -17,12 +17,12 @@ static const char dmenufont[]       = "envypn";
 // static const char col_cyan[]        = "#005577";
 
 // CUSTOM COLOR SCHEME
+static const char bg_norm[]       = "#121314";
 static const char fg_norm[]       = "#c5c8c6";
-static const char bg_norm[]       = "#1d1f21";
 static const char border_norm[]   = "#666666";
 static const char border_sel[]    = "#919693";
-static const char fg_sel[]        = "#c5c8c6";
-static const char bg_sel[]        = "#404040";
+static const char bg_sel[]        = "#2e2f30";
+static const char fg_sel[]        = "#ffffff";
 
 static const char *colors[][3]      = {
 	/*               fg       bg       border   */
@@ -152,11 +152,11 @@ static Key keys[] = {
 	// -------------
 
 	// desktop app launcher
-	{ MODKEY,                       XK_p,                     spawn,            SHCMD("dmenu_run-desktop --dmenu=\"rofi -dmenu -i -p Apps\"") },
+	{ MODKEY,                       XK_p,                     spawn,            SHCMD("dmenu_run-desktop --dmenu=\"rofi -dmenu -i -matching fuzzy -p Apps\"") },
 	// regular dmenu run launcher
 	{ MODKEY|ShiftMask,             XK_p,                     spawn,            {.v = dmenucmd } },
 	// text editor history script
-	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history --dmenu=\"rofi -dmenu -i -p Hist\" --sel") },
+	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history --dmenu=\"rofi -dmenu -i -matching fuzzy -p Hist\" --sel") },
 
 	// LAUNCH PROGRAM HOTKEYS
 	// -----------------------

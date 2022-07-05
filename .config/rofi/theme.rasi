@@ -16,7 +16,8 @@ window {
     border-color: @fg;
     border-radius: 0px;
     padding: 1em;
-    width: 35%;
+    width: 50%;
+    height: 50%;
     location: center;
     x-offset: 0;
     y-offset: 0;
@@ -45,7 +46,7 @@ entry {
     placeholder-color:              @fg-dark;
     expand:          true;
     horizontal-align:               0;
-    placeholder:     "Search...";
+    placeholder:     "Filter...";
     padding:         1.15% 0.5% 1% 0.5%;
     blink:           true;
     font: "monospace 12";

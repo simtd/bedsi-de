@@ -46,6 +46,7 @@ pkgconf
 playerctl
 pipewire
 pipewire-pulse
+rofi
 terminus-font
 tldr
 ttf-nerd-fonts-symbols-mono

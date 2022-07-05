@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Git Overview
+
+parent_dirs+=("$HOME/Code/GitHub")
+
+gitstatuses_in_dir() {
+	# $1 = absolute path to dir
+
+	status="$(git -C "$1" status 2>/dev/null)"
+
+	if [[ $status != '' ]]; then
+		echo
+		echo -----------------------------------------
+		echo "$1"
+		echo
+		git -C "$1" status 2>/dev/null
+		echo -----------------------------------------
+		echo
+	else
+		for f in "$1"/*; do
+			if [[ -d $f ]]; then
+				gitstatuses_in_dir "$f"
+			fi
+		done
+	fi
+}
+
+for dir in ${parent_dirs[@]}; do
+	gitstatuses_in_dir "$dir"
+done
