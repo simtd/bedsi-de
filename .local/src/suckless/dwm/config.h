@@ -152,11 +152,11 @@ static Key keys[] = {
 	// -------------
 
 	// desktop app launcher
-	{ MODKEY,                       XK_p,                     spawn,            SHCMD("dmenu_run-desktop --dmenu=\"rofi -dmenu -i -matching fuzzy -p Apps\"") },
+	{ MODKEY,                       XK_p,                     spawn,            SHCMD("dmenu_run-desktop --dmenu=\"rofi -dmenu -i -p Apps\"") },
 	// regular dmenu run launcher
 	{ MODKEY|ShiftMask,             XK_p,                     spawn,            {.v = dmenucmd } },
 	// text editor history script
-	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history --dmenu=\"rofi -dmenu -i -matching fuzzy -p Hist\" --sel") },
+	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history --pango --dmenu=\"rofi -markup-rows -dmenu -i -p Hist\" --sel") },
 
 	// LAUNCH PROGRAM HOTKEYS
 	// -----------------------
@@ -178,7 +178,7 @@ static Key keys[] = {
 	// screenshot seleted area to clipboard
 	{ MODKEY|ShiftMask,             XK_Print,                 spawn,            SHCMD("maim -u -s | xclip -selection clipboard -target image/png") },
 	// screenlocker
-	{ MODKEY|Mod5Mask,              XK_l,                     spawn,            SHCMD("slock") },	
+	{ MODKEY|Mod5Mask,              XK_l,                     spawn,            SHCMD("slock") },
 
 	// MEDIA HOTKEYS
 	// -------------

@@ -1,123 +1,108 @@
 * {
-  al:  #00000000;
-  bg:  #121314;
-  se:  #1d1f21;
-  fg:  #FFFFFF;
-  fg-dark: silver;
-  ac:  #2e2f30;
-  font: "monospace 10";
+    /*Fonts*/
+    font: "monospace 10";
+    font-large: "monospace 10";
+
+    /*Colors*/
+    bg: #121314;
+    bg-light: #1d1f21;
+    bg-lighter: #2e2f30;
+    fg: lightgray;
+    fg-dark: darkgray;
+    fg-light: white;
+    background-color: @bg;
+    text-color: @fg;
 }
 
 window {
     transparency: "real";
     background-color: @bg;
-    text-color: @fg;
     border: 1px;
     border-color: @fg;
     border-radius: 0px;
     padding: 1em;
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 40%;
     location: center;
     x-offset: 0;
     y-offset: 0;
 }
 
-prompt {
-    enabled: true;
-    padding: 1% 0.75% 1% 0.75%;
-    background-color:               @ac;
-    text-color:      @fg;
-    font: "monospace 12";
-
+inputbar {
+    children: [ prompt, entry, num-filtered-rows, textbox-num-sep, num-rows];
+    background-color: @bg-light;
+    text-color: @bg-lighter;
+    expand: false;
 }
 
-textbox-prompt-colon {
-    padding:         1% 0% 1% 0%;
-    background-color:               @se;
-    text-color:      @fg;
-    expand: false;
-    str: " :: ";
+prompt {
+    enabled: true;
+    padding: 1em;
+    background-color: @bg-lighter;
+    text-color: @fg-light;
+    font: @font-large;
 }
 
 entry {
-    background-color:               @al;
-    text-color:      @fg-dark;
-    placeholder-color:              @fg-dark;
-    expand:          true;
-    horizontal-align:               0;
-    placeholder:     "Filter...";
-    padding:         1.15% 0.5% 1% 0.5%;
-    blink:           true;
-    font: "monospace 12";
-
+    background-color: inherit;
+    text-color: @fg-dark;
+    placeholder-color: @fg-dark;
+    expand: true;
+    horizontal-align: 0;
+    vertical-align: 0.5;
+    padding: 0 0 0 0.5em;
+    placeholder: "Filter...";
+    blink: true;
+    font: @font-large;
 }
 
-inputbar {
-    children:        [ prompt, entry ];
-    background-color:               @se;
-    text-color:      @ac;
-    expand:          false;
-    border:          0% 0% 0% 0%;
-    border-radius:   0px;
-    border-color:    @ac;
+num-filtered-rows, textbox-num-sep, num-rows {
+    background-color: inherit;
+    vertical-align: 0.5;
+    text-color: @fg-dark;
+    expand: false;
+}
 
+textbox-num-sep {
+    str: "/";
+}
+
+num-rows {
+    padding: 0 1em 0 0;
 }
 
 listview {
-    background-color:               @al;
-    padding:         1em 0 0 0;
-    columns:         2;
-    lines:           8;
-    /*spacing:         1%;*/
-    cycle:           false;
-    dynamic:         true;
-    layout:          vertical;
-}
-
-mainbox {
-    background-color:               @al;
-    border:          0% 0% 0% 0%;
-    border-radius:   0% 0% 0% 0%;
-    border-color:    @ac;
-    children:        [ inputbar, listview ];
-    /*spacing:         2%;*/
-    /*padding:         2% 1% 2% 1%;*/
+    padding: 0.5em 0 0 0;
+    columns: 2;
+    cycle: false;
+    dynamic: true;
+    layout: vertical;
+    /*fixed-columns:  true;*/
 }
 
 element {
-    background-color:               @bg;
-    text-color:      @fg;
-    orientation:     horizontal;
-    border-radius:   0%;
-    padding:         1% 0.5% 1% 0.75%;
+    background-color: @bg;
+    orientation: horizontal;
+    border-radius: 0%;
+    padding: 0.7em;
 }
 
 element-icon {
-    background-color:               inherit;
-    text-color:      inherit;
-    horizontal-align:               0.5;
-    vertical-align:  0.5;
-    size:            24px;
-    border:          0px;
+    text-color: inherit;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    size: 1.5em;
+    padding: 0 0.5em 0 0;
 }
 
 element-text {
-    background-color:               @al;
-    text-color:      inherit;
-    /*expand:          true;*/
-    /*horizontal-align:               0;*/
-    /*vertical-align:  0.5;*/
-
-    /*margin:          0% 0.25% 0% 0.25%;*/
+    background-color: inherit;
+    text-color: inherit;
+    vertical-align: 0.5;
+    /*horizontal-align: 0.5;*/
 }
 
 element selected {
-    /*border:  1px;*/
-    /*border-color: ;*/
-    background-color:               @se;
-    /*text-color:      #a2bd8b;*/
-    /*border:          0% 0% 0% 0.5%;*/
-    /*border-radius:   0px;*/
-    /*border-color:    @ac;*/
+    background-color: @bg-light;
+    text-color: @fg-light;
 }

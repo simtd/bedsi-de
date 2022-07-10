@@ -37,7 +37,7 @@ playerctld daemon &
 nitrogen --restore &
 
 # Statusbar script for dwm panel
-gold-bar -rootname -color -colortheme nord 2> $HOME/gold-bar-errors &
+gold-bar -rootname -color -colortheme nord 2> "$HOME"/gold-bar-errors &
 
 # Launching window manager
 exec dwm
