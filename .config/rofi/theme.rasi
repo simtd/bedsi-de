@@ -6,7 +6,7 @@
     /*Colors*/
     bg: #121314;
     bg-light: #1d1f21;
-    bg-lighter: #2e2f30;
+    bg-lighter: #414141;
     fg: lightgray;
     fg-dark: darkgray;
     fg-light: white;
@@ -22,7 +22,7 @@ window {
     border-radius: 0px;
     padding: 1em;
     width: 40%;
-    height: 40%;
+    /*height: 40%;*/
     location: center;
     x-offset: 0;
     y-offset: 0;
@@ -30,14 +30,17 @@ window {
 
 inputbar {
     children: [ prompt, entry, num-filtered-rows, textbox-num-sep, num-rows];
-    background-color: @bg-light;
-    text-color: @bg-lighter;
+    /*background-color: @bg-light;*/
+    text-color: @bg-light;
     expand: false;
+    /*border: 0 0 1px 0;*/
+    /*border-color: blueviolet;*/
 }
 
 prompt {
     enabled: true;
-    padding: 1em;
+    /*border-radius: 10px 0 0 10px;*/
+    padding: 0.5em;
     background-color: @bg-lighter;
     text-color: @fg-light;
     font: @font-large;
@@ -68,23 +71,25 @@ textbox-num-sep {
 }
 
 num-rows {
-    padding: 0 1em 0 0;
+    /*padding: 0 1em 0 0;*/
 }
 
 listview {
-    padding: 0.5em 0 0 0;
+    padding: 1em 0 0 0;
     columns: 2;
     cycle: false;
     dynamic: true;
     layout: vertical;
+    lines: 12;
     /*fixed-columns:  true;*/
 }
 
 element {
     background-color: @bg;
+    /*border-radius: 10px 0 0 10px;*/
     orientation: horizontal;
-    border-radius: 0%;
-    padding: 0.7em;
+    padding: 0.5em;
+    /*border-radius: 5px;*/
 }
 
 element-icon {
