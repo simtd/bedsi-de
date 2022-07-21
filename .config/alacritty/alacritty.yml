@@ -1,8 +1,12 @@
 live_config_reload: true
 
+# colors:
+#   primary:
+#     foreground: "#00ff00"
+
 font:
   normal:
-    family: monospace
+    family: Terminus
     # style: bold
   size: 11
 

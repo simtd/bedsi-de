@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# DMENU-POWER
+# -----------
+
+# Turn off or reboot the computer from dmenu
+
+case "$1" in
+    --dmenu=*) cmd_dmenu=(${1#*=}) ;;
+    '') cmd_dmenu=(dmenu -p 'Power' -i) ;;
+    *) echo 'Error: unknown argument' && exit 1 ;;
+esac
+
+entries+=('Do nothing')        ; cmds+=('')
+entries+=('Power off')         ; cmds+=('systemctl poweroff')
+entries+=('Reboot')            ; cmds+=('systemctl reboot')
+entries+=('Exit graphical UI') ; cmds+=('exit-graphical-environment')
+
+sel=$(printf '%s\n' "${entries[@]}" | "${cmd_dmenu[@]}")
+
+for entry in "${entries[@]}"; do
+	if [[ $entry == $sel ]]; then
+		break
+	else
+		(( idx++ ))
+	fi
+done
+
+${cmds[$idx]}

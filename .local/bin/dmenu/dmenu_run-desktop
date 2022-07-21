@@ -14,16 +14,17 @@ esac
 
 dir='/usr/share/applications'
 
-appfile=$(
-    for f in "$dir"/*; do
-        case "$f" in
-            *.desktop)
-                if [ -f "$f" ]; then
-                    f="${f#$dir/}"
-                    printf '%s\n' "${f%.desktop}"
-                fi ;;
-        esac
-    done | "${cmd_dmenu[@]}"
-)
+
+for f in "$dir"/*; do
+    case "$f" in
+        *.desktop)
+            if [ -f "$f" ]; then
+                f="${f#$dir/}"
+                entries+=("${f%.desktop}")
+            fi ;;
+    esac
+done
+
+appfile=$(printf '%s\n' "${entries[@]}" | "${cmd_dmenu[@]}")
 
 [[ -f $dir/$appfile.desktop ]] && gtk-launch "$appfile"

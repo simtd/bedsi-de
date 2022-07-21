@@ -7,7 +7,7 @@ static const unsigned int snap      = 16;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 
-static const char *fonts[]          = { "envypn", "Symbols Nerd Font" };
+static const char *fonts[]          = { "envypn", "Symbols Nerd Font 11" };
 static const char dmenufont[]       = "envypn";
 
 // static const char col_gray1[]       = "#000000";
@@ -157,6 +157,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,                     spawn,            {.v = dmenucmd } },
 	// text editor history script
 	{ MODKEY,                       XK_e,                     spawn,            SHCMD("dmenu-editor-history --pango --dmenu=\"rofi -markup-rows -dmenu -i -p Hist\" --sel") },
+	// power
+	{ MODKEY|Mod5Mask,              XK_p,                     spawn,            SHCMD("dmenu-power --dmenu=\"rofi -dmenu -i -p Power\"") },
+
 
 	// LAUNCH PROGRAM HOTKEYS
 	// -----------------------

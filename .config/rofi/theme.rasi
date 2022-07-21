@@ -1,25 +1,27 @@
 * {
     /*Fonts*/
-    font: "monospace 10";
-    font-large: "monospace 10";
+    font: "Ubuntu Mono 10";
+    font-small: "Ubuntu Mono 8";
+    font-large: "Ubuntu Mono 12";
 
     /*Colors*/
     bg: #121314;
     bg-light: #1d1f21;
     bg-lighter: #414141;
     fg: lightgray;
-    fg-dark: darkgray;
+    fg-dark: gray;
     fg-light: white;
+    highlight: #c397d8;
     background-color: @bg;
     text-color: @fg;
 }
 
 window {
-    transparency: "real";
+    /*transparency: "real";*/
     background-color: @bg;
     border: 1px;
     border-color: @fg;
-    border-radius: 0px;
+    /*border-radius: 0px;*/
     padding: 1em;
     width: 40%;
     /*height: 40%;*/
@@ -30,17 +32,17 @@ window {
 
 inputbar {
     children: [ prompt, entry, num-filtered-rows, textbox-num-sep, num-rows];
-    /*background-color: @bg-light;*/
+    background-color: @bg-light;
     text-color: @bg-light;
     expand: false;
-    /*border: 0 0 1px 0;*/
-    /*border-color: blueviolet;*/
+    border: 1px;
+    border-color: @bg-lighter;
+    border-radius: 0.4em;
 }
 
 prompt {
     enabled: true;
-    /*border-radius: 10px 0 0 10px;*/
-    padding: 0.5em;
+    padding: 0.7em;
     background-color: @bg-lighter;
     text-color: @fg-light;
     font: @font-large;
@@ -48,7 +50,7 @@ prompt {
 
 entry {
     background-color: inherit;
-    text-color: @fg-dark;
+    text-color: @fg;
     placeholder-color: @fg-dark;
     expand: true;
     horizontal-align: 0;
@@ -56,7 +58,7 @@ entry {
     padding: 0 0 0 0.5em;
     placeholder: "Filter...";
     blink: true;
-    font: @font-large;
+    // font: @font-large;
 }
 
 num-filtered-rows, textbox-num-sep, num-rows {
@@ -71,7 +73,7 @@ textbox-num-sep {
 }
 
 num-rows {
-    /*padding: 0 1em 0 0;*/
+    padding: 0 0.5em 0 0;
 }
 
 listview {
@@ -80,16 +82,14 @@ listview {
     cycle: false;
     dynamic: true;
     layout: vertical;
-    lines: 12;
+    lines: 10;
     /*fixed-columns:  true;*/
 }
 
 element {
     background-color: @bg;
-    /*border-radius: 10px 0 0 10px;*/
     orientation: horizontal;
-    padding: 0.5em;
-    /*border-radius: 5px;*/
+    padding: 0.7em;
 }
 
 element-icon {
@@ -104,10 +104,12 @@ element-text {
     background-color: inherit;
     text-color: inherit;
     vertical-align: 0.5;
-    /*horizontal-align: 0.5;*/
 }
 
 element selected {
     background-color: @bg-light;
     text-color: @fg-light;
+    border: 1px;
+    border-color: @highlight;
+    border-radius: 0.4em;
 }

@@ -3,7 +3,7 @@
 #############################
 
 # default programs
-export EDITOR="nvim"
+export EDITOR="nano"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 

@@ -7,15 +7,9 @@ parent_dirs+=("$HOME/Code/GitHub")
 gitstatuses_in_dir() {
 	# $1 = absolute path to dir
 
-	status="$(git -C "$1" status 2>/dev/null)"
-
-	if [[ $status != '' ]]; then
-		echo
-		echo -----------------------------------------
+	if [[ -d $1/.git ]]; then
 		echo "$1"
-		echo
-		git -C "$1" status 2>/dev/null
-		echo -----------------------------------------
+		git -C "$1" status
 		echo
 	else
 		for f in "$1"/*; do
@@ -29,3 +23,5 @@ gitstatuses_in_dir() {
 for dir in ${parent_dirs[@]}; do
 	gitstatuses_in_dir "$dir"
 done
+
+
